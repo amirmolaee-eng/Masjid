@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact | Omar Faruque Mosque</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&family=Noto+Sans+Arabic:wght@400;700&family=Noto+Sans+Bengali:wght@400;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="styles.css">
+
+    <meta name="theme-color" content="#264F27">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="description" content="Get in touch with Omar Faruque Mosque and Cultural Centre.">
+</head>
+<body>
+    <!-- Site Navigation -->
+    <header class="site-nav">
+        <div class="site-nav-inner">
+            <a href="index.html" class="site-nav-brand">
+                <span class="site-nav-logo"><img src="Logo - Large.jpeg" alt="" class="site-nav-logo-img"></span>
+                <span class="site-nav-title">Omar Faruque Mosque</span>
+            </a>
+            <nav class="site-nav-links" aria-label="Primary">
+            <a href="index.html" class="site-nav-link">Home</a>
+            <a href="location.html" class="site-nav-link">Location</a>
+            <a href="about.html" class="site-nav-link">About Us</a>
+            <a href="etiquette.html" class="site-nav-link">Etiquette</a>
+            <a href="jumuah.html" class="site-nav-link">Jumu'ah</a>
+            <a href="help-us.html" class="site-nav-link site-nav-cta">Help Us</a>
+            <a href="links.html" class="site-nav-link">Links</a>
+            <a href="contact.html" class="site-nav-link active">Contact</a>
+            </nav>
+            <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="navDrawer">
+                <span class="nav-toggle-bar"></span><span class="nav-toggle-bar"></span><span class="nav-toggle-bar"></span>
+            </button>
+        </div>
+    </header>
+
+    <div class="nav-overlay" id="navOverlay"></div>
+    <aside class="nav-drawer" id="navDrawer" aria-hidden="true">
+        <div class="nav-drawer-header">
+            <span class="site-nav-title">Menu</span>
+            <button class="nav-drawer-close" id="navClose" aria-label="Close menu">&times;</button>
+        </div>
+    <a href="index.html" class="nav-drawer-link">Home</a>
+    <a href="location.html" class="nav-drawer-link">Location</a>
+    <a href="about.html" class="nav-drawer-link">About Us</a>
+    <a href="etiquette.html" class="nav-drawer-link">Etiquette</a>
+    <a href="jumuah.html" class="nav-drawer-link">Jumu'ah</a>
+    <a href="help-us.html" class="nav-drawer-link">Help Us</a>
+    <a href="links.html" class="nav-drawer-link">Links</a>
+    <a href="contact.html" class="nav-drawer-link active">Contact</a>
+    </aside>
+
+    <main class="page-container page-container-wide">
+        <div class="page-hero">
+            <h1 class="page-title">Contact Us</h1>
+            <p class="page-subtitle">Have a question or need to reach the Mosque committee? Use the options below.</p>
+        </div>
+
+        <div class="contact-layout">
+            <div class="page-card">
+                <h2>Send a Message</h2>
+                <div class="contact-form-notice">
+                    <span>&#9432;</span>
+                    <span>This contact form is being finalised and can&#8217;t be submitted yet. In the meantime, please reach us using one of the options on the right.</span>
+                </div>
+                <form class="contact-form" onsubmit="return false;">
+                    <div class="form-group">
+                        <label for="contactName">Name</label>
+                        <input type="text" id="contactName" name="name" placeholder="Your full name" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label for="contactEmail">Email</label>
+                        <input type="email" id="contactEmail" name="email" placeholder="you@example.com" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label for="contactSubject">Subject</label>
+                        <input type="text" id="contactSubject" name="subject" placeholder="What is this regarding?" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label for="contactMessage">Message</label>
+                        <textarea id="contactMessage" name="message" placeholder="Write your message here..." disabled></textarea>
+                    </div>
+                    <button type="submit" class="contact-form-submit" disabled>Form Coming Soon</button>
+                </form>
+            </div>
+
+            <div class="page-card">
+                <h2>Reach Us Directly</h2>
+                <div class="contact-alt-list">
+                    <a href="https://www.facebook.com/OmarFaruqueMosque" target="_blank" rel="noopener noreferrer" class="contact-alt-link">
+                        <span>Message us on Facebook</span>
+                    </a>
+                    <a href="https://www.instagram.com/omarfaruquemosque" target="_blank" rel="noopener noreferrer" class="contact-alt-link">
+                        <span>Message us on Instagram</span>
+                    </a>
+                </div>
+                <hr class="page-divider">
+                <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">Or visit us in person:</p>
+                <div class="info-row" style="border-bottom: none; padding-top: 4px;">
+                    <span class="info-row-value" style="text-align: left;">Kirkwood Rd, Cambridge, CB4 2PF</span>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Shared Footer -->
+    <footer class="site-footer">
+        <span class="site-footer-name">Omar Faruque Mosque &amp; Cultural Centre</span>
+        <div class="site-footer-meta">
+            Kirkwood Rd, Cambridge, CB4 2PF &bull; UK registered Charity No. 1117040
+        </div>
+    </footer>
+
+    <script src="nav.js"></script>
+</body>
+</html>

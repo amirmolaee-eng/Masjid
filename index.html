@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Omar Faruque Mosque</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&family=Noto+Sans+Arabic:wght@400;700&family=Noto+Sans+Bengali:wght@400;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Meta tags for PWA / Mobile Web App -->
+    <meta name="theme-color" content="#264F27">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="description" content="Omar Faruque Mosque Prayer Times and Info">
+</head>
+<body>
+    <!-- Site Navigation -->
+    <header class="site-nav">
+        <div class="site-nav-inner">
+            <a href="index.html" class="site-nav-brand">
+                <span class="site-nav-logo"><img src="Logo - Large.jpeg" alt="" class="site-nav-logo-img"></span>
+                <span class="site-nav-title">Omar Faruque Mosque</span>
+            </a>
+            <nav class="site-nav-links" aria-label="Primary">
+                <a href="index.html" class="site-nav-link active">Home</a>
+                <a href="location.html" class="site-nav-link">Location</a>
+                <a href="about.html" class="site-nav-link">About Us</a>
+                <a href="etiquette.html" class="site-nav-link">Etiquette</a>
+                <a href="jumuah.html" class="site-nav-link">Jumu'ah</a>
+                <a href="help-us.html" class="site-nav-link site-nav-cta">Help Us</a>
+                <a href="links.html" class="site-nav-link">Links</a>
+                <a href="contact.html" class="site-nav-link">Contact</a>
+            </nav>
+            <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="navDrawer">
+                <span class="nav-toggle-bar"></span><span class="nav-toggle-bar"></span><span class="nav-toggle-bar"></span>
+            </button>
+        </div>
+    </header>
+
+    <div class="nav-overlay" id="navOverlay"></div>
+    <aside class="nav-drawer" id="navDrawer" aria-hidden="true">
+        <div class="nav-drawer-header">
+            <span class="site-nav-title">Menu</span>
+            <button class="nav-drawer-close" id="navClose" aria-label="Close menu">&times;</button>
+        </div>
+        <a href="index.html" class="nav-drawer-link active">Home</a>
+        <a href="location.html" class="nav-drawer-link">Location</a>
+        <a href="about.html" class="nav-drawer-link">About Us</a>
+        <a href="etiquette.html" class="nav-drawer-link">Etiquette</a>
+        <a href="jumuah.html" class="nav-drawer-link">Jumu'ah</a>
+        <a href="help-us.html" class="nav-drawer-link">Help Us</a>
+        <a href="links.html" class="nav-drawer-link">Links</a>
+        <a href="contact.html" class="nav-drawer-link">Contact</a>
+    </aside>
+
+    <!-- Facebook SDK Root -->
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v19.0" nonce="ofmFb"></script>
+
+    <div class="app-container">
+        
+        <!-- Header: Logo & Titles -->
+        <header class="app-header">
+            <div class="logo-wrapper">
+                <img src="Logo - Large.jpeg" alt="Omar Faruque Mosque Logo" class="app-logo">
+            </div>
+            <div class="masjid-titles">
+                <h1 class="masjid-name">Omar Faruque Mosque</h1>
+                <h2 class="masjid-name-arabic" dir="rtl">مسجد عمر فاروق</h2>
+            </div>
+        </header>
+
+        <!-- Current Date & Time -->
+        <section class="datetime-section">
+            <div class="clock-display" id="clock">--:--</div>
+            <div class="date-stack">
+                <div class="gregorian-date" id="date">--</div>
+                <div class="hijri-date" id="hijri">--</div>
+            </div>
+        </section>
+
+        <!-- Countdown / Next Prayer -->
+        <section class="countdown-card">
+            <div class="countdown-header">
+                <span class="next-label">Next Prayer</span>
+                <span class="next-prayer-name" id="nextPrayerName">--</span>
+            </div>
+            <div class="countdown-time" id="countdownTime">--:--:--</div>
+            <div class="countdown-progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+        </section>
+        
+        <!-- Donation / Support Card -->
+        <section class="donation-section">
+            <a href="https://square.link/u/hJsC8N0N" target="_blank" rel="noopener noreferrer" class="donate-button-card" aria-label="Donate to Omar Faruque Mosque">
+                <span class="heart-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3c1.74 0 3.26.83 4.312 2.11 1.052-1.28 2.573-2.11 4.312-2.11 2.974 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z"/>
+                    </svg>
+                </span>
+                <span class="donate-text">Donate &amp; Support Our Mosque</span>
+            </a>
+        </section>
+
+        <!-- Prayer Timetable -->
+        <section class="timetable-section">
+            <div class="timetable-card">
+                <div class="timetable-header">
+                    <div class="col-name">Salah</div>
+                    <div class="col-start">Start</div>
+                    <div class="col-iqamah">Iqamah</div>
+                </div>
+                
+                <div class="prayer-row" id="row-fajr">
+                    <div class="col-name">
+                        <div class="salah-en">Fajr</div>
+                        <div class="salah-sub">ফজর • الفجر</div>
+                    </div>
+                    <div class="col-start time-val">--:--</div>
+                    <div class="col-iqamah time-val font-bold">--:--</div>
+                </div>
+
+                <div class="prayer-row" id="row-dhuhr">
+                    <div class="col-name">
+                        <div class="salah-en">Dhuhr</div>
+                        <div class="salah-sub">যোহর • الظهر</div>
+                    </div>
+                    <div class="col-start time-val">--:--</div>
+                    <div class="col-iqamah time-val font-bold">--:--</div>
+                </div>
+
+                <div class="prayer-row" id="row-asr">
+                    <div class="col-name">
+                        <div class="salah-en">Asr</div>
+                        <div class="salah-sub">আসর • العصر</div>
+                    </div>
+                    <div class="col-start time-val">--:--</div>
+                    <div class="col-iqamah time-val font-bold">--:--</div>
+                </div>
+
+                <div class="prayer-row" id="row-maghrib">
+                    <div class="col-name">
+                        <div class="salah-en">Maghrib</div>
+                        <div class="salah-sub">মাগরিব • المغرب</div>
+                    </div>
+                    <div class="col-start time-val">--:--</div>
+                    <div class="col-iqamah time-val font-bold">--:--</div>
+                </div>
+
+                <div class="prayer-row" id="row-isha">
+                    <div class="col-name">
+                        <div class="salah-en">Isha</div>
+                        <div class="salah-sub">ইশা • العشاء</div>
+                    </div>
+                    <div class="col-start time-val">--:--</div>
+                    <div class="col-iqamah time-val font-bold">--:--</div>
+                </div>
+                
+            </div>
+        </section>
+        
+        <!-- Jumu'ah Timetable Card -->
+        <section class="jumuah-section">
+            <div class="jumuah-card">
+                <div class="jumuah-card-header">
+                    <div class="jumuah-title-wrap">
+                        <h3 class="jumuah-title">Jumu'ah Prayer</h3>
+                        <span class="jumuah-title-sub">জুমআ • صلاة الجمعة</span>
+                    </div>
+                    <span class="jumuah-day-badge">Friday</span>
+                </div>
+                <div class="jumuah-times-grid">
+                    <div class="khutbah-time-card">
+                        <span class="khutbah-label">1st Khutbah</span>
+                        <span class="khutbah-time">13:25</span>
+                        <span class="khutbah-lang-labels">১ম খুতবা • الخطبة الأولى</span>
+                    </div>
+                    <div class="khutbah-time-card">
+                        <span class="khutbah-label">2nd Khutbah</span>
+                        <span class="khutbah-time">14:25</span>
+                        <span class="khutbah-lang-labels">২য় খুতবা • الخطبة الثانية</span>
+                    </div>
+                </div>
+                <div class="jumuah-note">
+                    Assalamu Alaykum • Please arrive early to listen to the Khutbah.
+                </div>
+            </div>
+        </section>
+        
+        <!-- Upcoming Islamic Events -->
+        <section class="events-section" id="islamicEventsSection">
+            <div class="events-section-header">
+                <div class="events-title-wrap">
+                    <span class="events-brand-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8 0-2.39 1.05-4.53 2.73-6 1.48 2.05 3.88 3.4 6.6 3.4 1.39 0 2.68-.35 3.82-.96.54 1.07.85 2.28.85 3.56 0 4.41-3.59 8-8 8zm4.33-11.23c-.7.39-1.49.62-2.33.62-2.61 0-4.75-2.02-4.9-4.59C7.62 5.53 6.54 6.88 6.08 8.49 5.39 10.9 6.2 13.56 8.16 15.17c1.96 1.62 4.7 1.83 6.89.55 1.54-.9 2.55-2.45 2.79-4.22-.44-.27-.95-.49-1.51-.73z"/>
+                        </svg>
+                    </span>
+                    <div>
+                        <h3 class="events-title">Upcoming Islamic Events</h3>
+                        <p class="events-subtitle" id="eventsCurrentHijri">Checking live lunar calendar...</p>
+                    </div>
+                </div>
+                <div class="events-header-actions">
+                    <div class="events-live-badge" title="Live calculation &amp; continuous countdown">
+                        <span class="events-live-dot"></span>
+                        <span>LIVE</span>
+                    </div>
+                    <button class="events-sync-btn" id="eventsRefreshBtn" title="Check &amp; refresh now" aria-label="Refresh Islamic events" type="button">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Featured Next Event Live Spotlight Card -->
+            <div class="next-event-spotlight" id="nextEventSpotlight">
+                <!-- Dynamically populated with live ticking countdown -->
+            </div>
+
+            <!-- Upcoming Events List -->
+            <div class="events-list" id="eventsList">
+                <div class="event-placeholder">Calculating upcoming events...</div>
+            </div>
+        </section>
+        
+        <!-- Social Media Connection -->
+        <section class="socials-section">
+            <h3 class="section-title">Connect With Us</h3>
+            <div class="socials-grid">
+                <a href="https://www.facebook.com/omarfaruquemosque" target="_blank" rel="noopener noreferrer" class="social-card facebook" aria-label="Follow us on Facebook">
+                    <span class="social-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c4.56-.93 8-4.96 8-9.75z"/>
+                        </svg>
+                    </span>
+                    <span class="social-name">Facebook</span>
+                </a>
+                <a href="https://www.instagram.com/omarfaruquemosque/" target="_blank" rel="noopener noreferrer" class="social-card instagram" aria-label="Follow us on Instagram">
+                    <span class="social-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+                        </svg>
+                    </span>
+                    <span class="social-name">Instagram</span>
+                </a>
+                <a href="https://www.youtube.com/@OmarFaruqueMosque" target="_blank" rel="noopener noreferrer" class="social-card youtube" aria-label="Subscribe on YouTube">
+                    <span class="social-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M23.498 6.163a3.003 3.003 0 0 0-2.11-2.11C19.517 3.545 12 3.545 12 3.545s-7.517 0-9.388.507a3.003 3.003 0 0 0-2.11 2.11C0 8.033 0 12 0 12s0 3.967.502 5.837a3.003 3.003 0 0 0 2.11 2.11C4.483 20.455 12 20.455 12 20.455s7.517 0 9.388-.507a3.003 3.003 0 0 0 2.11-2.11C24 15.967 24 12 24 12s0-3.967-.502-5.837zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                        </svg>
+                    </span>
+                    <span class="social-name">YouTube</span>
+                </a>
+                <a href="https://x.com/Omar_F_Mosque" target="_blank" rel="noopener noreferrer" class="social-card twitter-x" aria-label="Follow us on X">
+                    <span class="social-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                        </svg>
+                    </span>
+                    <span class="social-name">X (Twitter)</span>
+                </a>
+            </div>
+        </section>
+        
+        <!-- Facebook Live Posts Section -->
+        <section class="social-feed-section facebook-feed-section" id="facebookFeedSection">
+            <div class="feed-section-header">
+                <div class="feed-title-wrap">
+                    <span class="feed-brand-icon fb-icon" aria-hidden="true">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c4.56-.93 8-4.96 8-9.75z"/>
+                        </svg>
+                    </span>
+                    <div>
+                        <h3 class="feed-title">Mosque Facebook Live</h3>
+                        <p class="feed-subtitle">Live stream, prayer broadcasts &amp; announcements</p>
+                    </div>
+                </div>
+                <div class="live-pill" title="Live stream &amp; updates from Facebook">
+                    <span class="live-pulse"></span>
+                    <span>LIVE</span>
+                </div>
+            </div>
+
+            <!-- Facebook Live Feed Container -->
+            <div class="facebook-feed-box" id="facebookFeedBox">
+                <!-- View Switcher Tabs -->
+                <div class="fb-feed-toggle-bar">
+                    <button class="fb-toggle-btn active" id="fbTabPostsBtn" type="button" aria-selected="true">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+                        <span>Live Posts</span>
+                    </button>
+                    <button class="fb-toggle-btn" id="fbTabMetaBtn" type="button" aria-selected="false">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+                        <span>Meta Widget</span>
+                    </button>
+                </div>
+
+                <!-- Mosque Page Profile Header -->
+                <div class="fb-page-profile-card">
+                    <div class="fb-page-profile-left">
+                        <img src="Logo - Large.jpeg" alt="Omar Faruque Mosque" class="fb-profile-avatar">
+                        <div class="fb-profile-info">
+                            <div class="fb-profile-title-row">
+                                <h4 class="fb-profile-title">Omar Faruque Mosque</h4>
+                                <span class="fb-verified-badge" title="Official Mosque Page">
+                                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                                </span>
+                            </div>
+                            <span class="fb-profile-handle">@omarfaruquemosque • 1.9K followers • Cambridge</span>
+                        </div>
+                    </div>
+                    <div class="fb-profile-actions">
+                        <a href="https://www.facebook.com/omarfaruquemosque" target="_blank" rel="noopener noreferrer" class="fb-action-follow-btn" aria-label="Follow page on Facebook">
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+                            <span>Follow</span>
+                        </a>
+                        <a href="https://m.me/omarfaruquemosque" target="_blank" rel="noopener noreferrer" class="fb-action-msg-btn" aria-label="Send message on Facebook Messenger">
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.145 2 11.258c0 2.91 1.455 5.513 3.735 7.18V22l3.41-1.872c.907.252 1.868.388 2.855.388 5.523 0 10-4.145 10-9.258C22 6.145 17.523 2 12 2zm1.06 12.445l-2.673-2.85-5.215 2.85 5.736-6.09 2.748 2.85 5.14-2.85-5.736 6.09z"/></svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Tab 1: Live Posts Stream -->
+                <div class="fb-tab-view active" id="fbPostsStreamView">
+                    <!-- Post 1: Latest Jumu'ah & Prayer Announcement -->
+                    <article class="fb-post-item">
+                        <div class="fb-post-top">
+                            <img src="Logo - Large.jpeg" alt="Omar Faruque Mosque" class="fb-post-author-avatar">
+                            <div class="fb-post-author-details">
+                                <div class="fb-post-author-name-row">
+                                    <a href="https://www.facebook.com/omarfaruquemosque" target="_blank" rel="noopener noreferrer" class="fb-post-author-name">Omar Faruque Mosque</a>
+                                    <span class="fb-verified-badge-sm">✓</span>
+                                </div>
+                                <span class="fb-post-meta-line">2 hrs ago • Cambridge, UK • 🌐</span>
+                            </div>
+                        </div>
+
+                        <div class="fb-post-body">
+                            <p class="fb-post-paragraph">
+                                <strong>📢 JUMU'AH PRAYER &amp; COMMUNITY SCHEDULE</strong><br>
+                                Assalamu Alaykum wa Rahmatullah 🕌 Welcome to all brothers and sisters joining us for this week's Friday Congregational Prayers:
+                            </p>
+                            <div class="fb-schedule-box">
+                                <div class="fb-schedule-row">
+                                    <span class="fb-sched-num">1st Khutbah</span>
+                                    <span class="fb-sched-time">13:25</span>
+                                    <span class="fb-sched-sub">১ম খুতবা • الخطبة الأولى</span>
+                                </div>
+                                <div class="fb-schedule-row">
+                                    <span class="fb-sched-num">2nd Khutbah</span>
+                                    <span class="fb-sched-time">14:25</span>
+                                    <span class="fb-sched-sub">২য় খুতবা • الخطبة الثانية</span>
+                                </div>
+                            </div>
+                            <p class="fb-post-paragraph">
+                                📍 <strong>Kirkwood Rd, Cambridge CB4 2PF</strong><br>
+                                Please arrive early to listen attentively to the Khutbah. Park considerately and be mindful of our neighbours. Sisters prayer facilities available.
+                            </p>
+                            <div class="fb-post-tags">
+                                <span>#OmarFaruqueMosque</span>
+                                <span>#Cambridge</span>
+                                <span>#JumuahMubarak</span>
+                                <span>#CambridgeMuslims</span>
+                            </div>
+                        </div>
+
+                        <!-- Post Reactions Stats -->
+                        <div class="fb-post-stats-row">
+                            <div class="fb-reactions-icons">
+                                <span class="fb-reaction-bubble fb-like-bubble">👍</span>
+                                <span class="fb-reaction-bubble fb-love-bubble">❤️</span>
+                                <span class="fb-reaction-bubble fb-pray-bubble">🤲</span>
+                                <span class="fb-reactions-count" id="fbPost1Reactions">142</span>
+                            </div>
+                            <div class="fb-comments-shares-count">
+                                <span>28 comments</span>
+                                <span>•</span>
+                                <span>14 shares</span>
+                            </div>
+                        </div>
+
+                        <!-- Post Action Buttons -->
+                        <div class="fb-post-actions-row">
+                            <button class="fb-post-act-btn fb-like-post-btn" id="fbLikePost1Btn" type="button" aria-label="Like post">
+                                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M2 20h2c.55 0 1-.45 1-1v-9c0-.55-.45-1-1-1H2v11zm19.83-7.12c.11-.25.17-.52.17-.8 0-1.1-.9-2-2-2h-5.5l.92-4.65c.05-.22.02-.46-.08-.66-.23-.45-.52-.86-.88-1.22L14 3 7.59 9.41C7.21 9.79 7 10.3 7 10.83V19c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-1.12z"/></svg>
+                                <span>Like</span>
+                            </button>
+                            <a href="https://www.facebook.com/omarfaruquemosque" target="_blank" rel="noopener noreferrer" class="fb-post-act-btn">
+                                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.99 4c0-1.1-.89-2-1.99-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14l4 4-.01-18zM18 14H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/></svg>
+                                <span>Comment</span>
+                            </a>
+                            <button class="fb-post-act-btn fb-share-post-btn" id="fbSharePost1Btn" type="button" aria-label="Share post">
+                                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92c0-1.61-1.31-2.92-2.92-2.92z"/></svg>
+                                <span>Share</span>
+                            </button>
+                            <a href="https://www.facebook.com/omarfaruquemosque" target="_blank" rel="noopener noreferrer" class="fb-post-act-btn fb-view-fb-link" title="Open on Facebook">
+                                <span>View Post ↗</span>
+                            </a>
+                        </div>
+                    </article>
+
+                    <!-- Post 2: Community Education & Youth Circle -->
+                    <article class="fb-post-item">
+                        <div class="fb-post-top">
+                            <img src="Logo - Large.jpeg" alt="Omar Faruque Mosque" class="fb-post-author-avatar">
+                            <div class="fb-post-author-details">
+                                <div class="fb-post-author-name-row">
+                                    <a href="https://www.facebook.com/omarfaruquemosque" target="_blank" rel="noopener noreferrer" class="fb-post-author-name">Omar Faruque Mosque</a>
+                                    <span class="fb-verified-badge-sm">✓</span>
+                                </div>
+                                <span class="fb-post-meta-line">Yesterday at 18:30 • Cambridge, UK • 🌐</span>
+                            </div>
+                        </div>
+
+                        <div class="fb-post-body">
+                            <p class="fb-post-paragraph">
+                                <strong>📖 WEEKLY QURAN TAFSEER &amp; COMMUNITY HALAQAH</strong><br>
+                                Join us every Saturday after Maghrib Salah at Omar Faruque Mosque. Open to all youth, brothers, and sisters seeking to understand and connect with the Holy Quran.
+                            </p>
+                            <p class="fb-post-paragraph">
+                                ☕ Light refreshments and tea served afterwards. Come with your family and friends.
+                            </p>
+                            <div class="fb-post-tags">
+                                <span>#QuranStudy</span>
+                                <span>#YouthCircle</span>
+                                <span>#OmarFaruqueMosque</span>
+                                <span>#CambridgeCommunity</span>
+                            </div>
+                        </div>
+
+                        <!-- Post Reactions Stats -->
+                        <div class="fb-post-stats-row">
+                            <div class="fb-reactions-icons">
+                                <span class="fb-reaction-bubble fb-like-bubble">👍</span>
+                                <span class="fb-reaction-bubble fb-love-bubble">❤️</span>
+                                <span class="fb-reactions-count" id="fbPost2Reactions">89</span>
+                            </div>
+                            <div class="fb-comments-shares-count">
+                                <span>16 comments</span>
+                                <span>•</span>
+                                <span>7 shares</span>
+                            </div>
+                        </div>
+
+                        <!-- Post Action Buttons -->
+                        <div class="fb-post-actions-row">
+                            <button class="fb-post-act-btn fb-like-post-btn" id="fbLikePost2Btn" type="button" aria-label="Like post">
+                                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M2 20h2c.55 0 1-.45 1-1v-9c0-.55-.45-1-1-1H2v11zm19.83-7.12c.11-.25.17-.52.17-.8 0-1.1-.9-2-2-2h-5.5l.92-4.65c.05-.22.02-.46-.08-.66-.23-.45-.52-.86-.88-1.22L14 3 7.59 9.41C7.21 9.79 7 10.3 7 10.83V19c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-1.12z"/></svg>
+                                <span>Like</span>
+                            </button>
+                            <a href="https://www.facebook.com/omarfaruquemosque" target="_blank" rel="noopener noreferrer" class="fb-post-act-btn">
+                                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.99 4c0-1.1-.89-2-1.99-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14l4 4-.01-18zM18 14H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/></svg>
+                                <span>Comment</span>
+                            </a>
+                            <button class="fb-post-act-btn fb-share-post-btn" id="fbSharePost2Btn" type="button" aria-label="Share post">
+                                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92c0-1.61-1.31-2.92-2.92-2.92z"/></svg>
+                                <span>Share</span>
+                            </button>
+                            <a href="https://www.facebook.com/omarfaruquemosque" target="_blank" rel="noopener noreferrer" class="fb-post-act-btn fb-view-fb-link" title="Open on Facebook">
+                                <span>View Post ↗</span>
+                            </a>
+                        </div>
+                    </article>
+                </div>
+
+                <!-- Tab 2: Official Meta Page Plugin Widget -->
+                <div class="fb-tab-view" id="fbMetaWidgetView" style="display: none;">
+                    <div class="fb-meta-iframe-container">
+                        <iframe 
+                            src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fomarfaruquemosque&tabs=timeline&width=500&height=560&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId" 
+                            width="100%" 
+                            height="560" 
+                            style="border:none;overflow:hidden;border-radius:14px;background:#ffffff;" 
+                            scrolling="no" 
+                            frameborder="0" 
+                            allowfullscreen="true" 
+                            allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
+                        </iframe>
+                    </div>
+                    <div class="fb-meta-footer-action">
+                        <a href="https://www.facebook.com/omarfaruquemosque" target="_blank" rel="noopener noreferrer" class="fb-open-app-btn">
+                            <span>Open in Facebook App / Browser</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Bottom View More Facebook Link -->
+                <div class="fb-feed-footer">
+                    <a href="https://www.facebook.com/omarfaruquemosque" target="_blank" rel="noopener noreferrer" class="fb-cta-btn">
+                        <span>View All Posts on Facebook</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Instagram Latest Post Section -->
+        <section class="social-feed-section instagram-feed-section" id="instagramFeedSection">
+            <div class="feed-section-header">
+                <div class="feed-title-wrap">
+                    <span class="feed-brand-icon ig-icon" aria-hidden="true">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+                        </svg>
+                    </span>
+                    <div>
+                        <h3 class="feed-title">Latest from Instagram</h3>
+                        <p class="feed-subtitle">@omarfaruquemosque • Moments &amp; Reminders</p>
+                    </div>
+                </div>
+                <a href="https://www.instagram.com/omarfaruquemosque/" target="_blank" rel="noopener noreferrer" class="ig-follow-pill">
+                    <span>Follow</span>
+                </a>
+            </div>
+
+            <!-- Instagram Post Card -->
+            <article class="instagram-post-card" id="igPostCard">
+                <!-- Post Header -->
+                <div class="ig-post-header">
+                    <div class="ig-avatar-ring">
+                        <img src="Logo - Large.jpeg" alt="Omar Faruque Mosque" class="ig-avatar-img">
+                    </div>
+                    <div class="ig-post-meta">
+                        <div class="ig-author-line">
+                            <a href="https://www.instagram.com/omarfaruquemosque/" target="_blank" rel="noopener noreferrer" class="ig-username">
+                                omarfaruquemosque
+                            </a>
+                            <span class="ig-badge" title="Official Account">✓</span>
+                            <span class="ig-dot">•</span>
+                            <a href="https://www.instagram.com/omarfaruquemosque/" target="_blank" rel="noopener noreferrer" class="ig-follow-text">Follow</a>
+                        </div>
+                        <span class="ig-location">Omar Faruque Mosque • Cambridge, UK</span>
+                    </div>
+                    <button class="ig-more-btn" id="igShareBtnTop" aria-label="Share post options" type="button">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <circle cx="12" cy="12" r="1.75"/>
+                            <circle cx="19" cy="12" r="1.75"/>
+                            <circle cx="5" cy="12" r="1.75"/>
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Post Media Image with Double-Tap Heart -->
+                <div class="ig-media-wrapper" id="igMediaWrapper" title="Double tap to like">
+                    <img src="latest_instagram_post.jpg" alt="Peaceful prayer hall at Omar Faruque Mosque, Cambridge" class="ig-post-img" id="igPostImg" loading="lazy">
+                    <div class="ig-heart-overlay" id="igHeartOverlay" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="#FFFFFF">
+                            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                        </svg>
+                    </div>
+                    <div class="ig-location-tag">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                        <span>Kirkwood Rd, Cambridge CB4 2PF</span>
+                    </div>
+                </div>
+
+                <!-- Post Action Buttons -->
+                <div class="ig-actions-bar">
+                    <div class="ig-actions-left">
+                        <button class="ig-action-btn like-btn" id="igLikeBtn" aria-label="Like post" type="button">
+                            <svg class="heart-empty" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                            </svg>
+                            <svg class="heart-filled" viewBox="0 0 24 24" fill="#ED4956">
+                                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                            </svg>
+                        </button>
+                        <a href="https://www.instagram.com/omarfaruquemosque/" target="_blank" rel="noopener noreferrer" class="ig-action-btn comment-btn" aria-label="Comment on Instagram">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+                            </svg>
+                        </a>
+                        <button class="ig-action-btn share-btn" id="igShareBtn" aria-label="Share post" type="button">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="22" y1="2" x2="11" y2="13"/>
+                                <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="ig-actions-right">
+                        <button class="ig-action-btn bookmark-btn" id="igBookmarkBtn" aria-label="Save post" type="button">
+                            <svg class="bookmark-empty" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
+                            </svg>
+                            <svg class="bookmark-filled" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Post Stats & Caption -->
+                <div class="ig-post-details">
+                    <div class="ig-likes-row">
+                        Liked by <strong>cambridge_muslims</strong> and <span id="igLikesCount">284</span> others
+                    </div>
+                    <div class="ig-caption">
+                        <a href="https://www.instagram.com/omarfaruquemosque/" target="_blank" rel="noopener noreferrer" class="ig-caption-author">omarfaruquemosque</a>
+                        <span>Assalamu Alaykum wa Rahmatullah 🕌✨ “The mosques of Allah shall be visited and maintained by those who believe in Allah and the Last Day…” [Surah At-Tawbah 9:18]. Welcome to all for daily salah &amp; Friday Jumu'ah at Omar Faruque Mosque, Cambridge.</span>
+                    </div>
+                    <div class="ig-hashtags">
+                        #OmarFaruqueMosque #Cambridge #CambridgeMosque #Salah #Jumuah #Masjid #Peace #IslamicCommunity
+                    </div>
+                    <a href="https://www.instagram.com/omarfaruquemosque/" target="_blank" rel="noopener noreferrer" class="ig-comments-link">
+                        View all 24 comments
+                    </a>
+                    <div class="ig-post-time">LATEST POST • 1 DAY AGO</div>
+                </div>
+
+                <!-- Footer Direct Link -->
+                <div class="ig-card-footer">
+                    <a href="https://www.instagram.com/omarfaruquemosque/" target="_blank" rel="noopener noreferrer" class="ig-cta-btn">
+                        <span>View on Instagram</span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="7" y1="17" x2="17" y2="7"/>
+                            <polyline points="7 7 17 7 17 17"/>
+                        </svg>
+                    </a>
+                </div>
+            </article>
+        </section>
+
+        <!-- Visit Us / Navigation -->
+        <section class="directions-section">
+            <h3 class="section-title">Visit Us</h3>
+            <div class="directions-card">
+                <div class="address-info">
+                    <span class="mosque-full-name">Omar Faruque Mosque & Cultural Centre</span>
+                    <span class="mosque-address-sub">Kirkwood Rd, Cambridge CB4 2PF</span>
+                </div>
+                <div class="navigation-grid">
+                    <a href="https://www.google.com/maps/dir/?api=1&destination=Omar+Faruque+Mosque+and+Cultural+Centre,+Kirkwood+Rd,+Cambridge+CB4+2PF" target="_blank" rel="noopener noreferrer" class="nav-card google-maps" aria-label="Navigate with Google Maps">
+                        <span class="nav-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                            </svg>
+                        </span>
+                        <div class="nav-details">
+                            <span class="nav-title">Google Maps</span>
+                            <span class="nav-action">Get Directions</span>
+                        </div>
+                    </a>
+                    
+                    <a href="https://maps.apple.com/?daddr=Omar+Faruque+Mosque+and+Cultural+Centre,+Kirkwood+Rd,+Cambridge+CB4+2PF&dirflg=d" target="_blank" rel="noopener noreferrer" class="nav-card apple-maps" aria-label="Navigate with Apple Maps">
+                        <span class="nav-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 170 170" fill="currentColor">
+                                <path d="M150.37 130.25c-2.45 5.66-5.35 10.87-8.71 15.66-4.58 6.53-8.33 11.05-11.22 13.56-4.48 4.12-9.28 6.23-14.42 6.35-3.69 0-8.14-1.05-13.32-3.18-5.19-2.12-9.97-3.17-14.34-3.17-4.58 0-9.49 1.05-14.75 3.17-5.26 2.13-9.5 3.24-12.74 3.35-4.35.13-9.16-1.9-14.42-6.08-3.7-3.04-7.59-7.71-11.66-14-5.34-8.27-9.55-17.78-12.63-28.53-3.08-10.74-4.63-21.32-4.63-31.73 0-14.59 3.82-26.79 11.46-36.6 7.64-9.81 17.1-14.85 28.38-15.12 4.58 0 9.87 1.25 15.86 3.75 6 2.5 10.02 3.8 12.06 3.91 1.74-.11 5.99-1.46 12.74-4.05 6.75-2.59 12.3-3.8 16.65-3.64 10.89.54 19.67 4.29 26.33 11.25-9.58 5.76-14.32 13.91-14.22 24.45.11 8.27 3.27 15.22 9.48 20.87 6.2 5.66 13.6 8.92 22.2 9.79-1.96 6.09-4.35 12.4-7.18 18.93zM119.22 31.84c0-7.07 2.56-13.75 7.68-20.05 5.12-6.3 11.53-10.33 19.23-12.09.43 2.17.65 4.35.65 6.52 0 7.07-2.61 13.8-7.83 20.2-5.22 6.4-11.75 10.38-19.59 11.95-.11-2.17-.14-4.35-.14-6.53z"/>
+                            </svg>
+                        </span>
+                        <div class="nav-details">
+                            <span class="nav-title">Apple Maps</span>
+                            <span class="nav-action">Start Navigation</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Bottom Ticker / Announcements -->
+        <section class="ticker-section">
+            <div class="ticker-content" id="tickerContent">
+                Assalamu Alaykum • Welcome to Omar Faruque Mosque
+            </div>
+        </section>
+        
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="appToast" class="app-toast" role="status" aria-live="polite"></div>
+
+    <!-- Scripts -->
+    <script src="prayer_data.js"></script>
+    <script src="app.js"></script>
+    <script src="nav.js"></script>
+</body>
+</html>
