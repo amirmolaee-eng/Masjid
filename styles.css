@@ -30,30 +30,7 @@
     --font-bengali: 'Noto Sans Bengali', sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-    :root {
-        /* Dark Theme (matches TV Signage style) */
-        --bg-main: #142814;
-        --bg-card: #1E3F1F;
-        --text-primary: #F2E8D7;
-        --text-secondary: #BADEAD;
-        --text-muted: #8FB492;
-        --accent: #BADEAD;
-        --accent-glow: rgba(186, 222, 173, 0.3);
-        --border-color: rgba(242, 232, 215, 0.08);
-        --row-highlight-bg: rgba(242, 232, 215, 0.08);
-        
-        --hero-bg: linear-gradient(135deg, #18331A 0%, #0D1C0E 100%);
-        --hero-text: #F2E8D7;
-        --hero-accent: #BADEAD;
-        --hero-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
-        
-        --shadow-sm: 0 4px 8px rgba(0, 0, 0, 0.2);
-        --shadow-md: 0 12px 24px rgba(0, 0, 0, 0.3);
-        --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.4);
-    }
-}
-
+/* [dark-mode block removed - dark mode is disabled for now] */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -376,13 +353,7 @@ body {
     text-transform: uppercase;
 }
 
-@media (prefers-color-scheme: dark) {
-    .jumuah-day-badge {
-        background: var(--accent);
-        color: var(--bg-main);
-    }
-}
-
+/* [dark-mode block removed - dark mode is disabled for now] */
 .jumuah-times-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -406,16 +377,7 @@ body {
     border-color: rgba(38, 79, 39, 0.2);
 }
 
-@media (prefers-color-scheme: dark) {
-    .khutbah-time-card {
-        background: rgba(186, 222, 173, 0.03);
-    }
-    .jumuah-card:hover .khutbah-time-card {
-        background: rgba(186, 222, 173, 0.06);
-        border-color: rgba(186, 222, 173, 0.2);
-    }
-}
-
+/* [dark-mode block removed - dark mode is disabled for now] */
 .khutbah-label {
     font-size: 1rem;
     font-weight: 600;
@@ -467,12 +429,7 @@ body {
     border-top: 1px solid rgba(255,255,255,0.1);
 }
 
-@media (prefers-color-scheme: dark) {
-    .ticker-section {
-        background: rgba(20, 40, 20, 0.95);
-    }
-}
-
+/* [dark-mode block removed - dark mode is disabled for now] */
 .ticker-content {
     font-size: 1rem;
     font-weight: 500;
@@ -570,14 +527,7 @@ body {
     flex-shrink: 0;
 }
 
-@media (prefers-color-scheme: dark) {
-    .events-brand-icon {
-        background: linear-gradient(135deg, #2D602F 0%, #1C3A1F 100%);
-        color: #EAD79E;
-        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
-    }
-}
-
+/* [dark-mode block removed - dark mode is disabled for now] */
 .events-brand-icon svg {
     width: 22px;
     height: 22px;
@@ -617,14 +567,7 @@ body {
     border-radius: 20px;
 }
 
-@media (prefers-color-scheme: dark) {
-    .events-live-badge {
-        background: rgba(34, 197, 94, 0.2);
-        color: #4ADE80;
-        border-color: rgba(34, 197, 94, 0.4);
-    }
-}
-
+/* [dark-mode block removed - dark mode is disabled for now] */
 .events-live-dot {
     width: 7px;
     height: 7px;
@@ -698,14 +641,7 @@ body {
     overflow: hidden;
 }
 
-@media (prefers-color-scheme: dark) {
-    .next-event-spotlight {
-        background: linear-gradient(135deg, #1C3B1E 0%, #0E2010 100%);
-        border-color: rgba(186, 222, 173, 0.15);
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
-    }
-}
-
+/* [dark-mode block removed - dark mode is disabled for now] */
 .spotlight-top-badge {
     display: inline-flex;
     align-items: center;
@@ -815,12 +751,7 @@ body {
     border-color: rgba(38, 79, 39, 0.3);
 }
 
-@media (prefers-color-scheme: dark) {
-    .event-card:hover {
-        border-color: rgba(186, 222, 173, 0.3);
-    }
-}
-
+/* [dark-mode block removed - dark mode is disabled for now] */
 .event-info {
     display: flex;
     flex-direction: column;
@@ -872,14 +803,7 @@ body {
     border-color: rgba(217, 119, 6, 0.3);
 }
 
-@media (prefers-color-scheme: dark) {
-    .event-countdown-pill.countdown-urgent {
-        background: rgba(245, 158, 11, 0.18);
-        color: #FBBF24;
-        border-color: rgba(245, 158, 11, 0.35);
-    }
-}
-
+/* [dark-mode block removed - dark mode is disabled for now] */
 .event-countdown-pill.countdown-today {
     background: rgba(34, 197, 94, 0.15);
     color: #15803D;
@@ -947,14 +871,7 @@ body {
     flex-shrink: 0;
 }
 
-@media (prefers-color-scheme: dark) {
-    .event-verified-tick {
-        background: rgba(34, 197, 94, 0.22);
-        color: #4ade80;
-        border-color: rgba(74, 222, 128, 0.35);
-    }
-}
-
+/* [dark-mode block removed - dark mode is disabled for now] */
 /* Cross-verified badge inside spotlight */
 .events-verified-badge {
     display: inline-flex;
@@ -1015,12 +932,7 @@ body {
     transition: background-color 0.25s ease, color 0.25s ease, transform 0.25s ease;
 }
 
-@media (prefers-color-scheme: dark) {
-    .social-icon {
-        background: rgba(255, 255, 255, 0.05);
-    }
-}
-
+/* [dark-mode block removed - dark mode is disabled for now] */
 .social-icon svg {
     width: 100%;
     height: 100%;
@@ -1077,11 +989,7 @@ body {
     border-color: var(--text-primary);
     background: rgba(0, 0, 0, 0.04);
 }
-@media (prefers-color-scheme: dark) {
-    .social-card.twitter-x:hover {
-        background: rgba(255, 255, 255, 0.04);
-    }
-}
+/* [dark-mode block removed - dark mode is disabled for now] */
 .social-card.twitter-x:hover .social-icon {
     background: var(--text-primary);
     color: var(--bg-card);
@@ -1156,12 +1064,7 @@ body {
                 background-color 0.25s ease;
 }
 
-@media (prefers-color-scheme: dark) {
-    .nav-card {
-        background: rgba(255, 255, 255, 0.02);
-    }
-}
-
+/* [dark-mode block removed - dark mode is disabled for now] */
 .nav-icon {
     display: flex;
     align-items: center;
@@ -1175,12 +1078,7 @@ body {
     transition: background-color 0.25s ease, color 0.25s ease, transform 0.25s ease;
 }
 
-@media (prefers-color-scheme: dark) {
-    .nav-icon {
-        background: rgba(255, 255, 255, 0.05);
-    }
-}
-
+/* [dark-mode block removed - dark mode is disabled for now] */
 .nav-icon svg {
     width: 100%;
     height: 100%;
@@ -1229,23 +1127,12 @@ body {
     border-color: rgba(0, 0, 0, 0.25);
     background: rgba(0, 0, 0, 0.04);
 }
-@media (prefers-color-scheme: dark) {
-    .nav-card.apple-maps:hover {
-        border-color: rgba(255, 255, 255, 0.25);
-        background: rgba(255, 255, 255, 0.04);
-    }
-}
+/* [dark-mode block removed - dark mode is disabled for now] */
 .nav-card.apple-maps:hover .nav-icon {
     background: #000000;
     color: #ffffff;
 }
-@media (prefers-color-scheme: dark) {
-    .nav-card.apple-maps:hover .nav-icon {
-        background: #F2E8D7;
-        color: #142814;
-    }
-}
-
+/* [dark-mode block removed - dark mode is disabled for now] */
 /* Responsive adjustments for mobile */
 @media (max-width: 480px) {
     .navigation-grid {
@@ -1276,26 +1163,14 @@ body {
                 filter 0.3s ease;
 }
 
-@media (prefers-color-scheme: dark) {
-    .donate-button-card {
-        background: linear-gradient(135deg, #EAD79E 0%, #C29E38 100%);
-        border: 1px solid rgba(194, 158, 56, 0.4);
-        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-    }
-}
-
+/* [dark-mode block removed - dark mode is disabled for now] */
 .donate-button-card:hover {
     transform: translateY(-3px);
     box-shadow: 0 14px 30px rgba(212, 176, 76, 0.3);
     filter: brightness(1.03);
 }
 
-@media (prefers-color-scheme: dark) {
-    .donate-button-card:hover {
-        box-shadow: 0 14px 30px rgba(194, 158, 56, 0.2), 0 8px 25px rgba(0, 0, 0, 0.4);
-    }
-}
-
+/* [dark-mode block removed - dark mode is disabled for now] */
 .donate-button-card:active {
     transform: translateY(-1px);
 }
@@ -1404,14 +1279,7 @@ body {
     flex-shrink: 0;
 }
 
-@media (prefers-color-scheme: dark) {
-    .live-pill {
-        background: rgba(239, 68, 68, 0.2);
-        color: #F87171;
-        border-color: rgba(239, 68, 68, 0.4);
-    }
-}
-
+/* [dark-mode block removed - dark mode is disabled for now] */
 .live-pulse {
     width: 8px;
     height: 8px;
@@ -1510,12 +1378,7 @@ body {
     box-shadow: var(--shadow-sm);
 }
 
-@media (prefers-color-scheme: dark) {
-    .fb-toggle-btn.active {
-        color: #60A5FA;
-    }
-}
-
+/* [dark-mode block removed - dark mode is disabled for now] */
 /* Page Profile Header */
 .fb-page-profile-card {
     display: flex;
@@ -1772,12 +1635,7 @@ body {
     font-weight: 500;
 }
 
-@media (prefers-color-scheme: dark) {
-    .fb-post-tags {
-        color: #60A5FA;
-    }
-}
-
+/* [dark-mode block removed - dark mode is disabled for now] */
 /* Post Reactions Stats Row */
 .fb-post-stats-row {
     display: flex;
@@ -1853,22 +1711,12 @@ body {
     animation: likeBounce 0.35s ease;
 }
 
-@media (prefers-color-scheme: dark) {
-    .fb-like-post-btn.liked {
-        color: #60A5FA;
-    }
-}
-
+/* [dark-mode block removed - dark mode is disabled for now] */
 .fb-view-fb-link {
     color: #1877F2;
 }
 
-@media (prefers-color-scheme: dark) {
-    .fb-view-fb-link {
-        color: #60A5FA;
-    }
-}
-
+/* [dark-mode block removed - dark mode is disabled for now] */
 /* Meta Tab View */
 .fb-meta-iframe-container {
     padding: 12px;
@@ -2278,12 +2126,7 @@ body {
     word-wrap: break-word;
 }
 
-@media (prefers-color-scheme: dark) {
-    .ig-hashtags {
-        color: #8FD19E;
-    }
-}
-
+/* [dark-mode block removed - dark mode is disabled for now] */
 .ig-comments-link {
     font-size: 0.82rem;
     color: var(--text-muted);
@@ -2361,14 +2204,7 @@ body {
     transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-@media (prefers-color-scheme: dark) {
-    .app-toast {
-        background: rgba(14, 30, 15, 0.95);
-        color: #F2E8D7;
-        border-color: rgba(186, 222, 173, 0.35);
-    }
-}
-
+/* [dark-mode block removed - dark mode is disabled for now] */
 .app-toast.visible {
     opacity: 1;
     transform: translateX(-50%) translateY(0);

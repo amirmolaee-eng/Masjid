@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Announcements | Omar Faruque Mosque</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Noto+Sans+Arabic:wght@400;700&family=Noto+Sans+Bengali:wght@400;700&family=Belleza&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="overrides.css">
+    
+    <!-- Meta tags for PWA / Mobile Web App -->
+    <meta name="theme-color" content="#264F27">
+    <meta name="color-scheme" content="only light">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="description" content="Latest announcements from Omar Faruque Mosque and Cultural Centre, Cambridge">
+</head>
+<body>
+    <!-- Site Navigation -->
+    <header class="site-nav">
+        <div class="site-nav-inner">
+            <a href="index.html" class="site-nav-brand">
+                <span class="site-nav-logo"><img src="Logo - Large.jpeg" alt="" class="site-nav-logo-img"></span>
+                <span class="site-nav-title">Omar Faruque Mosque</span>
+            </a>
+            <nav class="site-nav-links" aria-label="Primary">
+                <a href="index.html" class="site-nav-link">Home</a>
+                <a href="announcements.html" class="site-nav-link active" aria-current="page">Announcements</a>
+                <a href="location.html" class="site-nav-link">Location</a>
+                <a href="about.html" class="site-nav-link">About Us</a>
+                <a href="etiquette.html" class="site-nav-link">Etiquette</a>
+                <a href="jumuah.html" class="site-nav-link">Jumu'ah</a>
+                <a href="help-us.html" class="site-nav-link site-nav-cta">Help Us</a>
+                <a href="links.html" class="site-nav-link">Links</a>
+                <a href="contact.html" class="site-nav-link">Contact</a>
+            </nav>
+            <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="navDrawer">
+                <span class="nav-toggle-bar"></span><span class="nav-toggle-bar"></span><span class="nav-toggle-bar"></span>
+            </button>
+        </div>
+    </header>
+
+    <div class="nav-overlay" id="navOverlay"></div>
+    <aside class="nav-drawer" id="navDrawer" aria-hidden="true" inert>
+        <div class="nav-drawer-header">
+            <span class="site-nav-title">Menu</span>
+            <button class="nav-drawer-close" id="navClose" aria-label="Close menu">&times;</button>
+        </div>
+        <a href="index.html" class="nav-drawer-link">Home</a>
+        <a href="announcements.html" class="nav-drawer-link active" aria-current="page">Announcements</a>
+        <a href="location.html" class="nav-drawer-link">Location</a>
+        <a href="about.html" class="nav-drawer-link">About Us</a>
+        <a href="etiquette.html" class="nav-drawer-link">Etiquette</a>
+        <a href="jumuah.html" class="nav-drawer-link">Jumu'ah</a>
+        <a href="help-us.html" class="nav-drawer-link">Help Us</a>
+        <a href="links.html" class="nav-drawer-link">Links</a>
+        <a href="contact.html" class="nav-drawer-link">Contact</a>
+    </aside>
+
+    <main class="ann-page">
+        <h1 class="ann-page-title">Announcements</h1>
+        <p class="ann-page-intro">News and notices from Omar Faruque Mosque and Cultural Centre.</p>
+        <div class="ann-list" id="allAnnouncements">
+            <noscript><div class="ann-empty">Please enable JavaScript to see announcements.</div></noscript>
+        </div>
+    </main>
+
+    <!-- Charity footer banner -->
+    <footer class="site-footer-banner">
+        <p class="footer-name">Omar Faruque Mosque and Cultural Centre</p>
+        <p>Registered charity in England and Wales no.
+            <a href="https://register-of-charities.charitycommission.gov.uk/charity-search/-/charity-details/1117040" target="_blank" rel="noopener noreferrer">1117040</a></p>
+        <p><a href="location.html">Kirkwood Road, Cambridge, CB4 2PF</a> &middot; <a href="contact.html">Contact us</a></p>
+        <!-- TODO (if applicable): add company number + registered office if the charity is also a registered company;
+             add links to Privacy Policy / Cookie Policy / Accessibility Statement once those pages exist. -->
+        <p>&copy; <span id="footerYear">2026</span> Omar Faruque Mosque and Cultural Centre</p>
+    </footer>
+
+    <script src="site-tweaks.js"></script>
+    <script src="announcements-data.js"></script>
+    <script src="announcements.js"></script>
+    <script src="nav.js"></script>
+</body>
+</html>

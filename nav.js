@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', function () {
         document.body.classList.add('nav-open');
         toggle.setAttribute('aria-expanded', 'true');
         drawer.setAttribute('aria-hidden', 'false');
+        drawer.removeAttribute('inert');
         if (closeBtn) closeBtn.focus();
     }
 
@@ -23,6 +24,7 @@ document.addEventListener('DOMContentLoaded', function () {
         document.body.classList.remove('nav-open');
         toggle.setAttribute('aria-expanded', 'false');
         drawer.setAttribute('aria-hidden', 'true');
+        drawer.setAttribute('inert', '');
         toggle.focus();
     }
 

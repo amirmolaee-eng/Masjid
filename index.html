@@ -7,17 +7,19 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&family=Noto+Sans+Arabic:wght@400;700&family=Noto+Sans+Bengali:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Noto+Sans+Arabic:wght@400;700&family=Noto+Sans+Bengali:wght@400;700&family=Belleza&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="overrides.css">
     
     <!-- Meta tags for PWA / Mobile Web App -->
     <meta name="theme-color" content="#264F27">
+    <meta name="color-scheme" content="only light">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="description" content="Omar Faruque Mosque Prayer Times and Info">
 </head>
-<body>
+<body class="has-ticker">
     <!-- Site Navigation -->
     <header class="site-nav">
         <div class="site-nav-inner">
@@ -27,6 +29,7 @@
             </a>
             <nav class="site-nav-links" aria-label="Primary">
                 <a href="index.html" class="site-nav-link active">Home</a>
+                <a href="announcements.html" class="site-nav-link">Announcements</a>
                 <a href="location.html" class="site-nav-link">Location</a>
                 <a href="about.html" class="site-nav-link">About Us</a>
                 <a href="etiquette.html" class="site-nav-link">Etiquette</a>
@@ -42,12 +45,13 @@
     </header>
 
     <div class="nav-overlay" id="navOverlay"></div>
-    <aside class="nav-drawer" id="navDrawer" aria-hidden="true">
+    <aside class="nav-drawer" id="navDrawer" aria-hidden="true" inert>
         <div class="nav-drawer-header">
             <span class="site-nav-title">Menu</span>
             <button class="nav-drawer-close" id="navClose" aria-label="Close menu">&times;</button>
         </div>
         <a href="index.html" class="nav-drawer-link active">Home</a>
+        <a href="announcements.html" class="nav-drawer-link">Announcements</a>
         <a href="location.html" class="nav-drawer-link">Location</a>
         <a href="about.html" class="nav-drawer-link">About Us</a>
         <a href="etiquette.html" class="nav-drawer-link">Etiquette</a>
@@ -57,11 +61,13 @@
         <a href="contact.html" class="nav-drawer-link">Contact</a>
     </aside>
 
-    <!-- Facebook SDK Root -->
+    <!-- Facebook SDK disabled while the Facebook feed is hidden. Restore with the feed.
+    Facebook SDK Root
     <div id="fb-root"></div>
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v19.0" nonce="ofmFb"></script>
+    -->
 
-    <div class="app-container">
+    <main class="app-container" id="main">
         
         <!-- Header: Logo & Titles -->
         <header class="app-header">
@@ -70,7 +76,6 @@
             </div>
             <div class="masjid-titles">
                 <h1 class="masjid-name">Omar Faruque Mosque</h1>
-                <h2 class="masjid-name-arabic" dir="rtl">مسجد عمر فاروق</h2>
             </div>
         </header>
 
@@ -79,7 +84,18 @@
             <div class="clock-display" id="clock">--:--</div>
             <div class="date-stack">
                 <div class="gregorian-date" id="date">--</div>
-                <div class="hijri-date" id="hijri">--</div>
+                <div class="hijri-year" id="hijriYear"></div>
+            </div>
+        </section>
+
+        <!-- Announcements -->
+        <section class="announcements-section" id="announcementsSection" aria-labelledby="annHeading">
+            <div class="ann-header">
+                <h2 class="ann-heading" id="annHeading">Announcements</h2>
+                <a href="announcements.html" class="ann-viewall">View all &rarr;</a>
+            </div>
+            <div class="ann-list" id="homeAnnouncements">
+                <noscript><div class="ann-empty">Please enable JavaScript or <a href="announcements.html">view all announcements</a>.</div></noscript>
             </div>
         </section>
 
@@ -109,6 +125,7 @@
 
         <!-- Prayer Timetable -->
         <section class="timetable-section">
+            <p class="timetable-notice" id="timetableNotice" role="status" hidden></p>
             <div class="timetable-card">
                 <div class="timetable-header">
                     <div class="col-name">Salah</div>
@@ -119,16 +136,25 @@
                 <div class="prayer-row" id="row-fajr">
                     <div class="col-name">
                         <div class="salah-en">Fajr</div>
-                        <div class="salah-sub">ফজর • الفجر</div>
+                        <div class="salah-sub"><span lang="bn">ফজর</span> • <span lang="ar">الفجر</span></div>
                     </div>
                     <div class="col-start time-val">--:--</div>
                     <div class="col-iqamah time-val font-bold">--:--</div>
                 </div>
 
+                <div class="prayer-row sunrise-row">
+                    <div class="col-name">
+                        <div class="salah-en">Sunrise</div>
+                        <div class="salah-sub"><span lang="bn">সূর্যোদয়</span> • <span lang="ar">الشروق</span></div>
+                    </div>
+                    <div class="col-start time-val" id="sunriseTime">--:--</div>
+                    <div class="col-iqamah time-val" aria-hidden="true">&mdash;</div>
+                </div>
+
                 <div class="prayer-row" id="row-dhuhr">
                     <div class="col-name">
                         <div class="salah-en">Dhuhr</div>
-                        <div class="salah-sub">যোহর • الظهر</div>
+                        <div class="salah-sub"><span lang="bn">যোহর</span> • <span lang="ar">الظهر</span></div>
                     </div>
                     <div class="col-start time-val">--:--</div>
                     <div class="col-iqamah time-val font-bold">--:--</div>
@@ -137,7 +163,7 @@
                 <div class="prayer-row" id="row-asr">
                     <div class="col-name">
                         <div class="salah-en">Asr</div>
-                        <div class="salah-sub">আসর • العصر</div>
+                        <div class="salah-sub"><span lang="bn">আসর</span> • <span lang="ar">العصر</span></div>
                     </div>
                     <div class="col-start time-val">--:--</div>
                     <div class="col-iqamah time-val font-bold">--:--</div>
@@ -146,7 +172,7 @@
                 <div class="prayer-row" id="row-maghrib">
                     <div class="col-name">
                         <div class="salah-en">Maghrib</div>
-                        <div class="salah-sub">মাগরিব • المغرب</div>
+                        <div class="salah-sub"><span lang="bn">মাগরিব</span> • <span lang="ar">المغرب</span></div>
                     </div>
                     <div class="col-start time-val">--:--</div>
                     <div class="col-iqamah time-val font-bold">--:--</div>
@@ -155,7 +181,7 @@
                 <div class="prayer-row" id="row-isha">
                     <div class="col-name">
                         <div class="salah-en">Isha</div>
-                        <div class="salah-sub">ইশা • العشاء</div>
+                        <div class="salah-sub"><span lang="bn">ইশা</span> • <span lang="ar">العشاء</span></div>
                     </div>
                     <div class="col-start time-val">--:--</div>
                     <div class="col-iqamah time-val font-bold">--:--</div>
@@ -170,20 +196,20 @@
                 <div class="jumuah-card-header">
                     <div class="jumuah-title-wrap">
                         <h3 class="jumuah-title">Jumu'ah Prayer</h3>
-                        <span class="jumuah-title-sub">জুমআ • صلاة الجمعة</span>
+                        <span class="jumuah-title-sub"><span lang="bn">জুমআ</span> • <span lang="ar">صلاة الجمعة</span></span>
                     </div>
                     <span class="jumuah-day-badge">Friday</span>
                 </div>
                 <div class="jumuah-times-grid">
                     <div class="khutbah-time-card">
                         <span class="khutbah-label">1st Khutbah</span>
-                        <span class="khutbah-time">13:25</span>
-                        <span class="khutbah-lang-labels">১ম খুতবা • الخطبة الأولى</span>
+                        <span class="khutbah-time" id="jumuahFirst">12:25</span>
+                        <span class="khutbah-lang-labels"><span lang="bn">১ম খুতবা</span> • <span lang="ar">الخطبة الأولى</span></span>
                     </div>
                     <div class="khutbah-time-card">
                         <span class="khutbah-label">2nd Khutbah</span>
-                        <span class="khutbah-time">14:25</span>
-                        <span class="khutbah-lang-labels">২য় খুতবা • الخطبة الثانية</span>
+                        <span class="khutbah-time" id="jumuahSecond">13:25</span>
+                        <span class="khutbah-lang-labels"><span lang="bn">২য় খুতবা</span> • <span lang="ar">الخطبة الثانية</span></span>
                     </div>
                 </div>
                 <div class="jumuah-note">
@@ -193,7 +219,7 @@
         </section>
         
         <!-- Upcoming Islamic Events -->
-        <section class="events-section" id="islamicEventsSection">
+        <section class="events-section" id="islamicEventsSection" hidden>
             <div class="events-section-header">
                 <div class="events-title-wrap">
                     <span class="events-brand-icon" aria-hidden="true">
@@ -272,7 +298,7 @@
         </section>
         
         <!-- Facebook Live Posts Section -->
-        <section class="social-feed-section facebook-feed-section" id="facebookFeedSection">
+        <section class="social-feed-section facebook-feed-section" id="facebookFeedSection" hidden>
             <div class="feed-section-header">
                 <div class="feed-title-wrap">
                     <span class="feed-brand-icon fb-icon" aria-hidden="true">
@@ -476,7 +502,7 @@
                 <!-- Tab 2: Official Meta Page Plugin Widget -->
                 <div class="fb-tab-view" id="fbMetaWidgetView" style="display: none;">
                     <div class="fb-meta-iframe-container">
-                        <iframe 
+                        <iframe loading="lazy"
                             src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fomarfaruquemosque&tabs=timeline&width=500&height=560&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId" 
                             width="100%" 
                             height="560" 
@@ -510,7 +536,7 @@
         </section>
 
         <!-- Instagram Latest Post Section -->
-        <section class="social-feed-section instagram-feed-section" id="instagramFeedSection">
+        <section class="social-feed-section instagram-feed-section" id="instagramFeedSection" hidden>
             <div class="feed-section-header">
                 <div class="feed-title-wrap">
                     <span class="feed-brand-icon ig-icon" aria-hidden="true">
@@ -680,12 +706,27 @@
             </div>
         </section>
         
-    </div>
+    </main>
+
+    <!-- Charity footer banner -->
+    <footer class="site-footer-banner">
+        <p class="footer-name">Omar Faruque Mosque and Cultural Centre</p>
+        <p>Registered charity in England and Wales no.
+            <a href="https://register-of-charities.charitycommission.gov.uk/charity-search/-/charity-details/1117040" target="_blank" rel="noopener noreferrer">1117040</a></p>
+        <p><a href="location.html">Kirkwood Road, Cambridge, CB4 2PF</a> &middot; <a href="contact.html">Contact us</a></p>
+        <!-- TODO (if applicable): add company number + registered office if the charity is also a registered company;
+             add links to Privacy Policy / Cookie Policy / Accessibility Statement once those pages exist. -->
+        <p>&copy; <span id="footerYear">2026</span> Omar Faruque Mosque and Cultural Centre</p>
+    </footer>
 
     <!-- Toast Notification -->
     <div id="appToast" class="app-toast" role="status" aria-live="polite"></div>
 
     <!-- Scripts -->
+    <script src="site-tweaks.js"></script>
+    <script src="announcements-data.js"></script>
+    <script src="announcements.js"></script>
+    <script src="jumuah-times.js"></script>
     <script src="prayer_data.js"></script>
     <script src="app.js"></script>
     <script src="nav.js"></script>

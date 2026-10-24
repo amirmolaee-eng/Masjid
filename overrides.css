@@ -1,0 +1,80 @@
+/* =========================================================
+   overrides.css  -  loaded AFTER styles.css
+   Holds all the latest changes so they are easy to find/undo.
+   ========================================================= */
+
+/* Anything marked [hidden] stays hidden, whatever styles.css says */
+[hidden] { display: none !important; }
+
+/* ---------- Light mode only (dark mode disabled for now) ---------- */
+:root {
+    color-scheme: only light;
+    /* Headings: Optima (Apple devices have it; Belleza is the free look-alike for Windows/Android) */
+    --font-heading: Optima, "Optima nova", Belleza, Candara, "Segoe UI", sans-serif;
+    /* Darker muted text so it passes WCAG AA (4.5:1) on white, magnolia and pale green */
+    --text-muted: #4E6F50;
+}
+
+/* ---------- Headings: Optima, capitals ---------- */
+h1, h2, h3, h4, h5, h6,
+.masjid-name, .section-title, .jumuah-title, .events-title, .feed-title,
+.ann-heading, .ann-page-title {
+    font-family: Optima, "Optima nova", Belleza, Candara, "Segoe UI", sans-serif !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0 !important; /* brand guide: Optima letter spacing 0 */
+}
+
+/* ---------- Top menu: bigger text, larger gaps ---------- */
+.site-nav-link {
+    font-size: 1.1rem !important;
+    font-weight: 500;
+    white-space: nowrap;
+}
+.site-nav-links { gap: clamp(1rem, 2.2vw, 2.25rem) !important; }
+.nav-drawer-link { font-size: 1.2rem !important; }
+
+/* ---------- Countdown: smaller ---------- */
+.countdown-card { padding: 0.7rem 1rem !important; margin-top: 0.75rem; margin-bottom: 0.75rem; }
+.countdown-time { font-size: clamp(1.5rem, 6vw, 2rem) !important; line-height: 1.15 !important; margin: 0.15rem 0 !important; }
+.next-label { font-size: 0.7rem !important; }
+.next-prayer-name { font-size: 0.95rem !important; }
+.countdown-progress-bar { height: 4px !important; }
+
+/* ---------- Hijri: year only ---------- */
+#hijri { display: none !important; }
+.hijri-year { font-size: 0.95rem; opacity: 0.8; letter-spacing: 0.04em; }
+
+/* ---------- Announcements ---------- */
+.announcements-section { margin: 1rem 0; }
+.ann-header { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; margin-bottom: 0.6rem; }
+.ann-heading { margin: 0; font-size: 1.15rem; color: #264F27; }
+.ann-viewall { font-size: 0.9rem; font-weight: 600; color: #264F27; text-decoration: none; white-space: nowrap; }
+.ann-viewall:hover, .ann-viewall:focus { text-decoration: underline; }
+.ann-list { display: grid; gap: 0.75rem; }
+.ann-card { background: #fff; border: 1px solid rgba(38, 79, 39, 0.18); border-left: 4px solid #264F27; border-radius: 12px; padding: 0.85rem 1rem; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+.ann-card.is-pinned { background: #f4f8f1; }
+.ann-meta { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; font-size: 0.78rem; color: #5b665b; margin-bottom: 0.25rem; }
+.ann-tag { background: #264F27; color: #fff; border-radius: 999px; padding: 0.05rem 0.6rem; font-size: 0.72rem; font-weight: 600; }
+.ann-title { margin: 0 0 0.25rem; font-size: 1.05rem; color: #1d2b1d; }
+.ann-body { margin: 0; color: #2c382c; line-height: 1.5; font-size: 0.95rem; white-space: pre-line; }
+.ann-link { display: inline-block; margin-top: 0.4rem; font-weight: 600; color: #264F27; }
+.ann-empty { padding: 1rem; text-align: center; color: #5b665b; background: #fff; border: 1px dashed rgba(38,79,39,0.3); border-radius: 12px; }
+.ann-page { max-width: 760px; margin: 0 auto; padding: 1.5rem 1rem 2rem; }
+.ann-page-title { font-size: 1.6rem; color: #264F27; margin: 0 0 0.25rem; }
+.ann-page-intro { margin: 0 0 1.25rem; color: #5b665b; }
+
+/* ---------- Charity footer banner ---------- */
+.site-footer-banner { background: #1d3a1e; color: #e8efe6; font-size: 0.8rem; line-height: 1.55; text-align: center; padding: 0.9rem 1rem calc(0.9rem + 64px + env(safe-area-inset-bottom, 0px)); margin-top: 1.5rem; } /* 64px clears the fixed ticker on the home page */
+.site-footer-banner a { color: #fff; text-decoration: underline; text-underline-offset: 2px; }
+.site-footer-banner p { margin: 0.1rem 0; }
+.site-footer-banner .footer-name { font-weight: 600; }
+
+/* ---------- Sunrise row + timetable notice ---------- */
+.sunrise-row { background: rgba(38, 79, 39, 0.03); }
+.sunrise-row .salah-en { font-size: 1.05rem !important; }
+.sunrise-row .time-val { opacity: 0.9; }
+.timetable-notice { margin: 0 0 0.75rem; padding: 0.6rem 0.9rem; border-radius: 10px; background: #F2E8D7; color: #264F27; font-size: 0.85rem; line-height: 1.4; border: 1px solid rgba(38,79,39,0.25); }
+
+/* ---------- Footer: only the home page has the fixed ticker to clear ---------- */
+.site-footer-banner { padding-bottom: calc(0.9rem + env(safe-area-inset-bottom, 0px)) !important; }
+.has-ticker .site-footer-banner { padding-bottom: calc(0.9rem + 64px + env(safe-area-inset-bottom, 0px)) !important; }

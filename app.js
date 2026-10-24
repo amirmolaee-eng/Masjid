@@ -1,32 +1,38 @@
 // app.js
 
 // Ticker Messages Rotation
-const tickerMessages = [
-    "Assalamu Alaykum • Friday (Jumu'ah): 1st Khutbah 13:25 • 2nd Khutbah 14:25",
-    "السلام عليكم ورحمة الله وبركاته • صلاة الجمعة: الخطبة الأولى ١٣:٢٥ • الخطبة الثانية ١٤:٢٥",
-    "আসসালামু আলাইকুম • জুমার নামাজ: ১ম খুতবা ১৩:২৫ • ২য় খুতবা ১৪:২৫",
-    "السلام علیکم • جمعہ کی نماز: پہلا خطبہ 13:25 • دوسرا خطبہ 14:25"
-];
+// Jumu'ah times are NOT typed here - they come from jumuah-times.js (one place to edit).
+function convertDigits(str, zeroCodePoint) {
+    return str.replace(/\d/g, d => String.fromCharCode(zeroCodePoint + Number(d)));
+}
+
+function getTickerMessages() {
+    const j = getJumuahTimes();
+    const a = j.first, b = j.second;
+    return [
+        `Assalamu Alaykum • Friday (Jumu'ah): 1st Khutbah ${a} • 2nd Khutbah ${b}`,
+        `السلام عليكم ورحمة الله وبركاته • صلاة الجمعة: الخطبة الأولى ${convertDigits(a, 0x660)} • الخطبة الثانية ${convertDigits(b, 0x660)}`,
+        `আসসালামু আলাইকুম • জুমার নামাজ: ১ম খুতবা ${convertDigits(a, 0x9E6)} • ২য় খুতবা ${convertDigits(b, 0x9E6)}`,
+        `السلام علیکم • جمعہ کی نماز: پہلا خطبہ ${a} • دوسرا خطبہ ${b}`
+    ];
+}
 let currentTickerIndex = 0;
 
 function updateTicker() {
     const tickerEl = document.getElementById('tickerContent');
     if (!tickerEl) return;
-    
+
     // Fade out
     tickerEl.style.opacity = 0;
-    
+
     setTimeout(() => {
-        currentTickerIndex = (currentTickerIndex + 1) % tickerMessages.length;
-        tickerEl.textContent = tickerMessages[currentTickerIndex];
-        
+        const messages = getTickerMessages();
+        currentTickerIndex = (currentTickerIndex + 1) % messages.length;
+        tickerEl.textContent = messages[currentTickerIndex];
+
         // Set RTL for Arabic and Urdu
-        if (currentTickerIndex === 1 || currentTickerIndex === 3) {
-            tickerEl.setAttribute('dir', 'rtl');
-        } else {
-            tickerEl.setAttribute('dir', 'ltr');
-        }
-        
+        tickerEl.setAttribute('dir', (currentTickerIndex === 1 || currentTickerIndex === 3) ? 'rtl' : 'ltr');
+
         // Fade in
         tickerEl.style.opacity = 1;
     }, 500); // Wait for fade out
@@ -44,118 +50,141 @@ function updateClock() {
     const greg = now.toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
     document.getElementById('date').innerText = greg;
     
-    // Hijri Date
-    let hijriStr = '';
-    try {
-        hijriStr = now.toLocaleDateString('en-GB-u-ca-islamic', { day: 'numeric', month: 'long', year: 'numeric' });
-    } catch (e) {
-        hijriStr = 'Islamic Date';
+    // Hijri year only (the full Hijri date is intentionally not shown)
+    const hijriEl = document.getElementById('hijriYear');
+    if (hijriEl) {
+        let hijriYear = '';
+        try {
+            const part = new Intl.DateTimeFormat('en-GB-u-ca-islamic', { year: 'numeric' })
+                .formatToParts(now).find(p => p.type === 'year');
+            if (part) hijriYear = `${part.value} AH`;
+        } catch (e) { /* leave blank */ }
+        hijriEl.textContent = hijriYear;
     }
-    document.getElementById('hijri').innerText = hijriStr;
 }
 
 // Timetable logic
 const PRAYERS = ['fajr', 'dhuhr', 'asr', 'maghrib', 'isha'];
+const TIME_RE = /^\d{1,2}:\d{2}$/;
+
+// Look up a day in PRAYER_DATA (29 Feb falls back to 28 Feb).
+function lookupDay(date) {
+    let key = `${date.getMonth() + 1}-${date.getDate()}`;
+    if (!PRAYER_DATA[key] && key === '2-29') key = '2-28';
+    return PRAYER_DATA[key] || null;
+}
+
+// Ordinary (non-Friday) Dhuhr iqamah, taken from the nearest day that has one.
+function regularDhuhrIqamah(date) {
+    for (let i = 1; i <= 7; i++) {
+        for (const dir of [-1, 1]) {
+            const d = new Date(date.getFullYear(), date.getMonth(), date.getDate() + dir * i);
+            const raw = lookupDay(d);
+            if (raw && TIME_RE.test(raw[3])) return raw[3];
+        }
+    }
+    return null;
+}
+
+// Everything for one date. Jumu'ah is decided by the real calendar (Friday),
+// NOT by the data file - so it is correct in every year.
+function getDay(date) {
+    const raw = lookupDay(date);
+    if (!raw) return null;
+    const friday = date.getDay() === 5;
+    let dhuhrIqamah = raw[3];
+    if (friday) dhuhrIqamah = "Jumu'ah";
+    else if (!TIME_RE.test(dhuhrIqamah)) dhuhrIqamah = regularDhuhrIqamah(date) || raw[2];
+    return {
+        friday,
+        sunrise: raw[10] || '',
+        prayers: {
+            fajr:    { start: raw[0], iqamah: raw[1] },
+            dhuhr:   { start: raw[2], iqamah: dhuhrIqamah },
+            asr:     { start: raw[4], iqamah: raw[5] },
+            maghrib: { start: raw[6], iqamah: raw[7] },
+            isha:    { start: raw[8], iqamah: raw[9] }
+        }
+    };
+}
+
+function atTime(date, hhmm) {
+    const [h, m] = hhmm.split(':').map(Number);
+    return new Date(date.getFullYear(), date.getMonth(), date.getDate(), h, m, 0, 0);
+}
+
+function dayOffset(n) {
+    const now = new Date();
+    return new Date(now.getFullYear(), now.getMonth(), now.getDate() + n);
+}
 
 function initTimetable() {
     const now = new Date();
-    const todayKey = `${now.getMonth() + 1}-${now.getDate()}`;
-    const todayData = PRAYER_DATA[todayKey];
-    
-    if (!todayData) return;
-    
-    const rows = {
-        'fajr': { start: todayData[0], iqamah: todayData[1] },
-        'dhuhr': { start: todayData[2], iqamah: todayData[3] },
-        'asr': { start: todayData[4], iqamah: todayData[5] },
-        'maghrib': { start: todayData[6], iqamah: todayData[7] },
-        'isha': { start: todayData[8], iqamah: todayData[9] }
-    };
-    
-    for (const [id, times] of Object.entries(rows)) {
+    const day = getDay(now);
+    if (!day) return;
+
+    for (const id of PRAYERS) {
         const row = document.getElementById(`row-${id}`);
-        if (row) {
-            row.dataset.start = times.start;
-            row.dataset.iqamah = times.iqamah;
-            
-            // Update UI
-            const startEl = row.querySelector('.col-start');
-            const iqamahEl = row.querySelector('.col-iqamah');
-            
-            if (startEl) startEl.innerText = times.start;
-            if (iqamahEl) iqamahEl.innerText = times.iqamah || times.start;
+        if (!row) continue;
+        const t = day.prayers[id];
+        const startEl = row.querySelector('.col-start');
+        const iqamahEl = row.querySelector('.col-iqamah');
+        if (startEl) startEl.innerText = t.start;
+        if (iqamahEl) iqamahEl.innerText = t.iqamah || t.start;
+    }
+
+    const sunriseEl = document.getElementById('sunriseTime');
+    if (sunriseEl) sunriseEl.innerText = day.sunrise || '--:--';
+
+    // If the timetable file is for a different year, say so (times still show).
+    const notice = document.getElementById('timetableNotice');
+    if (notice) {
+        const stale = typeof PRAYER_DATA_YEAR !== 'undefined' && now.getFullYear() !== PRAYER_DATA_YEAR;
+        notice.hidden = !stale;
+        if (stale) {
+            notice.textContent = `These are the ${PRAYER_DATA_YEAR} times. The ${now.getFullYear()} timetable is being prepared, so please check with the mosque if in doubt.`;
         }
     }
 }
 
-function parseHHMMToDate(hhmm, daysOffset = 0) {
-    if (!hhmm || !hhmm.includes(':')) {
-        return new Date(8640000000000000); // Far future
+// The list of iqamah moments for one date, in order.
+function dayEvents(date) {
+    const day = getDay(date);
+    if (!day) return [];
+    const events = [];
+    const add = (id, name, time) => {
+        if (time && TIME_RE.test(time)) events.push({ id, name, target: atTime(date, time) });
+    };
+    const p = day.prayers;
+    add('fajr', 'Fajr', p.fajr.iqamah || p.fajr.start);
+    if (day.friday) {
+        const j = getJumuahTimes(date);
+        add('dhuhr', "Jumu'ah • 1st Khutbah", j.first);
+        add('dhuhr', "Jumu'ah • 2nd Khutbah", j.second);
+    } else {
+        add('dhuhr', 'Dhuhr', p.dhuhr.iqamah || p.dhuhr.start);
     }
-    const [h, m] = hhmm.split(':').map(Number);
-    const d = new Date();
-    d.setHours(h, m, 0, 0);
-    if (daysOffset) d.setDate(d.getDate() + daysOffset);
-    return d;
-}
-
-function getPrayerRows() {
-    const rows = PRAYERS.map(id => {
-        const r = document.getElementById(`row-${id}`);
-        if (!r) return null;
-        
-        const nameEl = r.querySelector('.salah-en');
-        const name = nameEl ? nameEl.textContent.trim() : id;
-        
-        return {
-            id,
-            row: r,
-            name,
-            start: r.dataset.start,
-            iqamah: r.dataset.iqamah || r.dataset.start
-        };
-    }).filter(Boolean);
-    return rows;
+    add('asr', 'Asr', p.asr.iqamah || p.asr.start);
+    add('maghrib', 'Maghrib', p.maghrib.iqamah || p.maghrib.start);
+    add('isha', 'Isha', p.isha.iqamah || p.isha.start);
+    return events;
 }
 
 function findNextPrayer() {
     const now = new Date();
-    const prayers = getPrayerRows();
-    if (!prayers.length) return null;
-    
-    let previousIqamahTarget = null;
-
-    for (let i = 0; i < prayers.length; i++) {
-        const p = prayers[i];
-        const iqamahTarget = parseHHMMToDate(p.iqamah);
-        
-        if (now < iqamahTarget) {
-            // Find the previous prayer's iqamah target for progress calculation
-            if (i > 0) {
-                previousIqamahTarget = parseHHMMToDate(prayers[i-1].iqamah);
-            } else {
-                // If next is Fajr today, previous is Isha yesterday
-                const yesterdayIsha = PRAYERS[4]; // isha
-                const ishaRow = document.getElementById(`row-${yesterdayIsha}`);
-                if (ishaRow) {
-                    previousIqamahTarget = parseHHMMToDate(ishaRow.dataset.iqamah, -1);
-                } else {
-                    previousIqamahTarget = parseHHMMToDate("20:00", -1); // fallback
-                }
-            }
-            return { prayer: p, target: iqamahTarget, previousTarget: previousIqamahTarget };
+    // Yesterday + today + tomorrow, so "previous" and "next" are always real times
+    // (including tomorrow's own Fajr time, and across clock changes).
+    const events = [...dayEvents(dayOffset(-1)), ...dayEvents(dayOffset(0)), ...dayEvents(dayOffset(1))];
+    for (let i = 0; i < events.length; i++) {
+        if (events[i].target > now) {
+            return {
+                prayer: events[i],
+                target: events[i].target,
+                previousTarget: i > 0 ? events[i - 1].target : null
+            };
         }
     }
-    
-    // Wrap to tomorrow's Fajr
-    const first = prayers[0];
-    const target = parseHHMMToDate(first.iqamah, 1);
-    
-    // Previous is today's Isha
-    const last = prayers[prayers.length - 1];
-    previousIqamahTarget = parseHHMMToDate(last.iqamah);
-    
-    return { prayer: first, target, previousTarget: previousIqamahTarget };
+    return null;
 }
 
 function formatTimeDiff(diffMs) {
@@ -164,7 +193,7 @@ function formatTimeDiff(diffMs) {
     const h = Math.floor(totalSeconds / 3600);
     const m = Math.floor((totalSeconds % 3600) / 60);
     const s = totalSeconds % 60;
-    
+
     if (h > 0) {
         return `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
     }
@@ -174,35 +203,49 @@ function formatTimeDiff(diffMs) {
 function updateCountdown() {
     const next = findNextPrayer();
     if (!next) return;
-    
+
     const { prayer, target, previousTarget } = next;
     const now = new Date();
     const diff = target - now;
-    
+
     const timeEl = document.getElementById('countdownTime');
     const nameEl = document.getElementById('nextPrayerName');
     const progressEl = document.getElementById('progressFill');
-    
+
     if (timeEl) timeEl.innerText = formatTimeDiff(diff);
     if (nameEl) nameEl.innerText = prayer.name;
-    
+
     // Update progress bar
     if (progressEl && previousTarget) {
         const totalDuration = target - previousTarget;
         const elapsed = now - previousTarget;
         let percentage = (elapsed / totalDuration) * 100;
-        
-        // Clamp between 0 and 100
         percentage = Math.max(0, Math.min(100, percentage));
         progressEl.style.width = `${percentage}%`;
     }
-    
-    // Highlight current active row
+
+    // Highlight the row of the next prayer
     document.querySelectorAll('.prayer-row').forEach(r => r.classList.remove('active'));
-    if (prayer && prayer.row) {
-        prayer.row.classList.add('active');
-    }
+    const row = document.getElementById(`row-${prayer.id}`);
+    if (row) row.classList.add('active');
 }
+
+// Home-page Jumu'ah card reads from jumuah-times.js
+function initJumuahCard() {
+    const j = getJumuahTimes();
+    const first = document.getElementById('jumuahFirst');
+    const second = document.getElementById('jumuahSecond');
+    if (first) first.textContent = j.first;
+    if (second) second.textContent = j.second;
+}
+
+// Which optional sections are switched on (a section with the "hidden" attribute is off).
+function sectionOn(id) {
+    const el = document.getElementById(id);
+    return !!el && !el.hidden;
+}
+const EVENTS_ON = () => sectionOn('islamicEventsSection');
+const SOCIAL_ON = () => sectionOn('facebookFeedSection') || sectionOn('instagramFeedSection');
 
 // Check for new day to refresh timetable & events
 let lastDay = new Date().getDate();
@@ -211,7 +254,8 @@ function checkNewDay() {
     if (currentDay !== lastDay) {
         lastDay = currentDay;
         initTimetable();
-        updateEvents(true);
+        initJumuahCard();
+        if (EVENTS_ON()) updateEvents(true);
     }
 }
 // Upcoming Islamic Events Logic
@@ -855,50 +899,51 @@ function init() {
     }
     
     initTimetable();
+    initJumuahCard();
     updateClock();
     updateCountdown();
-    updateEvents();
-    initSocialInteractions();
-    
+
+    // Optional sections: they only run when switched on (i.e. NOT hidden in index.html).
+    // While hidden they make no network requests and use no timers.
+    const eventsOn = EVENTS_ON();
+    if (eventsOn) updateEvents();
+    if (SOCIAL_ON()) initSocialInteractions();
+
     // Start interval for Clock & Prayer Countdown & Spotlight (every second)
     setInterval(() => {
         updateClock();
         updateCountdown();
         checkNewDay();
-        updateSpotlightCountdown();
+        if (eventsOn) updateSpotlightCountdown();
     }, 1000);
-    
-    // Check and refresh events frequently (every 60s) so live relative days stay accurate
-    setInterval(updateEvents, 60000);
-    
-    // Check every time user returns to the tab or window gains focus
-    document.addEventListener('visibilitychange', () => {
-        if (!document.hidden) {
-            updateEvents(true);
-        }
-    });
-    window.addEventListener('focus', () => {
-        updateEvents(true);
-    });
 
-    // Manual Refresh button for Islamic Events
-    const refreshBtn = document.getElementById('eventsRefreshBtn');
-    if (refreshBtn) {
-        refreshBtn.addEventListener('click', async () => {
-            refreshBtn.classList.add('spinning');
-            showAppToast('Checking sources: Local + AlAdhan.com... 🌙');
-            try {
-                await updateEvents(true);
-                showAppToast('✓ Cross-verified with AlAdhan.com API! 🌙');
-            } catch (err) {
-                showAppToast('Local calendar updated 🌙');
-            }
-            setTimeout(() => {
-                refreshBtn.classList.remove('spinning');
-            }, 800);
+    if (eventsOn) {
+        // Refresh events every 60s so live relative days stay accurate
+        setInterval(updateEvents, 60000);
+
+        // Check every time user returns to the tab or window gains focus
+        document.addEventListener('visibilitychange', () => {
+            if (!document.hidden) updateEvents(true);
         });
+        window.addEventListener('focus', () => updateEvents(true));
+
+        // Manual Refresh button for Islamic Events
+        const refreshBtn = document.getElementById('eventsRefreshBtn');
+        if (refreshBtn) {
+            refreshBtn.addEventListener('click', async () => {
+                refreshBtn.classList.add('spinning');
+                showAppToast('Checking sources: Local + AlAdhan.com... 🌙');
+                try {
+                    await updateEvents(true);
+                    showAppToast('✓ Cross-verified with AlAdhan.com API! 🌙');
+                } catch (err) {
+                    showAppToast('Local calendar updated 🌙');
+                }
+                setTimeout(() => refreshBtn.classList.remove('spinning'), 800);
+            });
+        }
     }
-    
+
     // Start Ticker rotation (every 8 seconds)
     setInterval(updateTicker, 8000);
     
