@@ -4,28 +4,52 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Omar Faruque Mosque</title>
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Noto+Sans+Arabic:wght@400;700&family=Noto+Sans+Bengali:wght@400;700&family=Belleza&display=swap" rel="stylesheet">
+    <link rel="preload" href="fonts/outfit-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="fonts/fonts.css">
     
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="overrides.css">
     
     <!-- Meta tags for PWA / Mobile Web App -->
+        <link rel="icon" href="favicon.ico" sizes="48x48">
+    <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16.png">
+    <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+    <link rel="manifest" href="manifest.webmanifest">
     <meta name="theme-color" content="#264F27">
     <meta name="color-scheme" content="only light">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="description" content="Omar Faruque Mosque Prayer Times and Info">
+    <meta property="og:site_name" content="Omar Faruque Mosque">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Omar Faruque Mosque">
+    <meta property="og:description" content="Omar Faruque Mosque Prayer Times and Info">
+    <meta property="og:locale" content="en_GB">
+    <meta name="twitter:card" content="summary_large_image">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Mosque",
+      "name": "Omar Faruque Mosque and Cultural Centre",
+      "alternateName": "Omar Faruque Mosque",
+      "description": "Mosque and registered charity (no. 1117040) serving the Muslim community of north Cambridge.",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Kirkwood Road",
+        "addressLocality": "Cambridge",
+        "postalCode": "CB4 2PF",
+        "addressCountry": "GB"
+      }
+    }
+    </script>
 </head>
 <body class="has-ticker">
     <!-- Site Navigation -->
     <header class="site-nav">
         <div class="site-nav-inner">
-            <a href="index.html" class="site-nav-brand">
-                <span class="site-nav-logo"><img src="Logo - Large.jpeg" alt="" class="site-nav-logo-img"></span>
-                <span class="site-nav-title">Omar Faruque Mosque</span>
+            <a href="index.html" class="site-nav-brand" aria-label="Omar Faruque Mosque home">
+                <img src="OMF-Secondary-Myrtle.png" alt="Omar Faruque Mosque" class="site-nav-secondary-logo">
             </a>
             <nav class="site-nav-links" aria-label="Primary">
                 <a href="index.html" class="site-nav-link active">Home</a>
@@ -34,6 +58,7 @@
                 <a href="about.html" class="site-nav-link">About Us</a>
                 <a href="etiquette.html" class="site-nav-link">Etiquette</a>
                 <a href="jumuah.html" class="site-nav-link">Jumu'ah</a>
+                <a href="timetable.html" class="site-nav-link">Timetable</a>
                 <a href="help-us.html" class="site-nav-link site-nav-cta">Help Us</a>
                 <a href="links.html" class="site-nav-link">Links</a>
                 <a href="contact.html" class="site-nav-link">Contact</a>
@@ -56,6 +81,7 @@
         <a href="about.html" class="nav-drawer-link">About Us</a>
         <a href="etiquette.html" class="nav-drawer-link">Etiquette</a>
         <a href="jumuah.html" class="nav-drawer-link">Jumu'ah</a>
+        <a href="timetable.html" class="nav-drawer-link">Timetable</a>
         <a href="help-us.html" class="nav-drawer-link">Help Us</a>
         <a href="links.html" class="nav-drawer-link">Links</a>
         <a href="contact.html" class="nav-drawer-link">Contact</a>
@@ -69,10 +95,12 @@
 
     <main class="app-container" id="main">
         
+        <div class="home-layout">
+            <div class="home-main-column">
         <!-- Header: Logo & Titles -->
         <header class="app-header">
             <div class="logo-wrapper">
-                <img src="Logo - Large.jpeg" alt="Omar Faruque Mosque Logo" class="app-logo">
+                <img src="OMF-Primary-Myrtle.png" alt="Omar Faruque Mosque Logo" class="app-logo">
             </div>
             <div class="masjid-titles">
                 <h1 class="masjid-name">Omar Faruque Mosque</h1>
@@ -81,7 +109,6 @@
 
         <!-- Current Date & Time -->
         <section class="datetime-section">
-            <div class="clock-display" id="clock">--:--</div>
             <div class="date-stack">
                 <div class="gregorian-date" id="date">--</div>
                 <div class="hijri-year" id="hijriYear"></div>
@@ -99,28 +126,9 @@
             </div>
         </section>
 
-        <!-- Countdown / Next Prayer -->
-        <section class="countdown-card">
-            <div class="countdown-header">
-                <span class="next-label">Next Prayer</span>
-                <span class="next-prayer-name" id="nextPrayerName">--</span>
-            </div>
-            <div class="countdown-time" id="countdownTime">--:--:--</div>
-            <div class="countdown-progress-bar">
-                <div class="progress-fill" id="progressFill"></div>
-            </div>
-        </section>
-        
-        <!-- Donation / Support Card -->
-        <section class="donation-section">
-            <a href="https://square.link/u/hJsC8N0N" target="_blank" rel="noopener noreferrer" class="donate-button-card" aria-label="Donate to Omar Faruque Mosque">
-                <span class="heart-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3c1.74 0 3.26.83 4.312 2.11 1.052-1.28 2.573-2.11 4.312-2.11 2.974 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z"/>
-                    </svg>
-                </span>
-                <span class="donate-text">Donate &amp; Support Our Mosque</span>
-            </a>
+        <!-- Next Jama'at (fixed time display, no live countdown) -->
+        <section class="countdown-card next-prayer-card" aria-live="polite" aria-atomic="true">
+            <span class="next-prayer-summary" id="nextPrayerSummary">Next Jama'at — --:--</span>
         </section>
 
         <!-- Prayer Timetable -->
@@ -218,6 +226,27 @@
             </div>
         </section>
         
+            </div>
+            <aside class="home-side-column" aria-label="Mosque and support">
+                <figure class="mosque-photo-card">
+                    <img src="latest_instagram_post.jpg" alt="Inside the prayer hall at Omar Faruque Mosque, Cambridge" loading="eager">
+                    <figcaption>Welcome to Omar Faruque Mosque</figcaption>
+                </figure>
+        <!-- Donation / Support Card -->
+        <section class="donation-section">
+            <a href="https://square.link/u/hJsC8N0N" target="_blank" rel="noopener noreferrer" class="donate-button-card" aria-label="Donate to Omar Faruque Mosque">
+                <span class="heart-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3c1.74 0 3.26.83 4.312 2.11 1.052-1.28 2.573-2.11 4.312-2.11 2.974 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z"/>
+                    </svg>
+                </span>
+                <span class="donate-text">Donate &amp; Support Our Mosque</span>
+            </a>
+        </section>
+
+            </aside>
+        </div>
+
         <!-- Upcoming Islamic Events -->
         <section class="events-section" id="islamicEventsSection" hidden>
             <div class="events-section-header">
@@ -379,12 +408,12 @@
                             <div class="fb-schedule-box">
                                 <div class="fb-schedule-row">
                                     <span class="fb-sched-num">1st Khutbah</span>
-                                    <span class="fb-sched-time">13:25</span>
+                                    <span class="fb-sched-time">12:25</span>
                                     <span class="fb-sched-sub">১ম খুতবা • الخطبة الأولى</span>
                                 </div>
                                 <div class="fb-schedule-row">
                                     <span class="fb-sched-num">2nd Khutbah</span>
-                                    <span class="fb-sched-time">14:25</span>
+                                    <span class="fb-sched-time">13:25</span>
                                     <span class="fb-sched-sub">২য় খুতবা • الخطبة الثانية</span>
                                 </div>
                             </div>
@@ -713,9 +742,9 @@
         <p class="footer-name">Omar Faruque Mosque and Cultural Centre</p>
         <p>Registered charity in England and Wales no.
             <a href="https://register-of-charities.charitycommission.gov.uk/charity-search/-/charity-details/1117040" target="_blank" rel="noopener noreferrer">1117040</a></p>
-        <p><a href="location.html">Kirkwood Road, Cambridge, CB4 2PF</a> &middot; <a href="contact.html">Contact us</a></p>
+        <p><a href="location.html">Kirkwood Road, Cambridge, CB4 2PF</a> &middot; <a href="contact.html">Contact us</a> &middot; <a href="privacy.html">Privacy &amp; cookies</a></p>
         <!-- TODO (if applicable): add company number + registered office if the charity is also a registered company;
-             add links to Privacy Policy / Cookie Policy / Accessibility Statement once those pages exist. -->
+             add an Accessibility Statement link once that page exists. -->
         <p>&copy; <span id="footerYear">2026</span> Omar Faruque Mosque and Cultural Centre</p>
     </footer>
 

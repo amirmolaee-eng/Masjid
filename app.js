@@ -44,7 +44,8 @@ function updateClock() {
     
     // Time
     const opts = { hour: '2-digit', minute: '2-digit', hour12: false };
-    document.getElementById('clock').innerText = now.toLocaleTimeString('en-GB', opts);
+    const clockEl = document.getElementById('clock');
+    if (clockEl) clockEl.innerText = now.toLocaleTimeString('en-GB', opts);
     
     // Gregorian Date
     const greg = now.toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
@@ -204,27 +205,19 @@ function updateCountdown() {
     const next = findNextPrayer();
     if (!next) return;
 
-    const { prayer, target, previousTarget } = next;
-    const now = new Date();
-    const diff = target - now;
-
-    const timeEl = document.getElementById('countdownTime');
-    const nameEl = document.getElementById('nextPrayerName');
-    const progressEl = document.getElementById('progressFill');
-
-    if (timeEl) timeEl.innerText = formatTimeDiff(diff);
-    if (nameEl) nameEl.innerText = prayer.name;
-
-    // Update progress bar
-    if (progressEl && previousTarget) {
-        const totalDuration = target - previousTarget;
-        const elapsed = now - previousTarget;
-        let percentage = (elapsed / totalDuration) * 100;
-        percentage = Math.max(0, Math.min(100, percentage));
-        progressEl.style.width = `${percentage}%`;
+    const { prayer, target } = next;
+    const summaryEl = document.getElementById('nextPrayerSummary');
+    const time = `${String(target.getHours()).padStart(2, '0')}:${String(target.getMinutes()).padStart(2, '0')}`;
+    let summary;
+    if (prayer.name.indexOf("Jumu'ah") === 0) {
+        const jumuahLabel = prayer.name.replace('Jumu\'ah • ', 'Jumu\'ah ');
+        summary = `Next ${jumuahLabel} ${time}`;
+    } else {
+        summary = `Next Jama'at ${prayer.name} ${time}`;
     }
+    if (summaryEl) summaryEl.textContent = summary;
 
-    // Highlight the row of the next prayer
+    // Keep the next prayer row highlighted in the timetable, without a ticking countdown.
     document.querySelectorAll('.prayer-row').forEach(r => r.classList.remove('active'));
     const row = document.getElementById(`row-${prayer.id}`);
     if (row) row.classList.add('active');
@@ -909,7 +902,7 @@ function init() {
     if (eventsOn) updateEvents();
     if (SOCIAL_ON()) initSocialInteractions();
 
-    // Start interval for Clock & Prayer Countdown & Spotlight (every second)
+    // Refresh the date, next Jama'at label and any enabled live event spotlight
     setInterval(() => {
         updateClock();
         updateCountdown();

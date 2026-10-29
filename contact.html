@@ -4,27 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact | Omar Faruque Mosque</title>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Noto+Sans+Arabic:wght@400;700&family=Noto+Sans+Bengali:wght@400;700&family=Belleza&display=swap" rel="stylesheet">
+    <link rel="preload" href="fonts/outfit-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="fonts/fonts.css">
 
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="overrides.css">
 
+        <link rel="icon" href="favicon.ico" sizes="48x48">
+    <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16.png">
+    <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+    <link rel="manifest" href="manifest.webmanifest">
     <meta name="theme-color" content="#264F27">
     <meta name="color-scheme" content="only light">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="description" content="Get in touch with Omar Faruque Mosque and Cultural Centre.">
+    <meta property="og:site_name" content="Omar Faruque Mosque">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Contact | Omar Faruque Mosque">
+    <meta property="og:description" content="Get in touch with Omar Faruque Mosque and Cultural Centre.">
+    <meta property="og:locale" content="en_GB">
+    <meta name="twitter:card" content="summary_large_image">
 </head>
 <body>
     <!-- Site Navigation -->
     <header class="site-nav">
         <div class="site-nav-inner">
-            <a href="index.html" class="site-nav-brand">
-                <span class="site-nav-logo"><img src="Logo - Large.jpeg" alt="" class="site-nav-logo-img"></span>
-                <span class="site-nav-title">Omar Faruque Mosque</span>
+            <a href="index.html" class="site-nav-brand" aria-label="Omar Faruque Mosque home">
+                <img src="OMF-Secondary-Myrtle.png" alt="Omar Faruque Mosque" class="site-nav-secondary-logo">
             </a>
             <nav class="site-nav-links" aria-label="Primary">
             <a href="index.html" class="site-nav-link">Home</a>
@@ -33,6 +41,7 @@
             <a href="about.html" class="site-nav-link">About Us</a>
             <a href="etiquette.html" class="site-nav-link">Etiquette</a>
             <a href="jumuah.html" class="site-nav-link">Jumu'ah</a>
+                <a href="timetable.html" class="site-nav-link">Timetable</a>
             <a href="help-us.html" class="site-nav-link site-nav-cta">Help Us</a>
             <a href="links.html" class="site-nav-link">Links</a>
             <a href="contact.html" class="site-nav-link active">Contact</a>
@@ -55,6 +64,7 @@
     <a href="about.html" class="nav-drawer-link">About Us</a>
     <a href="etiquette.html" class="nav-drawer-link">Etiquette</a>
     <a href="jumuah.html" class="nav-drawer-link">Jumu'ah</a>
+    <a href="timetable.html" class="nav-drawer-link">Timetable</a>
     <a href="help-us.html" class="nav-drawer-link">Help Us</a>
     <a href="links.html" class="nav-drawer-link">Links</a>
     <a href="contact.html" class="nav-drawer-link active">Contact</a>
@@ -119,9 +129,9 @@
         <p class="footer-name">Omar Faruque Mosque and Cultural Centre</p>
         <p>Registered charity in England and Wales no.
             <a href="https://register-of-charities.charitycommission.gov.uk/charity-search/-/charity-details/1117040" target="_blank" rel="noopener noreferrer">1117040</a></p>
-        <p><a href="location.html">Kirkwood Road, Cambridge, CB4 2PF</a> &middot; <a href="contact.html">Contact us</a></p>
+        <p><a href="location.html">Kirkwood Road, Cambridge, CB4 2PF</a> &middot; <a href="contact.html">Contact us</a> &middot; <a href="privacy.html">Privacy &amp; cookies</a></p>
         <!-- TODO (if applicable): add company number + registered office if the charity is also a registered company;
-             add links to Privacy Policy / Cookie Policy / Accessibility Statement once those pages exist. -->
+             add an Accessibility Statement link once that page exists. -->
         <p>&copy; <span id="footerYear">2026</span> Omar Faruque Mosque and Cultural Centre</p>
     </footer>
 

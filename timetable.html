@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prayer Timetable | Omar Faruque Mosque</title>
+    <link rel="stylesheet" href="fonts/fonts.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="overrides.css">
+    <meta name="theme-color" content="#264F27">
+    <meta name="description" content="Download the yearly prayer timetable for Omar Faruque Mosque, Cambridge.">
+</head>
+<body>
+    <header class="site-nav">
+        <div class="site-nav-inner">
+            <a href="index.html" class="site-nav-brand" aria-label="Omar Faruque Mosque home">
+                <img src="OMF-Secondary-Myrtle.png" alt="Omar Faruque Mosque" class="site-nav-secondary-logo">
+            </a>
+            <nav class="site-nav-links" aria-label="Primary">
+                <a href="index.html" class="site-nav-link">Home</a>
+                <a href="announcements.html" class="site-nav-link">Announcements</a>
+                <a href="location.html" class="site-nav-link">Location</a>
+                <a href="about.html" class="site-nav-link">About Us</a>
+                <a href="etiquette.html" class="site-nav-link">Etiquette</a>
+                <a href="jumuah.html" class="site-nav-link">Jumu'ah</a>
+                <a href="timetable.html" class="site-nav-link active" aria-current="page">Timetable</a>
+                <a href="help-us.html" class="site-nav-link site-nav-cta">Help Us</a>
+                <a href="links.html" class="site-nav-link">Links</a>
+                <a href="contact.html" class="site-nav-link">Contact</a>
+            </nav>
+            <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="navDrawer">
+                <span class="nav-toggle-bar"></span><span class="nav-toggle-bar"></span><span class="nav-toggle-bar"></span>
+            </button>
+        </div>
+    </header>
+    <div class="nav-overlay" id="navOverlay"></div>
+    <aside class="nav-drawer" id="navDrawer" aria-hidden="true" inert>
+        <div class="nav-drawer-header">
+            <span class="site-nav-title">Menu</span><button class="nav-drawer-close" id="navClose" aria-label="Close menu">&times;</button>
+        </div>
+        <a href="index.html" class="nav-drawer-link">Home</a>
+        <a href="announcements.html" class="nav-drawer-link">Announcements</a>
+        <a href="location.html" class="nav-drawer-link">Location</a>
+        <a href="about.html" class="nav-drawer-link">About Us</a>
+        <a href="etiquette.html" class="nav-drawer-link">Etiquette</a>
+        <a href="jumuah.html" class="nav-drawer-link">Jumu'ah</a>
+        <a href="timetable.html" class="nav-drawer-link active" aria-current="page">Timetable</a>
+        <a href="help-us.html" class="nav-drawer-link">Help Us</a>
+        <a href="links.html" class="nav-drawer-link">Links</a>
+        <a href="contact.html" class="nav-drawer-link">Contact</a>
+    </aside>
+    <main class="page-container timetable-page">
+        <header class="page-hero">
+            <h1 class="ann-page-title">Yearly Prayer Timetable</h1>
+            <p class="ann-page-intro" id="timetableIntro">Prayer start and Jama'at times for Cambridge.</p>
+        </header>
+        <div class="timetable-download-card">
+            <p>Download the full year as a CSV file, suitable for Excel, Google Sheets or printing.</p>
+            <button type="button" class="timetable-download-btn" id="downloadTimetable">Download yearly timetable (CSV)</button>
+            <p class="timetable-download-note" id="timetableStatus" role="status"></p>
+        </div>
+        <div class="yearly-table-wrap">
+            <table class="yearly-prayer-table">
+                <thead><tr><th>Date</th><th>Fajr Start</th><th>Fajr Jama'at</th><th>Sunrise</th><th>Dhuhr Start</th><th>Dhuhr Jama'at</th><th>Asr Start</th><th>Asr Jama'at</th><th>Maghrib Start</th><th>Maghrib Jama'at</th><th>Isha Start</th><th>Isha Jama'at</th><th>1st Khutbah</th><th>2nd Khutbah</th></tr></thead>
+                <tbody id="yearlyPrayerRows"><tr><td colspan="14">Loading timetable…</td></tr></tbody>
+            </table>
+        </div>
+    </main>
+    <footer class="site-footer-banner">
+        <p class="footer-name">Omar Faruque Mosque and Cultural Centre</p>
+        <p>Registered charity in England and Wales no. <a href="https://register-of-charities.charitycommission.gov.uk/charity-search/-/charity-details/1117040" target="_blank" rel="noopener noreferrer">1117040</a></p>
+        <p><a href="location.html">Kirkwood Road, Cambridge, CB4 2PF</a> &middot; <a href="contact.html">Contact us</a> &middot; <a href="privacy.html">Privacy &amp; cookies</a></p>
+        <p>&copy; <span id="footerYear">2026</span> Omar Faruque Mosque and Cultural Centre</p>
+    </footer>
+    <script src="site-tweaks.js"></script>
+    <script src="jumuah-times.js"></script>
+    <script src="prayer_data.js"></script>
+    <script src="timetable-page.js"></script>
+    <script src="nav.js"></script>
+</body>
+</html>
