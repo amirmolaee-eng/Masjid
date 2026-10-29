@@ -41,15 +41,11 @@ function updateTicker() {
 // Update clock and dates
 function updateClock() {
     const now = new Date();
-    
-    // Time
-    const opts = { hour: '2-digit', minute: '2-digit', hour12: false };
-    const clockEl = document.getElementById('clock');
-    if (clockEl) clockEl.innerText = now.toLocaleTimeString('en-GB', opts);
-    
+
     // Gregorian Date
     const greg = now.toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
-    document.getElementById('date').innerText = greg;
+    const dateEl = document.getElementById('date');
+    if (dateEl) dateEl.innerText = greg;
     
     // Hijri year only (the full Hijri date is intentionally not shown)
     const hijriEl = document.getElementById('hijriYear');
@@ -160,8 +156,8 @@ function dayEvents(date) {
     add('fajr', 'Fajr', p.fajr.iqamah || p.fajr.start);
     if (day.friday) {
         const j = getJumuahTimes(date);
-        add('dhuhr', "Jumu'ah • 1st Khutbah", j.first);
-        add('dhuhr', "Jumu'ah • 2nd Khutbah", j.second);
+        add('dhuhr', "Jumu'ah (1st Khutbah)", j.first);
+        add('dhuhr', "Jumu'ah (2nd Khutbah)", j.second);
     } else {
         add('dhuhr', 'Dhuhr', p.dhuhr.iqamah || p.dhuhr.start);
     }
@@ -201,23 +197,20 @@ function formatTimeDiff(diffMs) {
     return `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
 }
 
-function updateCountdown() {
+// "Next Jama'at" line: shows the next congregational prayer and its time.
+// The countdown itself was removed - it was confusing on a website.
+function updateNextJamaat() {
     const next = findNextPrayer();
     if (!next) return;
 
     const { prayer, target } = next;
-    const summaryEl = document.getElementById('nextPrayerSummary');
-    const time = `${String(target.getHours()).padStart(2, '0')}:${String(target.getMinutes()).padStart(2, '0')}`;
-    let summary;
-    if (prayer.name.indexOf("Jumu'ah") === 0) {
-        const jumuahLabel = prayer.name.replace('Jumu\'ah • ', 'Jumu\'ah ');
-        summary = `Next ${jumuahLabel} ${time}`;
-    } else {
-        summary = `Next Jama'at ${prayer.name} ${time}`;
-    }
-    if (summaryEl) summaryEl.textContent = summary;
 
-    // Keep the next prayer row highlighted in the timetable, without a ticking countdown.
+    // e.g. "Asr 15:30"
+    const hhmm = target.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', hour12: false });
+    const valueEl = document.getElementById('nextJamaatValue');
+    if (valueEl) valueEl.innerText = `${prayer.name} ${hhmm}`;
+
+    // Highlight the row of the next prayer
     document.querySelectorAll('.prayer-row').forEach(r => r.classList.remove('active'));
     const row = document.getElementById(`row-${prayer.id}`);
     if (row) row.classList.add('active');
@@ -679,6 +672,13 @@ function showAppToast(message) {
     }, 2600);
 }
 
+// Small in-memory store for the social-card UI toggles. We deliberately avoid
+// browser storage APIs here so the page also works where they are blocked
+// (private browsing, embedded views). The toggles simply reset on reload.
+var _uiStore = {};
+function storeGet(k) { return (k in _uiStore) ? _uiStore[k] : null; }
+function storeSet(k, v) { _uiStore[k] = v; }
+
 // Social Feeds: Facebook & Instagram Interactions
 function initSocialInteractions() {
     // --- Facebook Live Posts & View Switcher Logic ---
@@ -713,7 +713,7 @@ function initSocialInteractions() {
         const countEl = document.getElementById(countId);
         if (!btn || !countEl) return;
 
-        let liked = localStorage.getItem(storageKey) === 'true';
+        let liked = storeGet(storageKey) === 'true';
         function updateState() {
             if (liked) {
                 btn.classList.add('liked');
@@ -730,7 +730,7 @@ function initSocialInteractions() {
         btn.addEventListener('click', (e) => {
             e.stopPropagation();
             liked = !liked;
-            localStorage.setItem(storageKey, liked);
+            storeSet(storageKey, liked);
             updateState();
         });
     }
@@ -774,8 +774,8 @@ function initSocialInteractions() {
     const shareBtns = [document.getElementById('igShareBtn'), document.getElementById('igShareBtnTop')].filter(Boolean);
 
     const baseLikes = 284;
-    let isLiked = localStorage.getItem('ofm_ig_post_liked') === 'true';
-    let isSaved = localStorage.getItem('ofm_ig_post_saved') === 'true';
+    let isLiked = storeGet('ofm_ig_post_liked') === 'true';
+    let isSaved = storeGet('ofm_ig_post_saved') === 'true';
 
     function updateLikeUI(animate = false) {
         if (!likeBtn || !likesCountEl) return;
@@ -799,7 +799,7 @@ function initSocialInteractions() {
 
     function toggleLike() {
         isLiked = !isLiked;
-        localStorage.setItem('ofm_ig_post_liked', isLiked);
+        storeSet('ofm_ig_post_liked', isLiked);
         updateLikeUI(true);
         if (isLiked) {
             triggerHeartPop();
@@ -826,7 +826,7 @@ function initSocialInteractions() {
                 // Double tap detected
                 if (!isLiked) {
                     isLiked = true;
-                    localStorage.setItem('ofm_ig_post_liked', 'true');
+                    storeSet('ofm_ig_post_liked', 'true');
                     updateLikeUI(true);
                 }
                 triggerHeartPop();
@@ -843,7 +843,7 @@ function initSocialInteractions() {
         bookmarkBtn.addEventListener('click', (e) => {
             e.stopPropagation();
             isSaved = !isSaved;
-            localStorage.setItem('ofm_ig_post_saved', isSaved);
+            storeSet('ofm_ig_post_saved', isSaved);
             if (isSaved) {
                 bookmarkBtn.classList.add('saved');
                 showAppToast('Post saved to bookmarks 🔖');
@@ -894,7 +894,7 @@ function init() {
     initTimetable();
     initJumuahCard();
     updateClock();
-    updateCountdown();
+    updateNextJamaat();
 
     // Optional sections: they only run when switched on (i.e. NOT hidden in index.html).
     // While hidden they make no network requests and use no timers.
@@ -902,10 +902,10 @@ function init() {
     if (eventsOn) updateEvents();
     if (SOCIAL_ON()) initSocialInteractions();
 
-    // Refresh the date, next Jama'at label and any enabled live event spotlight
+    // Start interval for Clock & Next Jama'at (every second)
     setInterval(() => {
         updateClock();
-        updateCountdown();
+        updateNextJamaat();
         checkNewDay();
         if (eventsOn) updateSpotlightCountdown();
     }, 1000);

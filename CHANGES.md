@@ -1,5 +1,14 @@
 # WebApp changes (October 2026)
 
+## Round 3 (late October 2026)
+- Brand typography: main headers Optima Bold, sub-headers Optima Regular, body Gill Sans Regular. These are commercial fonts, so the site uses system font stacks (Optima/Gill Sans render natively on Apple devices; Candara/Segoe UI are the Windows/Android stand-ins). If you later get web-licensed font files, put them in `fonts/` and add @font-face rules.
+- New logos from the brand guidelines: `OMF-Secondary-Myrtle.png` fills the white menu bar height (all pages); `OMF-Primary-Myrtle.png` replaces the old circular emblem in the home header.
+- Home page: the clock and countdown are gone. It now shows "Next Jama'at" with the prayer name and time (e.g. "Asr 15:30"), including the two Jumu'ah Khutbahs on Fridays.
+- Home page layout: on desktop the content sits in a left column; the right column has the mosque photo with the Donate button underneath it. Announcements stay in a single column.
+- New "Timetable" link in the top menu (all pages) → `timetable.html`, a full-year prayer times page with month tabs and downloads: `OMF-Prayer-Times-2026.pdf` (one page per month, Jumu'ah highlighted) and `OMF-Prayer-Times-2026.csv`, both generated from `prayer_data.js`. When you load a new year's timetable, regenerate these two files (or ask for them to be regenerated).
+- Files added: `OMF-Primary-Myrtle.png`, `OMF-Secondary-Myrtle.png`, `timetable.html`, `timetable.js`, `OMF-Prayer-Times-2026.pdf`, `OMF-Prayer-Times-2026.csv`.
+
+
 ## Where to edit things
 | What | File |
 |---|---|
@@ -23,11 +32,3 @@ Remove the word `hidden` from the section in `index.html`:
 ## Files
 New: `jumuah-times.js`, `overrides.css`, `announcements.html`, `announcements.js`, `announcements-data.js`, `site-tweaks.js`
 Changed: every `.html` page, `app.js`, `nav.js`, `prayer_data.js`, `styles.css` (dark-mode rules removed)
-
-
-## Homepage redesign and timetable download
-- Homepage uses an explicit desktop two-column layout: prayer information and announcements stay in the left column; a mosque interior photo and donation button sit in the right column. Mobile stacks the columns.
-- Replaced the live clock/countdown presentation with a static “Next Jama'at [prayer] [time]” label.
-- Matched the Announcements heading size to Jumu'ah Prayer and set the type stack to Optima for headings/subheadings and Gill Sans for body text, with fallbacks when the fonts are not installed.
-- Added the Timetable navigation link and `timetable.html`, which displays the bundled annual data and exports it to CSV. The downloadable year comes from `PRAYER_DATA_YEAR` in `prayer_data.js`.
-- The linked OMF PNGs were inaccessible in this environment, so `OMF-Secondary-Myrtle.png` and `OMF-Primary-Myrtle.png` are prepared from the closest logo assets already bundled with the app. Swap these for the exact supplied PNGs when they are available locally.

@@ -4,78 +4,135 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Prayer Timetable | Omar Faruque Mosque</title>
+    <link rel="preload" href="fonts/outfit-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="fonts/fonts.css">
+
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="overrides.css">
+
+        <link rel="icon" href="favicon.ico" sizes="48x48">
+    <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16.png">
+    <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+    <link rel="manifest" href="manifest.webmanifest">
     <meta name="theme-color" content="#264F27">
-    <meta name="description" content="Download the yearly prayer timetable for Omar Faruque Mosque, Cambridge.">
+    <meta name="color-scheme" content="only light">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="description" content="Yearly prayer timetable (Salah start and Iqamah times) for Omar Faruque Mosque, Cambridge — view online or download the full-year PDF and CSV.">
+    <meta property="og:site_name" content="Omar Faruque Mosque">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Prayer Timetable | Omar Faruque Mosque">
+    <meta property="og:description" content="Yearly prayer timetable (Salah start and Iqamah times) for Omar Faruque Mosque, Cambridge — view online or download the full-year PDF and CSV.">
+    <meta property="og:locale" content="en_GB">
+    <meta name="twitter:card" content="summary_large_image">
 </head>
 <body>
+    <!-- Site Navigation -->
     <header class="site-nav">
         <div class="site-nav-inner">
-            <a href="index.html" class="site-nav-brand" aria-label="Omar Faruque Mosque home">
-                <img src="OMF-Secondary-Myrtle.png" alt="Omar Faruque Mosque" class="site-nav-secondary-logo">
+            <a href="index.html" class="site-nav-brand" aria-label="Omar Faruque Mosque — Home">
+                <img src="OMF-Secondary-Myrtle.png" alt="Omar Faruque Mosque" class="site-nav-logo-img">
             </a>
             <nav class="site-nav-links" aria-label="Primary">
-                <a href="index.html" class="site-nav-link">Home</a>
-                <a href="announcements.html" class="site-nav-link">Announcements</a>
-                <a href="location.html" class="site-nav-link">Location</a>
-                <a href="about.html" class="site-nav-link">About Us</a>
-                <a href="etiquette.html" class="site-nav-link">Etiquette</a>
-                <a href="jumuah.html" class="site-nav-link">Jumu'ah</a>
-                <a href="timetable.html" class="site-nav-link active" aria-current="page">Timetable</a>
-                <a href="help-us.html" class="site-nav-link site-nav-cta">Help Us</a>
-                <a href="links.html" class="site-nav-link">Links</a>
-                <a href="contact.html" class="site-nav-link">Contact</a>
+            <a href="index.html" class="site-nav-link">Home</a>
+            <a href="announcements.html" class="site-nav-link">Announcements</a>
+            <a href="location.html" class="site-nav-link">Location</a>
+            <a href="about.html" class="site-nav-link">About Us</a>
+            <a href="etiquette.html" class="site-nav-link">Etiquette</a>
+            <a href="jumuah.html" class="site-nav-link">Jumu'ah</a>
+            <a href="timetable.html" class="site-nav-link active">Timetable</a>
+            <a href="help-us.html" class="site-nav-link site-nav-cta">Help Us</a>
+            <a href="links.html" class="site-nav-link">Links</a>
+            <a href="contact.html" class="site-nav-link">Contact</a>
             </nav>
             <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="navDrawer">
                 <span class="nav-toggle-bar"></span><span class="nav-toggle-bar"></span><span class="nav-toggle-bar"></span>
             </button>
         </div>
     </header>
+
     <div class="nav-overlay" id="navOverlay"></div>
     <aside class="nav-drawer" id="navDrawer" aria-hidden="true" inert>
         <div class="nav-drawer-header">
-            <span class="site-nav-title">Menu</span><button class="nav-drawer-close" id="navClose" aria-label="Close menu">&times;</button>
+            <span class="site-nav-title">Menu</span>
+            <button class="nav-drawer-close" id="navClose" aria-label="Close menu">&times;</button>
         </div>
-        <a href="index.html" class="nav-drawer-link">Home</a>
-        <a href="announcements.html" class="nav-drawer-link">Announcements</a>
-        <a href="location.html" class="nav-drawer-link">Location</a>
-        <a href="about.html" class="nav-drawer-link">About Us</a>
-        <a href="etiquette.html" class="nav-drawer-link">Etiquette</a>
-        <a href="jumuah.html" class="nav-drawer-link">Jumu'ah</a>
-        <a href="timetable.html" class="nav-drawer-link active" aria-current="page">Timetable</a>
-        <a href="help-us.html" class="nav-drawer-link">Help Us</a>
-        <a href="links.html" class="nav-drawer-link">Links</a>
-        <a href="contact.html" class="nav-drawer-link">Contact</a>
+    <a href="index.html" class="nav-drawer-link">Home</a>
+    <a href="announcements.html" class="nav-drawer-link">Announcements</a>
+    <a href="location.html" class="nav-drawer-link">Location</a>
+    <a href="about.html" class="nav-drawer-link">About Us</a>
+    <a href="etiquette.html" class="nav-drawer-link">Etiquette</a>
+    <a href="jumuah.html" class="nav-drawer-link">Jumu'ah</a>
+    <a href="timetable.html" class="nav-drawer-link active">Timetable</a>
+    <a href="help-us.html" class="nav-drawer-link">Help Us</a>
+    <a href="links.html" class="nav-drawer-link">Links</a>
+    <a href="contact.html" class="nav-drawer-link">Contact</a>
     </aside>
-    <main class="page-container timetable-page">
-        <header class="page-hero">
-            <h1 class="ann-page-title">Yearly Prayer Timetable</h1>
-            <p class="ann-page-intro" id="timetableIntro">Prayer start and Jama'at times for Cambridge.</p>
-        </header>
-        <div class="timetable-download-card">
-            <p>Download the full year as a CSV file, suitable for Excel, Google Sheets or printing.</p>
-            <button type="button" class="timetable-download-btn" id="downloadTimetable">Download yearly timetable (CSV)</button>
-            <p class="timetable-download-note" id="timetableStatus" role="status"></p>
+
+    <main class="page-container">
+        <div class="page-hero">
+            <h1 class="page-title">Prayer Timetable</h1>
+            <p class="page-subtitle">Full-year Salah start and Iqamah times for Omar Faruque Mosque, Cambridge.</p>
         </div>
-        <div class="yearly-table-wrap">
-            <table class="yearly-prayer-table">
-                <thead><tr><th>Date</th><th>Fajr Start</th><th>Fajr Jama'at</th><th>Sunrise</th><th>Dhuhr Start</th><th>Dhuhr Jama'at</th><th>Asr Start</th><th>Asr Jama'at</th><th>Maghrib Start</th><th>Maghrib Jama'at</th><th>Isha Start</th><th>Isha Jama'at</th><th>1st Khutbah</th><th>2nd Khutbah</th></tr></thead>
-                <tbody id="yearlyPrayerRows"><tr><td colspan="14">Loading timetable…</td></tr></tbody>
-            </table>
+
+        <p class="timetable-notice" id="timetableNotice" role="status" hidden></p>
+
+        <div class="tt-downloads">
+            <a class="tt-download-btn" href="OMF-Prayer-Times-2026.pdf" download>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                <span>Download yearly PDF</span>
+            </a>
+            <a class="tt-download-btn secondary" href="OMF-Prayer-Times-2026.csv" download>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                <span>Download CSV</span>
+            </a>
+            <button class="tt-download-btn secondary" type="button" id="ttPrintBtn">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9V2c0-.6.4-1 1-1h10c.6 0 1 .4 1 1v7"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+                <span>Print this page</span>
+            </button>
         </div>
+
+        <div class="tt-jumuah-note" id="ttJumuahNote"></div>
+
+        <div class="tt-month-tabs" id="ttTabs" role="tablist" aria-label="Choose month"></div>
+
+        <div class="tt-card">
+            <h2 class="tt-card-title" id="ttCardTitle">Timetable</h2>
+            <p class="tt-note">Each prayer shows <strong>Start / Iqamah</strong>. Friday rows show the two Jumu'ah Khutbah times.</p>
+            <div class="tt-scroll">
+                <table class="tt-table" id="ttTable">
+                    <thead>
+                        <tr>
+                            <th scope="col">Date</th>
+                            <th scope="col">Fajr</th>
+                            <th scope="col">Sunrise</th>
+                            <th scope="col">Dhuhr</th>
+                            <th scope="col">Asr</th>
+                            <th scope="col">Maghrib</th>
+                            <th scope="col">Isha</th>
+                        </tr>
+                    </thead>
+                    <tbody id="ttBody"></tbody>
+                </table>
+            </div>
+        </div>
+
     </main>
+
+    <!-- Charity footer banner -->
     <footer class="site-footer-banner">
         <p class="footer-name">Omar Faruque Mosque and Cultural Centre</p>
-        <p>Registered charity in England and Wales no. <a href="https://register-of-charities.charitycommission.gov.uk/charity-search/-/charity-details/1117040" target="_blank" rel="noopener noreferrer">1117040</a></p>
-        <p><a href="location.html">Kirkwood Road, Cambridge, CB4 2PF</a> &middot; <a href="contact.html">Contact us</a> &middot; <a href="privacy.html">Privacy &amp; cookies</a></p>
+        <p>Registered charity in England and Wales no.
+            <a href="https://register-of-charities.charitycommission.gov.uk/charity-search/-/charity-details/1117040" target="_blank" rel="noopener noreferrer">1117040</a></p>
+        <p><a href="location.html">Kirkwood Road, Cambridge, CB4 2PF</a> &middot; <a href="contact.html">Contact us</a> &middot; <a href="privacy.html">Privacy & cookies</a></p>
         <p>&copy; <span id="footerYear">2026</span> Omar Faruque Mosque and Cultural Centre</p>
     </footer>
-    <script src="site-tweaks.js"></script>
-    <script src="jumuah-times.js"></script>
-    <script src="prayer_data.js"></script>
-    <script src="timetable-page.js"></script>
-    <script src="nav.js"></script>
+
+<script src="jumuah-times.js"></script>
+<script src="prayer_data.js"></script>
+<script src="timetable.js"></script>
+<script src="site-tweaks.js"></script>
+<script src="nav.js"></script>
 </body>
 </html>

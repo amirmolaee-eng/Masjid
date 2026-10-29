@@ -9,19 +9,33 @@
 /* ---------- Light mode only (dark mode disabled for now) ---------- */
 :root {
     color-scheme: only light;
-    /* Headings: Optima (Apple devices have it; Belleza is the free look-alike for Windows/Android) */
-    --font-heading: Optima, "Optima nova", Belleza, Candara, "Segoe UI", sans-serif;
+    /* Brand typography (system stacks - no webfont download needed):
+       Headings: Optima (all Apple devices; Candara/Segoe UI are the close Windows matches)
+       Body: Gill Sans (all Apple devices; Candara/Segoe UI are the close Windows matches) */
+    --font-heading: Optima, "Optima nova", Candara, "Segoe UI", "Trebuchet MS", sans-serif;
+    --font-body: "Gill Sans", "Gill Sans MT", "Gill Sans Nova", Candara, "Segoe UI", "Trebuchet MS", sans-serif;
     /* Darker muted text so it passes WCAG AA (4.5:1) on white, magnolia and pale green */
     --text-muted: #4E6F50;
 }
 
-/* ---------- Headings: Optima, capitals ---------- */
-h1, h2, h3, h4, h5, h6,
-.masjid-name, .section-title, .jumuah-title, .events-title, .feed-title,
-.ann-heading, .ann-page-title {
-    font-family: Optima, "Optima nova", Belleza, Candara, "Segoe UI", sans-serif !important;
+/* ---------- Brand typography: Optima for headings, Gill Sans for body ---------- */
+body { font-family: var(--font-body) !important; }
+
+/* Sub-headers: Optima Regular */
+h2, h3, h4, h5, h6, .events-title, .feed-title {
+    font-family: var(--font-heading) !important;
+    font-weight: 400 !important;
     text-transform: uppercase !important;
-    letter-spacing: 0 !important; /* brand guide: Optima letter spacing 0 */
+    letter-spacing: 0 !important;
+}
+
+/* Main headers: Optima Bold */
+h1, .masjid-name, .section-title, .jumuah-title,
+.ann-heading, .ann-page-title, .page-title, .next-jamaat-value {
+    font-family: var(--font-heading) !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0 !important;
 }
 
 /* ---------- Top menu: bigger text, larger gaps ---------- */
@@ -33,12 +47,10 @@ h1, h2, h3, h4, h5, h6,
 .site-nav-links { gap: clamp(1rem, 2.2vw, 2.25rem) !important; }
 .nav-drawer-link { font-size: 1.2rem !important; }
 
-/* ---------- Countdown: smaller ---------- */
-.countdown-card { padding: 0.7rem 1rem !important; margin-top: 0.75rem; margin-bottom: 0.75rem; }
-.countdown-time { font-size: clamp(1.5rem, 6vw, 2rem) !important; line-height: 1.15 !important; margin: 0.15rem 0 !important; }
-.next-label { font-size: 0.7rem !important; }
-.next-prayer-name { font-size: 0.95rem !important; }
-.countdown-progress-bar { height: 4px !important; }
+/* ---------- Next Jama'at (replaces the old clock + countdown) ---------- */
+.next-jamaat { display: flex; flex-direction: column; gap: 0.1rem; }
+.next-jamaat-label { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); }
+.next-jamaat-value { font-size: clamp(1.6rem, 5vw, 2.2rem); color: var(--accent); line-height: 1.1; font-variant-numeric: tabular-nums; }
 
 /* ---------- Hijri: year only ---------- */
 #hijri { display: none !important; }
@@ -47,7 +59,7 @@ h1, h2, h3, h4, h5, h6,
 /* ---------- Announcements ---------- */
 .announcements-section { margin: 1rem 0; }
 .ann-header { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; margin-bottom: 0.6rem; }
-.ann-heading { margin: 0; font-size: 1.15rem; color: #264F27; }
+.ann-heading { margin: 0; font-size: 1.8rem; color: #264F27; } /* same size as "Jumu'ah Prayer" */
 .ann-viewall { font-size: 0.9rem; font-weight: 600; color: #264F27; text-decoration: none; white-space: nowrap; }
 .ann-viewall:hover, .ann-viewall:focus { text-decoration: underline; }
 .ann-list { display: grid; gap: 0.75rem; }
@@ -86,180 +98,148 @@ h1, h2, h3, h4, h5, h6,
 .map-consent-btn:hover, .map-consent-btn:focus-visible { background: #1d3a1e; }
 .map-consent-link { color: #264F27; font-weight: 600; }
 
+/* =========================================================
+   ROUND 3 (Oct 2026)
+   New nav logo, home two-column layout, timetable page.
+   ========================================================= */
+
+/* ---------- Screen-reader-only utility ---------- */
+.sr-only {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+}
+
+/* ---------- Top menu: Secondary logo fills the bar height ---------- */
+.site-nav-inner { padding: 6px 20px !important; }
+img.site-nav-logo-img {
+    height: 48px !important;
+    width: auto !important;
+    display: block;
+    object-fit: contain;
+}
+.site-nav-brand { gap: 0; }
+
+/* ---------- Home hero: Primary logo ---------- */
+.app-header { margin-bottom: 16px; }
+.app-logo-primary {
+    width: min(340px, 78vw);
+    height: auto;
+    display: block;
+}
+
+/* ---------- Home two-column layout ----------
+   Mobile: single stack (hero, photo+donate, main content).
+   Desktop: left column = all main content; right column = mosque photo
+   with the Donate button underneath it. */
+.home-layout { display: flex; flex-direction: column; }
+
+.home-hero .datetime-section {
+    margin-bottom: 20px;
+    align-items: flex-start;
+}
+
+.mosque-photo-card {
+    margin: 0 0 1rem;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--border-color);
+    background: var(--bg-card);
+}
+.mosque-photo-card img {
+    width: 100%;
+    height: 230px;
+    object-fit: cover;
+    display: block;
+}
+.home-aside .donation-section { margin: 0 0 1.5rem; }
+
+/* ---------- Desktop: two columns ---------- */
+@media (min-width: 1024px) {
+    .home-layout-page .app-container { display: block; column-count: initial; }
+    .home-layout {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 340px;
+        grid-template-areas:
+            "hero aside"
+            "main  aside";
+        column-gap: 40px;
+        align-items: start;
+    }
+    .home-hero { grid-area: hero; }
+    .home-aside {
+        grid-area: aside;
+        position: sticky;
+        top: 84px; /* below the sticky nav bar */
+    }
+    .home-main { grid-area: main; min-width: 0; }
+    .app-header { margin-bottom: 12px; }
+    .app-logo-primary { width: 380px; }
+    .mosque-photo-card img { height: 300px; }
+    /* Announcements stay in ONE column (they are inside .home-main) */
+    .ann-list { grid-template-columns: 1fr; }
+}
+
+@media (min-width: 1440px) {
+    .home-layout { grid-template-columns: minmax(0, 1fr) 380px; }
+    .app-logo-primary { width: 420px; }
+}
 
 /* =========================================================
-   Homepage refresh: typography, explicit two-column layout,
-   static next Jama'at label and larger section headings.
+   TIMETABLE PAGE (yearly prayer times + download)
    ========================================================= */
-:root {
-    --font-heading-bold: "Optima", "Optima nova", "Segoe UI", sans-serif;
-    --font-heading-regular: "Optima", "Optima nova", "Segoe UI", sans-serif;
-    --font-body: "Gill Sans", "Gill Sans MT", Calibri, sans-serif;
-    --font-heading: var(--font-heading-bold);
+.tt-downloads {
+    display: flex; flex-wrap: wrap; gap: 0.75rem; margin: 0 0 1.5rem;
 }
+.tt-download-btn {
+    display: inline-flex; align-items: center; gap: 0.55rem;
+    background: #264F27; color: #fff; text-decoration: none;
+    font-weight: 600; font-size: 0.95rem;
+    padding: 0.7rem 1.3rem; border-radius: 999px;
+    border: 1px solid #1d3a1e;
+}
+.tt-download-btn:hover, .tt-download-btn:focus-visible { background: #1d3a1e; }
+.tt-download-btn.secondary { background: #fff; color: #264F27; border-color: rgba(38,79,39,0.35); }
+.tt-download-btn.secondary:hover { background: #f4f8f1; }
 
-body, button, input, select, textarea {
-    font-family: "Gill Sans", "Gill Sans MT", Calibri, sans-serif;
+.tt-month-tabs { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0 0 1.25rem; }
+.tt-tab {
+    appearance: none; font: inherit; cursor: pointer;
+    background: #fff; color: #264F27; font-weight: 600;
+    border: 1px solid rgba(38, 79, 39, 0.3); border-radius: 999px;
+    padding: 0.4rem 0.95rem; font-size: 0.9rem;
 }
-h1, h2, h3, h4, h5, h6,
-.masjid-name, .section-title, .jumuah-title, .events-title,
-.feed-title, .ann-heading, .ann-page-title, .timetable-header {
-    font-family: "Optima", "Optima nova", "Segoe UI", sans-serif !important;
-    font-weight: 700 !important;
-    text-transform: uppercase !important;
-    letter-spacing: 0 !important;
-}
-.site-nav-title, .jumuah-title-sub, .khutbah-label,
-.ann-page-intro, .salah-sub, .next-prayer-summary, .date-stack {
-    font-family: "Optima", "Optima nova", "Segoe UI", sans-serif;
-    font-weight: 400;
-}
-.ann-heading, .jumuah-title {
-    font-size: clamp(1.45rem, 2.2vw, 1.8rem) !important;
-    line-height: 1.15;
-}
-.ann-heading { color: #264F27; }
-.announcements-section { margin: 0 0 1.35rem; width: 100%; }
-.ann-header { align-items: center; }
-.ann-heading { margin: 0; }
-.ann-list { width: 100%; }
+.tt-tab:hover { background: #f4f8f1; }
+.tt-tab.active { background: #264F27; color: #fff; border-color: #1d3a1e; }
 
-/* Logo now occupies almost the full height of the white top bar. */
-.site-nav-inner { padding-top: 3px !important; padding-bottom: 3px !important; }
-.site-nav-brand { height: 56px; flex: 0 0 auto; display:flex; align-items:center; }
-.site-nav-secondary-logo { display:block; height: 54px; width:auto; max-width: 220px; object-fit:contain; }
-.site-nav-links { gap: clamp(.65rem, 1.35vw, 1.3rem) !important; }
-.site-nav-link { font-family: "Gill Sans", "Gill Sans MT", Calibri, sans-serif; font-size: .97rem !important; }
-.nav-drawer-link { font-family: "Gill Sans", "Gill Sans MT", Calibri, sans-serif; }
-
-/* Explicit grid replaces the old desktop CSS columns. Announcements stay in the left column. */
-.app-container {
-    display: block !important;
-    width: min(100%, 1320px);
-    max-width: 1320px !important;
-    min-height: 0;
-    padding: clamp(1.25rem, 3vw, 2.5rem) clamp(1rem, 3vw, 2.5rem) 100px !important;
-    margin: 0 auto;
-    column-count: auto !important;
-    column-gap: normal !important;
+.tt-card {
+    background: var(--bg-card); border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md); border: 1px solid var(--border-color);
+    overflow: hidden; margin-bottom: 1.5rem;
 }
-.home-layout {
-    display: grid;
-    grid-template-columns: minmax(0, 1.12fr) minmax(280px, .88fr);
-    align-items: start;
-    gap: clamp(1.25rem, 3vw, 2.5rem);
+.tt-card-title {
+    font-family: var(--font-heading); font-weight: 700; text-transform: uppercase;
+    font-size: 1.3rem; color: #264F27; padding: 1rem 1.25rem 0.6rem;
 }
-.home-main-column, .home-side-column { min-width: 0; display:flex; flex-direction:column; gap:1.1rem; }
-.home-main-column > *, .home-side-column > * { width:100%; min-width:0; }
-.app-header {
-    flex-direction: row !important;
-    justify-content: flex-start !important;
-    align-items: center;
-    gap: 1rem;
-    text-align: left !important;
-    margin: 0 !important;
-    animation: none;
+.tt-note { padding: 0 1.25rem 0.9rem; font-size: 0.85rem; color: var(--text-muted); margin: 0; }
+.tt-table { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
+.tt-table th, .tt-table td { padding: 0.5rem 0.75rem; text-align: center; border-top: 1px solid rgba(38,79,39,0.12); white-space: nowrap; }
+.tt-table th {
+    background: #264F27; color: #fff; font-weight: 600; font-size: 0.8rem;
+    text-transform: uppercase; letter-spacing: 0.04em; border-top: 0; padding: 0.65rem 0.75rem;
 }
-.masjid-titles { min-width: 0; text-align:left !important; }
-.masjid-name {
-    font-size: clamp(1.55rem, 2.7vw, 2.4rem) !important;
-    line-height: 1.12;
-    margin: 0;
+.tt-table td.tt-date { text-align: left; font-weight: 600; color: #1d2b1d; }
+.tt-table .tt-start { color: var(--text-muted); font-size: 0.82rem; display: block; }
+.tt-table .tt-iqamah { font-weight: 700; }
+.tt-table tr.today { background: #EAF0DF; }
+.tt-table tr.friday td { background: rgba(38, 79, 39, 0.06); }
+.tt-scroll { overflow-x: auto; }
+.tt-jumuah-note {
+    margin: 0 0 1.25rem; padding: 0.7rem 1rem; border-radius: 10px;
+    background: #F2E8D7; color: #264F27; font-size: 0.88rem; line-height: 1.5;
+    border: 1px solid rgba(38,79,39,0.25);
 }
-.logo-wrapper {
-    width: clamp(66px, 8vw, 94px) !important;
-    height: clamp(66px, 8vw, 94px) !important;
-    flex: 0 0 auto;
-    margin: 0 !important;
-    border-radius: 50%;
+@media (max-width: 640px) {
+    .tt-table { font-size: 0.85rem; }
+    .tt-table th, .tt-table td { padding: 0.4rem 0.5rem; }
 }
-.datetime-section {
-    display:flex;
-    flex-direction:row;
-    align-items:center;
-    justify-content:flex-start;
-    margin:0 !important;
-    animation:none;
-}
-.clock-display { display:none !important; }
-.date-stack { text-align:left; padding:.55rem .9rem; border-radius:999px; }
-.gregorian-date { font-size:.98rem; }
-.hijri-year { font-size:.82rem !important; }
-.next-prayer-card {
-    margin: 0 !important;
-    max-width: none !important;
-    padding: 1rem 1.2rem !important;
-    border-radius: 16px !important;
-    text-align:left !important;
-    display:flex;
-    align-items:center;
-    min-height:70px;
-    animation:none;
-}
-.next-prayer-summary {
-    color:#f6f0e5;
-    font-size:clamp(1.15rem, 2vw, 1.55rem);
-    font-weight:400;
-    line-height:1.3;
-}
-.countdown-header, .countdown-time, .countdown-progress-bar { display:none !important; }
-.timetable-section, .jumuah-section { margin:0 !important; animation:none; break-inside:avoid; }
-.timetable-card, .jumuah-card { border-radius:16px; }
-.timetable-header { font-weight:700; }
-.salah-en { font-family:"Optima", "Optima nova", "Segoe UI", sans-serif !important; font-weight:400; }
-.time-val { font-family:"Gill Sans", "Gill Sans MT", Calibri, sans-serif; }
-.mosque-photo-card {
-    margin:0;
-    overflow:hidden;
-    background:#fff;
-    border-radius:20px;
-    border:1px solid rgba(38,79,39,.12);
-    box-shadow:var(--shadow-md);
-}
-.mosque-photo-card img { display:block; width:100%; aspect-ratio: 4 / 3; object-fit:cover; }
-.mosque-photo-card figcaption { padding:.75rem 1rem; color:#264F27; font-size:.92rem; font-family:"Optima", "Optima nova", "Segoe UI", sans-serif; }
-.home-side-column .donation-section { margin:0 !important; max-width:none !important; animation:none; }
-.home-side-column .donate-button-card { padding:1rem 1.2rem; border-radius:14px; }
-.home-side-column .donate-text { font-family:"Optima", "Optima nova", "Segoe UI", sans-serif; font-weight:700; }
-
-/* Timetable download page */
-.timetable-page { max-width:1320px; }
-.timetable-download-card { display:flex; flex-wrap:wrap; gap:1rem; align-items:center; justify-content:space-between; background:#fff; border:1px solid rgba(38,79,39,.16); border-radius:16px; padding:1.2rem; margin:0 0 1.4rem; box-shadow:var(--shadow-sm); }
-.timetable-download-card p { margin:0; max-width:42rem; line-height:1.5; }
-.timetable-download-btn { border:0; border-radius:999px; padding:.85rem 1.25rem; background:#264F27; color:#fff; font:600 1rem "Gill Sans", "Gill Sans MT", Calibri, sans-serif; cursor:pointer; }
-.timetable-download-btn:hover, .timetable-download-btn:focus-visible { background:#1d3a1e; }
-.timetable-download-note { width:100%; color:#4e6f50; font-size:.9rem; }
-.yearly-table-wrap { overflow:auto; background:#fff; border:1px solid rgba(38,79,39,.15); border-radius:14px; }
-.yearly-prayer-table { width:100%; border-collapse:collapse; font-size:.85rem; white-space:nowrap; }
-.yearly-prayer-table th, .yearly-prayer-table td { padding:.65rem .75rem; text-align:left; border-bottom:1px solid rgba(38,79,39,.1); }
-.yearly-prayer-table th { position:sticky; top:0; background:#eaf0df; color:#1c3a1f; font-family:"Optima", "Optima nova", "Segoe UI", sans-serif; }
-.yearly-prayer-table tbody tr:nth-child(even) { background:#fbfcf8; }
-
-@media (max-width: 900px) {
-    .home-layout { grid-template-columns:1fr; }
-    .home-side-column { order:2; }
-    .home-main-column { order:1; }
-    .site-nav-secondary-logo { height:43px; max-width:190px; }
-    .home-side-column .mosque-photo-card img { aspect-ratio:16 / 9; }
-}
-@media (max-width: 560px) {
-    .app-container { padding:1rem 1rem 100px !important; }
-    .app-header { gap:.75rem; }
-    .masjid-name { font-size:1.45rem !important; }
-    .logo-wrapper { width:58px !important; height:58px !important; }
-    .ann-heading, .jumuah-title { font-size:1.35rem !important; }
-    .ann-card { padding:.75rem; }
-    .timetable-header, .prayer-row { padding-left:12px; padding-right:12px; }
-    .timetable-header { font-size:1rem; }
-    .salah-en { font-size:1.12rem; }
-    .time-val { font-size:1rem; }
-    .jumuah-card { padding:1rem; }
-    .site-nav-brand { height:46px; }
-    .site-nav-secondary-logo { height:42px; max-width:172px; }
-    .timetable-download-card { align-items:flex-start; }
-    .timetable-download-btn { width:100%; }
-}
-
-.ann-meta, .ann-viewall, .ann-body, .ann-empty { font-family: "Gill Sans", "Gill Sans MT", Calibri, sans-serif; }
-
-.gregorian-date { font-family: "Optima", "Optima nova", "Segoe UI", sans-serif; font-weight: 400; }

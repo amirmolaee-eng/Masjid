@@ -44,12 +44,12 @@
     }
     </script>
 </head>
-<body class="has-ticker">
+<body class="has-ticker home-layout-page">
     <!-- Site Navigation -->
     <header class="site-nav">
         <div class="site-nav-inner">
-            <a href="index.html" class="site-nav-brand" aria-label="Omar Faruque Mosque home">
-                <img src="OMF-Secondary-Myrtle.png" alt="Omar Faruque Mosque" class="site-nav-secondary-logo">
+            <a href="index.html" class="site-nav-brand" aria-label="Omar Faruque Mosque — Home">
+                <img src="OMF-Secondary-Myrtle.png" alt="Omar Faruque Mosque" class="site-nav-logo-img">
             </a>
             <nav class="site-nav-links" aria-label="Primary">
                 <a href="index.html" class="site-nav-link active">Home</a>
@@ -58,7 +58,7 @@
                 <a href="about.html" class="site-nav-link">About Us</a>
                 <a href="etiquette.html" class="site-nav-link">Etiquette</a>
                 <a href="jumuah.html" class="site-nav-link">Jumu'ah</a>
-                <a href="timetable.html" class="site-nav-link">Timetable</a>
+            <a href="timetable.html" class="site-nav-link">Timetable</a>
                 <a href="help-us.html" class="site-nav-link site-nav-cta">Help Us</a>
                 <a href="links.html" class="site-nav-link">Links</a>
                 <a href="contact.html" class="site-nav-link">Contact</a>
@@ -96,24 +96,47 @@
     <main class="app-container" id="main">
         
         <div class="home-layout">
-            <div class="home-main-column">
-        <!-- Header: Logo & Titles -->
-        <header class="app-header">
-            <div class="logo-wrapper">
-                <img src="OMF-Primary-Myrtle.png" alt="Omar Faruque Mosque Logo" class="app-logo">
-            </div>
-            <div class="masjid-titles">
-                <h1 class="masjid-name">Omar Faruque Mosque</h1>
-            </div>
-        </header>
 
-        <!-- Current Date & Time -->
-        <section class="datetime-section">
-            <div class="date-stack">
-                <div class="gregorian-date" id="date">--</div>
-                <div class="hijri-year" id="hijriYear"></div>
-            </div>
-        </section>
+        <!-- Header: Primary logo + Next Jama'at + date (left column, top) -->
+        <div class="home-hero">
+            <header class="app-header">
+                <img src="OMF-Primary-Myrtle.png" alt="Omar Faruque Mosque" class="app-logo-primary" width="420" height="189">
+                <h1 class="sr-only">Omar Faruque Mosque</h1>
+            </header>
+
+            <section class="datetime-section">
+                <div class="next-jamaat" aria-live="polite">
+                    <span class="next-jamaat-label">Next Jama&rsquo;at</span>
+                    <span class="next-jamaat-value" id="nextJamaatValue">&ndash;</span>
+                </div>
+                <div class="date-stack">
+                    <div class="gregorian-date" id="date">--</div>
+                    <div class="hijri-year" id="hijriYear"></div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Right column: mosque photo with Donate underneath -->
+        <aside class="home-aside">
+            <figure class="mosque-photo-card">
+                <img src="latest_instagram_post.jpg" alt="Prayer hall at Omar Faruque Mosque, Cambridge" loading="lazy">
+            </figure>
+
+            <!-- Donation / Support Card -->
+            <section class="donation-section">
+                <a href="https://square.link/u/hJsC8N0N" target="_blank" rel="noopener noreferrer" class="donate-button-card" aria-label="Donate to Omar Faruque Mosque">
+                    <span class="heart-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3c1.74 0 3.26.83 4.312 2.11 1.052-1.28 2.573-2.11 4.312-2.11 2.974 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z"/>
+                        </svg>
+                    </span>
+                    <span class="donate-text">Donate & Support Our Mosque</span>
+                </a>
+            </section>
+        </aside>
+
+        <!-- Left column: main content -->
+        <div class="home-main">
 
         <!-- Announcements -->
         <section class="announcements-section" id="announcementsSection" aria-labelledby="annHeading">
@@ -124,11 +147,6 @@
             <div class="ann-list" id="homeAnnouncements">
                 <noscript><div class="ann-empty">Please enable JavaScript or <a href="announcements.html">view all announcements</a>.</div></noscript>
             </div>
-        </section>
-
-        <!-- Next Jama'at (fixed time display, no live countdown) -->
-        <section class="countdown-card next-prayer-card" aria-live="polite" aria-atomic="true">
-            <span class="next-prayer-summary" id="nextPrayerSummary">Next Jama'at — --:--</span>
         </section>
 
         <!-- Prayer Timetable -->
@@ -226,27 +244,6 @@
             </div>
         </section>
         
-            </div>
-            <aside class="home-side-column" aria-label="Mosque and support">
-                <figure class="mosque-photo-card">
-                    <img src="latest_instagram_post.jpg" alt="Inside the prayer hall at Omar Faruque Mosque, Cambridge" loading="eager">
-                    <figcaption>Welcome to Omar Faruque Mosque</figcaption>
-                </figure>
-        <!-- Donation / Support Card -->
-        <section class="donation-section">
-            <a href="https://square.link/u/hJsC8N0N" target="_blank" rel="noopener noreferrer" class="donate-button-card" aria-label="Donate to Omar Faruque Mosque">
-                <span class="heart-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3c1.74 0 3.26.83 4.312 2.11 1.052-1.28 2.573-2.11 4.312-2.11 2.974 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z"/>
-                    </svg>
-                </span>
-                <span class="donate-text">Donate &amp; Support Our Mosque</span>
-            </a>
-        </section>
-
-            </aside>
-        </div>
-
         <!-- Upcoming Islamic Events -->
         <section class="events-section" id="islamicEventsSection" hidden>
             <div class="events-section-header">
@@ -728,13 +725,16 @@
             </div>
         </section>
         
+        </div><!-- /home-main -->
+        </div><!-- /home-layout -->
+
         <!-- Bottom Ticker / Announcements -->
         <section class="ticker-section">
             <div class="ticker-content" id="tickerContent">
                 Assalamu Alaykum • Welcome to Omar Faruque Mosque
             </div>
         </section>
-        
+
     </main>
 
     <!-- Charity footer banner -->
