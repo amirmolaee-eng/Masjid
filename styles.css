@@ -24,10 +24,9 @@
     --radius-md: 20px;
     --radius-lg: 30px;
     
-    --font-heading: 'Cormorant Garamond', serif;
-    --font-body: 'Outfit', sans-serif;
+    --font-heading: "Optima Brand", "Libertinus Sans", Optima, Candara, "Segoe UI", sans-serif;
+    --font-body: "Gill Sans Brand", "Cabin", "Gill Sans", "Gill Sans MT", "Segoe UI", sans-serif;
     --font-arabic: 'Noto Sans Arabic', sans-serif;
-    --font-bengali: 'Noto Sans Bengali', sans-serif;
 }
 
 /* [dark-mode block removed - dark mode is disabled for now] */

@@ -12,7 +12,6 @@ function getTickerMessages() {
     return [
         `Assalamu Alaykum • Friday (Jumu'ah): 1st Khutbah ${a} • 2nd Khutbah ${b}`,
         `السلام عليكم ورحمة الله وبركاته • صلاة الجمعة: الخطبة الأولى ${convertDigits(a, 0x660)} • الخطبة الثانية ${convertDigits(b, 0x660)}`,
-        `আসসালামু আলাইকুম • জুমার নামাজ: ১ম খুতবা ${convertDigits(a, 0x9E6)} • ২য় খুতবা ${convertDigits(b, 0x9E6)}`,
         `السلام علیکم • جمعہ کی نماز: پہلا خطبہ ${a} • دوسرا خطبہ ${b}`
     ];
 }
@@ -31,7 +30,7 @@ function updateTicker() {
         tickerEl.textContent = messages[currentTickerIndex];
 
         // Set RTL for Arabic and Urdu
-        tickerEl.setAttribute('dir', (currentTickerIndex === 1 || currentTickerIndex === 3) ? 'rtl' : 'ltr');
+        tickerEl.setAttribute('dir', (currentTickerIndex === 1 || currentTickerIndex === 2) ? 'rtl' : 'ltr');
 
         // Fade in
         tickerEl.style.opacity = 1;
@@ -208,7 +207,17 @@ function updateNextJamaat() {
     // e.g. "Asr 15:30"
     const hhmm = target.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', hour12: false });
     const valueEl = document.getElementById('nextJamaatValue');
-    if (valueEl) valueEl.innerText = `${prayer.name} ${hhmm}`;
+    if (valueEl) {
+        // Build with DOM nodes so "1st"/"2nd" stay lower-case inside the upper-case heading
+        valueEl.textContent = '';
+        `${prayer.name} ${hhmm}`.split(/(\d+(?:st|nd))/).forEach(part => {
+            if (/^\d+(?:st|nd)$/.test(part)) {
+                const o = document.createElement('span'); o.className = 'ord'; o.textContent = part; valueEl.appendChild(o);
+            } else if (part) {
+                valueEl.appendChild(document.createTextNode(part));
+            }
+        });
+    }
 
     // Highlight the row of the next prayer
     document.querySelectorAll('.prayer-row').forEach(r => r.classList.remove('active'));
@@ -248,7 +257,6 @@ function checkNewDay() {
 const ISLAMIC_EVENTS = [
     { 
         name: "Islamic New Year", 
-        bengali: "হিজরি নববর্ষ", 
         arabic: "رأس السنة الهجرية", 
         day: 1, 
         month: 1,
@@ -256,7 +264,6 @@ const ISLAMIC_EVENTS = [
     },
     { 
         name: "Day of Ashura", 
-        bengali: "পবিত্র আশুরা", 
         arabic: "يوم عاشوراء", 
         day: 10, 
         month: 1,
@@ -264,7 +271,6 @@ const ISLAMIC_EVENTS = [
     },
     { 
         name: "Mawlid al-Nabi", 
-        bengali: "ঈদে মিলাদুন্নবী ﷺ", 
         arabic: "المولد النبوي الشريف", 
         day: 12, 
         month: 3,
@@ -272,7 +278,6 @@ const ISLAMIC_EVENTS = [
     },
     { 
         name: "Isra' and Mi'raj", 
-        bengali: "পবিত্র শবে মেরাজ", 
         arabic: "الإسراء والمعراج", 
         day: 27, 
         month: 7,
@@ -280,7 +285,6 @@ const ISLAMIC_EVENTS = [
     },
     { 
         name: "Mid-Sha'ban (Shab-e-Barat)", 
-        bengali: "শবে বরাত (লাইলাতুল বারাত)", 
         arabic: "ليلة النصف من شعبان", 
         day: 15, 
         month: 8,
@@ -288,7 +292,6 @@ const ISLAMIC_EVENTS = [
     },
     { 
         name: "Ramadan Start", 
-        bengali: "পবিত্র মাহে রমজান", 
         arabic: "بداية شهر رمضان المبارك", 
         day: 1, 
         month: 9,
@@ -296,7 +299,6 @@ const ISLAMIC_EVENTS = [
     },
     { 
         name: "Laylat al-Qadr", 
-        bengali: "লাইলাতুল কদর (শবে কদর)", 
         arabic: "ليلة القدر المباركة", 
         day: 27, 
         month: 9,
@@ -304,7 +306,6 @@ const ISLAMIC_EVENTS = [
     },
     { 
         name: "Eid al-Fitr", 
-        bengali: "ঈদুল ফিতর", 
         arabic: "عيد الفطر المبارك", 
         day: 1, 
         month: 10,
@@ -312,7 +313,6 @@ const ISLAMIC_EVENTS = [
     },
     { 
         name: "Day of Arafah", 
-        bengali: "আরাফার দিন (হজ)", 
         arabic: "يوم عرفة المبارك", 
         day: 9, 
         month: 12,
@@ -320,7 +320,6 @@ const ISLAMIC_EVENTS = [
     },
     { 
         name: "Eid al-Adha", 
-        bengali: "ঈদুল আযহা (কোরবানি)", 
         arabic: "عيد الأضحى المبارك", 
         day: 10, 
         month: 12,
@@ -542,7 +541,7 @@ function renderEvents(upcoming, sourceLabel) {
             </div>
             <div>
                 <h4 class="spotlight-name">${nextEvt.name}</h4>
-                <div class="spotlight-trans">${nextEvt.bengali} • ${nextEvt.arabic}</div>
+                <div class="spotlight-trans">${nextEvt.arabic}</div>
             </div>
             <div class="spotlight-date-row">
                 📅 ${gregStr} • ${nextEvt.day} ${getHijriMonthName(nextEvt.month)} ${nextEvt.hijriYear} AH
@@ -603,7 +602,7 @@ function renderEvents(upcoming, sourceLabel) {
         card.innerHTML = `
             <div class="event-info">
                 <span class="event-name">${event.name} ${verifiedPill}</span>
-                <span class="event-trans">${event.bengali} • ${event.arabic}</span>
+                <span class="event-trans">${event.arabic}</span>
                 <span class="event-hijri">${event.day} ${getHijriMonthName(event.month)} ${event.hijriYear} AH</span>
                 ${pillHtml}
             </div>

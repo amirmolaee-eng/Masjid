@@ -9,17 +9,20 @@
 /* ---------- Light mode only (dark mode disabled for now) ---------- */
 :root {
     color-scheme: only light;
-    /* Brand typography (system stacks - no webfont download needed):
-       Headings: Optima (all Apple devices; Candara/Segoe UI are the close Windows matches)
-       Body: Gill Sans (all Apple devices; Candara/Segoe UI are the close Windows matches) */
-    --font-heading: Optima, "Optima nova", Candara, "Segoe UI", "Trebuchet MS", sans-serif;
-    --font-body: "Gill Sans", "Gill Sans MT", "Gill Sans Nova", Candara, "Segoe UI", "Trebuchet MS", sans-serif;
+    /* Typography. Fonts are self-hosted in /fonts (see fonts/fonts.css), so every browser
+       draws the same letterforms. "Optima Brand" / "Gill Sans Brand" only exist if licensed
+       files are added to fonts.css; until then the free look-alikes are used:
+       Libertinus Sans (headings) and Cabin (body). */
+    --font-heading: "Optima Brand", "Libertinus Sans", Optima, Candara, "Segoe UI", sans-serif;
+    --font-body: "Gill Sans Brand", "Cabin", "Gill Sans", "Gill Sans MT", "Segoe UI", sans-serif;
+    --font-arabic: "Noto Sans Arabic", "Geeza Pro", "Segoe UI", sans-serif;
     /* Darker muted text so it passes WCAG AA (4.5:1) on white, magnolia and pale green */
     --text-muted: #4E6F50;
 }
 
-/* ---------- Brand typography: Optima for headings, Gill Sans for body ---------- */
+/* ---------- Brand typography: Optima-style headings, Gill Sans-style body ---------- */
 body { font-family: var(--font-body) !important; }
+[lang="ar"], [dir="rtl"] { font-family: var(--font-arabic) !important; }
 
 /* Sub-headers: Optima Regular */
 h2, h3, h4, h5, h6, .events-title, .feed-title {
@@ -31,7 +34,7 @@ h2, h3, h4, h5, h6, .events-title, .feed-title {
 
 /* Main headers: Optima Bold */
 h1, .masjid-name, .section-title, .jumuah-title,
-.ann-heading, .ann-page-title, .page-title, .next-jamaat-value {
+.ann-heading, .page-title, .next-jamaat-value {
     font-family: var(--font-heading) !important;
     font-weight: 700 !important;
     text-transform: uppercase !important;
@@ -71,20 +74,18 @@ h1, .masjid-name, .section-title, .jumuah-title,
 .ann-body { margin: 0; color: #2c382c; line-height: 1.5; font-size: 0.95rem; white-space: pre-line; }
 .ann-link { display: inline-block; margin-top: 0.4rem; font-weight: 600; color: #264F27; }
 .ann-empty { padding: 1rem; text-align: center; color: #5b665b; background: #fff; border: 1px dashed rgba(38,79,39,0.3); border-radius: 12px; }
-.ann-page { max-width: 760px; margin: 0 auto; padding: 1.5rem 1rem 2rem; }
-.ann-page-title { font-size: 1.6rem; color: #264F27; margin: 0 0 0.25rem; }
-.ann-page-intro { margin: 0 0 1.25rem; color: #5b665b; }
 
-/* ---------- Charity footer banner ---------- */
-.site-footer-banner { background: #1d3a1e; color: #e8efe6; font-size: 0.8rem; line-height: 1.55; text-align: center; padding: 0.9rem 1rem calc(0.9rem + 64px + env(safe-area-inset-bottom, 0px)); margin-top: 1.5rem; } /* 64px clears the fixed ticker on the home page */
+/* ---------- Charity footer banner: one small line ---------- */
+.site-footer-banner { background: #1d3a1e; color: #e8efe6; font-size: 0.74rem; line-height: 1.5; text-align: center; padding: 0.7rem 1rem; margin-top: 1.5rem; }
 .site-footer-banner a { color: #fff; text-decoration: underline; text-underline-offset: 2px; }
-.site-footer-banner p { margin: 0.1rem 0; }
-.site-footer-banner .footer-name { font-weight: 600; }
+.site-footer-banner p { margin: 0; }
+.footer-line { display: flex; flex-wrap: wrap; justify-content: center; align-items: baseline; column-gap: 0.45rem; row-gap: 0.1rem; }
+.footer-line > span { white-space: nowrap; }
+.footer-line > span:not(.footer-sep):has(> span) { white-space: normal; }
+@media (max-width: 700px) { .footer-sep { display: none; } .footer-line { column-gap: 0.9rem; } }
 
 /* ---------- Sunrise row + timetable notice ---------- */
 .sunrise-row { background: rgba(38, 79, 39, 0.03); }
-.sunrise-row .salah-en { font-size: 1.05rem !important; }
-.sunrise-row .time-val { opacity: 0.9; }
 .timetable-notice { margin: 0 0 0.75rem; padding: 0.6rem 0.9rem; border-radius: 10px; background: #F2E8D7; color: #264F27; font-size: 0.85rem; line-height: 1.4; border: 1px solid rgba(38,79,39,0.25); }
 
 /* ---------- Footer: only the home page has the fixed ticker to clear ---------- */
@@ -109,29 +110,40 @@ h1, .masjid-name, .section-title, .jumuah-title,
     overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
 }
 
-/* ---------- Top menu: Secondary logo fills the bar height ---------- */
-.site-nav-inner { padding: 6px 20px !important; }
+/* ---------- Top menu: Primary logo (wide). 68px tall = 151px wide, above the 150px brand minimum ---------- */
+.site-nav-inner { padding: 4px 20px !important; }
 img.site-nav-logo-img {
-    height: 48px !important;
+    height: 68px !important;
     width: auto !important;
     display: block;
     object-fit: contain;
 }
 .site-nav-brand { gap: 0; }
 
-/* ---------- Home hero: Primary logo ---------- */
-.app-header { margin-bottom: 16px; }
-.app-logo-primary {
-    width: min(340px, 78vw);
+/* ---------- Home hero: Secondary (stacked) logo ---------- */
+.app-header { margin-bottom: 14px; }
+.app-logo-secondary {
+    width: min(210px, 56vw);
     height: auto;
     display: block;
 }
 
 /* ---------- Home two-column layout ----------
-   Mobile: single stack (hero, photo+donate, main content).
-   Desktop: left column = all main content; right column = mosque photo
-   with the Donate button underneath it. */
+   Desktop: LEFT = header, Salah timetable, Jumu'ah, Connect With Us.
+            RIGHT = mosque photo (+ Donate), Announcements, Visit Us.
+   Mobile: one column; the two column wrappers dissolve (display: contents) and
+   every block is placed with "order": header, Salah, Jumu'ah, photo + Donate,
+   Announcements, Visit Us, Connect With Us. */
 .home-layout { display: flex; flex-direction: column; }
+.home-col { display: contents; }
+.home-hero            { order: 1; }
+.timetable-section    { order: 2; }
+.jumuah-section       { order: 3; }
+.events-section, .social-feed-section { order: 4; }
+.home-photo-wrap      { order: 5; }
+.announcements-section{ order: 6; }
+.directions-section   { order: 7; }
+.socials-section      { order: 8; }
 
 .home-hero .datetime-section {
     margin-bottom: 20px;
@@ -148,41 +160,60 @@ img.site-nav-logo-img {
 }
 .mosque-photo-card img {
     width: 100%;
-    height: 230px;
+    height: 260px;
     object-fit: cover;
+    object-position: 50% 62%;
     display: block;
 }
-.home-aside .donation-section { margin: 0 0 1.5rem; }
+.home-photo-wrap .donation-section { margin: 0 0 1.5rem; }
+
+/* Donate button over the bottom-centre of the photo (remove class "donate-on-photo" in index.html to undo) */
+.home-photo-wrap.donate-on-photo { position: relative; margin-bottom: 1.5rem; }
+.home-photo-wrap.donate-on-photo .mosque-photo-card { margin-bottom: 0; }
+.home-photo-wrap.donate-on-photo .donation-section {
+    position: absolute; left: 50%; bottom: 16px; transform: translateX(-50%);
+    width: max-content; max-width: calc(100% - 32px); margin: 0; animation: none;
+}
+.home-photo-wrap.donate-on-photo .donate-button-card { padding: 12px 22px; box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35); }
+.home-photo-wrap.donate-on-photo .donate-text { font-size: 1rem; }
+
+/* Timetable: names + start times regular, Iqamah + header + current row bold */
+.timetable-header { font-weight: 700; }
+.salah-en { font-weight: 400 !important; }
+.timetable-card .col-start.time-val { font-weight: 400; }
+.timetable-card .col-iqamah.time-val { font-weight: 700; }
+.prayer-row.active .salah-en,
+.prayer-row.active .time-val { font-weight: 700 !important; }
+
+/* "1st KHUTBAH" / "2nd KHUTBAH": the ordinal stays lower-case */
+.ord { text-transform: none; }
 
 /* ---------- Desktop: two columns ---------- */
 @media (min-width: 1024px) {
     .home-layout-page .app-container { display: block; column-count: initial; }
     .home-layout {
         display: grid;
-        grid-template-columns: minmax(0, 1fr) 340px;
-        grid-template-areas:
-            "hero aside"
-            "main  aside";
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); /* 50 / 50 */
         column-gap: 40px;
         align-items: start;
     }
-    .home-hero { grid-area: hero; }
-    .home-aside {
-        grid-area: aside;
-        position: sticky;
-        top: 84px; /* below the sticky nav bar */
-    }
-    .home-main { grid-area: main; min-width: 0; }
-    .app-header { margin-bottom: 12px; }
-    .app-logo-primary { width: 380px; }
-    .mosque-photo-card img { height: 300px; }
-    /* Announcements stay in ONE column (they are inside .home-main) */
+    .home-col { display: flex; flex-direction: column; min-width: 0; }
+    .home-hero, .timetable-section, .jumuah-section, .events-section,
+    .social-feed-section, .home-photo-wrap, .announcements-section,
+    .directions-section, .socials-section { order: 0; }
+    .home-hero { display: flex; align-items: center; gap: 36px; margin-bottom: 24px; }
+    .home-hero .app-header { margin-bottom: 0; flex: none; }
+    .home-hero .datetime-section { margin-bottom: 0; }
+    .app-logo-secondary { width: 220px; }
+    .mosque-photo-card img { height: 440px; }
+    .announcements-section { margin-top: 0; }
+    /* Announcements stay in ONE column */
     .ann-list { grid-template-columns: 1fr; }
 }
 
 @media (min-width: 1440px) {
-    .home-layout { grid-template-columns: minmax(0, 1fr) 380px; }
-    .app-logo-primary { width: 420px; }
+    .app-logo-secondary { width: 240px; }
+    .mosque-photo-card img { height: 500px; }
 }
 
 /* =========================================================
@@ -243,3 +274,40 @@ img.site-nav-logo-img {
     .tt-table { font-size: 0.85rem; }
     .tt-table th, .tt-table td { padding: 0.4rem 0.5rem; }
 }
+
+/* ---------- Phone refinements (home) ---------- */
+@media (max-width: 1023px) {
+    .home-hero { text-align: center; }
+    .home-hero .app-header { display: flex; justify-content: center; }
+    .home-hero .datetime-section { align-items: center; }
+    .home-hero .next-jamaat { align-items: center; }
+}
+@media (max-width: 520px) {
+    .khutbah-label { font-size: 0.85rem; white-space: nowrap; letter-spacing: 0.2px; }
+    .home-photo-wrap.donate-on-photo .donate-button-card { padding: 10px 16px; gap: 8px; }
+    .home-photo-wrap.donate-on-photo .donate-text { font-size: 0.9rem; white-space: nowrap; }
+    .mosque-photo-card img { height: 240px; }
+}
+
+/* Contrast fix: small grey-green helper text on the Visit Us buttons */
+.nav-action { color: var(--text-muted) !important; }
+
+/* ---------- Announcements PAGE: same cards, sizes and spacing as the other pages ---------- */
+.ann-page .ann-list { gap: 20px; }
+.ann-page .ann-card {
+    background: var(--bg-card); border: 1px solid var(--border-color); border-left: 1px solid var(--border-color);
+    border-radius: var(--radius-md); padding: 24px; box-shadow: var(--shadow-sm);
+}
+.ann-page .ann-card.is-pinned { background: var(--bg-card); border-top: 4px solid #264F27; }
+.ann-page .ann-meta { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 8px; }
+.ann-page .ann-tag { font-size: 0.78rem; }
+.ann-page .ann-title { font-size: 1.3rem; color: var(--text-primary); margin: 0 0 10px; }
+.ann-page .ann-body { font-size: 1rem; line-height: 1.75; color: var(--text-primary); }
+.ann-page .ann-link { margin-top: 12px; }
+.ann-page .ann-empty { border-radius: var(--radius-md); padding: 24px; }
+
+/* ---------- Footer always sits at the bottom of the window, even on short pages ---------- */
+body { min-height: 100vh; min-height: 100dvh; display: flex; flex-direction: column; }
+body > main { flex: 1 0 auto; width: 100%; }
+body > .site-footer-banner { flex-shrink: 0; }
+button.tt-download-btn { font-family: inherit; }

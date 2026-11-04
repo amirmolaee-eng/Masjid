@@ -32,3 +32,35 @@ Remove the word `hidden` from the section in `index.html`:
 ## Files
 New: `jumuah-times.js`, `overrides.css`, `announcements.html`, `announcements.js`, `announcements-data.js`, `site-tweaks.js`
 Changed: every `.html` page, `app.js`, `nav.js`, `prayer_data.js`, `styles.css` (dark-mode rules removed)
+
+## Round 4 (November 2026) - feedback review
+**Fonts (embedded)**
+- All fonts are now served from `fonts/` - nothing is fetched from Google or left to the visitor's computer, so Chrome, Safari, Firefox, Edge and phones all draw the same letters.
+- Headings: Libertinus Sans (Regular + Bold). Body: Cabin. Arabic: Noto Sans Arabic. All SIL Open Font Licence (licence texts are in `fonts/OFL-*.txt`).
+- Optima and Gill Sans (the brand fonts) are commercial and cannot legally be put on a website without a web-font licence. Libertinus Sans and Cabin are the closest free matches. If the mosque buys web licences, save the woff2 files in `fonts/` and un-comment the block at the bottom of `fonts/fonts.css` - nothing else needs changing.
+- Removed: Outfit, Belleza and the Bengali font (no longer used).
+
+**Home page**
+- Left column: logo + Next Jama'at + date, Salah timetable, Jumu'ah, Connect With Us. Right column: mosque photo with Donate over its bottom-centre, Announcements, Visit Us.
+- Donate over the photo: delete the class `donate-on-photo` in `index.html` to put the button back underneath the photo.
+- Phone order: header, Salah, Jumu'ah, photo + Donate, Announcements, Visit Us, Connect With Us (change the `order:` numbers in `overrides.css` to rearrange).
+- Logos swapped: Secondary (stacked) logo on the home page, Primary (wide) logo in the top bar on every page (151px wide, above the 150px brand minimum).
+- Photo compressed from 836 KB to 136 KB (same file name, so it can be replaced later).
+
+**Text and typography**
+- All Bengali removed (timetable labels, Jumu'ah card, ticker, Islamic events). Arabic kept; the ticker still has its Urdu line.
+- Timetable: prayer names and start times regular, Iqamah times bold, header row bold, current/next row bold; Sunrise is now the same size as the other rows.
+- "1st / 2nd Khutbah" no longer shows as "1ST / 2ND" (Jumu'ah card and Next Jama'at line).
+- Footer is one small line on every page (charity number, address, Contact us, Privacy & cookies, copyright); the name line is gone.
+- Small fixes: darker "Get Directions" text, the timetable table scroll area is keyboard-reachable, CSV button reads "Download spreadsheet (CSV)".
+
+**Not done on purpose:** offline/PWA app, hosting, and the official PDF timetable (waiting on the old site's file).
+
+## Round 5 (November 2026)
+- Home page on desktop is now an even 50 / 50 split between the left and right columns.
+- New prayer-hall photo behind the Donate button (`mosque-prayer-hall.jpg`, resized to 301 KB). The old `latest_instagram_post.jpg` was removed.
+- Timetable page: CSV download removed; the button now downloads the official **2026** timetable PDF (`Cambridge-Prayer-Times-2026.pdf`). The old generated PDF and CSV files were deleted.
+- Announcements page now uses the same layout, title size, card style and text sizes as the other pages.
+- Footer now sits at the bottom of the window on short pages (it used to float halfway up the Announcements page).
+- Clean-up: removed a leftover Perplexity editor script (about 15 KB, about 440 lines) from every page. It was not part of the site and allowed messages from perplexity.ai when the page was framed.
+- When 2027 arrives: replace the PDF, update the button text in `timetable.html`, and load the new year into `prayer_data.js`.

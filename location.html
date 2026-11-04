@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Location | Omar Faruque Mosque</title>
-    <link rel="preload" href="fonts/outfit-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="fonts/libertinus-sans-latin-700.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="fonts/libertinus-sans-latin-400.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="fonts/cabin-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="fonts/fonts.css">
 
     <link rel="stylesheet" href="styles.css">
@@ -32,7 +34,7 @@
     <header class="site-nav">
         <div class="site-nav-inner">
             <a href="index.html" class="site-nav-brand" aria-label="Omar Faruque Mosque — Home">
-                <img src="OMF-Secondary-Myrtle.png" alt="Omar Faruque Mosque" class="site-nav-logo-img">
+                <img src="OMF-Primary-Myrtle.png" alt="Omar Faruque Mosque" class="site-nav-logo-img" width="151" height="68">
             </a>
             <nav class="site-nav-links" aria-label="Primary">
             <a href="index.html" class="site-nav-link">Home</a>
@@ -123,17 +125,22 @@
 
     <!-- Charity footer banner -->
     <footer class="site-footer-banner">
-        <p class="footer-name">Omar Faruque Mosque and Cultural Centre</p>
-        <p>Registered charity in England and Wales no.
-            <a href="https://register-of-charities.charitycommission.gov.uk/charity-search/-/charity-details/1117040" target="_blank" rel="noopener noreferrer">1117040</a></p>
-        <p><a href="location.html">Kirkwood Road, Cambridge, CB4 2PF</a> &middot; <a href="contact.html">Contact us</a> &middot; <a href="privacy.html">Privacy &amp; cookies</a></p>
+        <p class="footer-line">
+            <span>Registered charity in England and Wales no. <a href="https://register-of-charities.charitycommission.gov.uk/charity-search/-/charity-details/1117040" target="_blank" rel="noopener noreferrer">1117040</a></span>
+            <span class="footer-sep" aria-hidden="true">&middot;</span>
+            <span><a href="location.html">Kirkwood Road, Cambridge, CB4 2PF</a></span>
+            <span class="footer-sep" aria-hidden="true">&middot;</span>
+            <span><a href="contact.html">Contact us</a></span>
+            <span class="footer-sep" aria-hidden="true">&middot;</span>
+            <span><a href="privacy.html">Privacy &amp; cookies</a></span>
+            <span class="footer-sep" aria-hidden="true">&middot;</span>
+            <span>&copy; <span id="footerYear">2026</span> Omar Faruque Mosque and Cultural Centre</span>
+        </p>
         <!-- TODO (if applicable): add company number + registered office if the charity is also a registered company;
              add an Accessibility Statement link once that page exists. -->
-        <p>&copy; <span id="footerYear">2026</span> Omar Faruque Mosque and Cultural Centre</p>
     </footer>
 
 <script src="jumuah-times.js"></script>
     <script src="site-tweaks.js"></script>
-    <script src="nav.js"></script>
-</body>
+    <script src="nav.js"></script></body>
 </html>
