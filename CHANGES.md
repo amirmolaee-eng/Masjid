@@ -64,3 +64,14 @@ Changed: every `.html` page, `app.js`, `nav.js`, `prayer_data.js`, `styles.css` 
 - Footer now sits at the bottom of the window on short pages (it used to float halfway up the Announcements page).
 - Clean-up: removed a leftover Perplexity editor script (about 15 KB, about 440 lines) from every page. It was not part of the site and allowed messages from perplexity.ai when the page was framed.
 - When 2027 arrives: replace the PDF, update the button text in `timetable.html`, and load the new year into `prayer_data.js`.
+- Timetable PDF replaced with the new brand-styled 2026 timetable (built from the mosque's CSV: Myrtle / Magnolia / Light Grey Green, brand logo, Fridays highlighted, clock changes marked).
+
+## Round 6 (November 2026) - mobile browsers
+Tested on iPhone SE / 15 Pro / 15 Pro Max (landscape), Pixel 7, Galaxy S24, A55, Z Fold 7 cover, S9+ (landscape) sizes.
+- Every page: `viewport-fit=cover` + safe-area padding (notch, Dynamic Island, home bar), and phone/date/address auto-linking turned off (stops iOS/Samsung turning the bank account number into a phone link).
+- Status bar on home-screen (installed) use is now "default", so the top bar is never hidden behind the clock.
+- Menu drawer: scroll lock that works on iOS (the page behind no longer scrolls), closes itself if the phone is rotated to a wide screen, 44px tap targets.
+- No text enlargement when phones are turned sideways; sideways phones get a compact header so prayer times show straight away.
+- Contact form fields use 16px text so iOS does not zoom in on tap.
+- No "stuck" hover effects after tapping cards on touch screens; pulsing animations stop for people who turn on Reduce Motion.
+- 320-360px phones: Announcements header no longer pushes the page sideways; "View all" is a bigger tap target.

@@ -8,7 +8,21 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if (!toggle || !drawer || !overlay) return;
 
+    // Scroll lock that also works on iOS Safari (overflow:hidden alone does not stop the page behind scrolling)
+    var savedY = 0;
+    function lockScroll() {
+        savedY = window.scrollY || window.pageYOffset || 0;
+        var b = document.body.style;
+        b.position = 'fixed'; b.top = (-savedY) + 'px'; b.left = '0'; b.right = '0'; b.width = '100%';
+    }
+    function unlockScroll() {
+        var b = document.body.style;
+        b.position = ''; b.top = ''; b.left = ''; b.right = ''; b.width = '';
+        window.scrollTo(0, savedY);
+    }
+
     function openDrawer() {
+        lockScroll();
         drawer.classList.add('open');
         overlay.classList.add('open');
         document.body.classList.add('nav-open');
@@ -19,9 +33,11 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function closeDrawer() {
+        if (!drawer.classList.contains('open')) return;
         drawer.classList.remove('open');
         overlay.classList.remove('open');
         document.body.classList.remove('nav-open');
+        unlockScroll();
         toggle.setAttribute('aria-expanded', 'false');
         drawer.setAttribute('aria-hidden', 'true');
         drawer.setAttribute('inert', '');
@@ -43,6 +59,10 @@ document.addEventListener('DOMContentLoaded', function () {
         if (e.key === 'Escape' && drawer.classList.contains('open')) {
             closeDrawer();
         }
+    });
+
+    window.addEventListener('resize', function () {
+        if (window.innerWidth >= 1100 && drawer.classList.contains('open')) closeDrawer();
     });
 
     var drawerLinks = drawer.querySelectorAll('a');

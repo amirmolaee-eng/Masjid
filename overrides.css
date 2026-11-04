@@ -311,3 +311,78 @@ body { min-height: 100vh; min-height: 100dvh; display: flex; flex-direction: col
 body > main { flex: 1 0 auto; width: 100%; }
 body > .site-footer-banner { flex-shrink: 0; }
 button.tt-download-btn { font-family: inherit; }
+
+/* =========================================================
+   MOBILE BROWSERS (iOS Safari/Chrome/Edge/Brave = WebKit;
+   Android Chrome/Samsung Internet/Opera/Brave = Chromium)
+   ========================================================= */
+/* Stop iOS / Samsung enlarging text when the phone is turned sideways */
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+/* Long words / links never push the page sideways */
+body { overflow-wrap: break-word; }
+@supports (overflow: clip) { body { overflow-x: clip; } } /* "clip" keeps the sticky top bar working on iOS */
+img, svg, video, iframe { max-width: 100%; }
+
+/* Notch / Dynamic Island / home-indicator safe areas (needs viewport-fit=cover) */
+.site-nav { padding-top: env(safe-area-inset-top, 0px); }
+.site-nav-inner {
+    padding-left: max(20px, env(safe-area-inset-left, 0px)) !important;
+    padding-right: max(20px, env(safe-area-inset-right, 0px)) !important;
+}
+@media (max-width: 1023px) {
+    .app-container, .page-container {
+        padding-left: max(20px, env(safe-area-inset-left, 0px));
+        padding-right: max(20px, env(safe-area-inset-right, 0px));
+    }
+}
+.app-container { min-height: 0; } /* 100vh is taller than the visible screen on iOS; the footer is now kept at the bottom by flexbox */
+.ticker-section { padding-bottom: calc(16px + env(safe-area-inset-bottom, 0px)); padding-left: max(20px, env(safe-area-inset-left, 0px)); padding-right: max(20px, env(safe-area-inset-right, 0px)); }
+.nav-drawer {
+    padding-top: calc(20px + env(safe-area-inset-top, 0px));
+    padding-bottom: calc(30px + env(safe-area-inset-bottom, 0px));
+    padding-right: max(18px, env(safe-area-inset-right, 0px));
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+}
+.site-footer-banner { padding-left: max(1rem, env(safe-area-inset-left, 0px)); padding-right: max(1rem, env(safe-area-inset-right, 0px)); }
+
+/* iOS zooms the page when you tap a field with text smaller than 16px */
+input, textarea, select { font-size: 16px !important; }
+
+/* Bigger tap targets in the menu drawer and the hamburger button (44px minimum, Apple/Google guidance) */
+.nav-drawer-link { min-height: 44px; display: flex; align-items: center; }
+.nav-toggle, .nav-drawer-close { min-width: 44px; min-height: 44px; }
+
+/* Touch screens: no "stuck" hover lift after tapping a card */
+@media (hover: none) {
+    .social-card:hover, .nav-card:hover, .donate-button-card:hover, .jumuah-card:hover,
+    .link-card:hover, .event-card:hover, .instagram-post-card:hover, .facebook-feed-box:hover {
+        transform: none !important;
+    }
+}
+
+/* Phones turned sideways: short screens get a non-sticky top bar so content has room */
+@media (max-height: 500px) and (orientation: landscape) {
+    .site-nav { position: relative; }
+    .ticker-section { padding-top: 8px; padding-bottom: calc(8px + env(safe-area-inset-bottom, 0px)); }
+    .has-ticker .site-footer-banner { padding-bottom: calc(0.9rem + 44px + env(safe-area-inset-bottom, 0px)) !important; }
+}
+
+/* People who ask their phone for less motion get no pulsing / sliding */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+}
+
+/* Announcements header on narrow phones (320-360px): wrap instead of pushing the page sideways */
+.ann-header { flex-wrap: wrap; row-gap: 0.25rem; }
+.ann-viewall { display: inline-flex; align-items: center; min-height: 44px; padding: 0 2px; }
+@media (max-width: 380px) { .ann-heading { font-size: 1.55rem; } }
+
+/* Sideways phones: logo beside "Next Jama'at" so the prayer times are visible straight away */
+@media (max-height: 500px) and (orientation: landscape) and (max-width: 1023px) {
+    .home-hero { display: flex; align-items: center; justify-content: center; gap: 28px; text-align: left; }
+    .home-hero .app-header { margin-bottom: 0; }
+    .app-logo-secondary { width: 110px; }
+    .home-hero .datetime-section, .home-hero .next-jamaat { align-items: flex-start; margin-bottom: 0; }
+}
+@media (max-width: 340px) { .gregorian-date { font-size: 1rem; } }
