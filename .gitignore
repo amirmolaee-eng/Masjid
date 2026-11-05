@@ -1,0 +1,14 @@
+# Files GitHub should NOT upload
+
+# Original commercial font files (Optima / Gill Sans full families).
+# Not used by the website and should not be published. The three fonts the
+# site actually uses are copied into assets/fonts/ and ARE uploaded.
+assets/fonts/commercial-not-deployed/
+
+# Claude preview settings (only used on this computer)
+.claude/
+
+# Windows / Mac clutter
+Thumbs.db
+desktop.ini
+.DS_Store
