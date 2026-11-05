@@ -1,23 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-root="">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <meta name="format-detection" content="telephone=no, date=no, email=no, address=no">
     <title>Omar Faruque Mosque</title>
-    <link rel="preload" href="fonts/libertinus-sans-latin-700.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="fonts/libertinus-sans-latin-400.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="fonts/cabin-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="fonts/fonts.css">
+    <link rel="preload" href="assets/fonts/optima-bold.ttf" as="font" type="font/ttf" crossorigin>
+    <link rel="preload" href="assets/fonts/optima-regular.ttf" as="font" type="font/ttf" crossorigin>
+    <link rel="preload" href="assets/fonts/gill-sans-regular.otf" as="font" type="font/otf" crossorigin>
+    <link rel="stylesheet" href="assets/fonts/fonts.css">
     
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="overrides.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/overrides.css">
     
     <!-- Meta tags for PWA / Mobile Web App -->
         <link rel="icon" href="favicon.ico" sizes="48x48">
-    <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16.png">
-    <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/icons/favicon-16.png">
+    <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
     <link rel="manifest" href="manifest.webmanifest">
     <meta name="theme-color" content="#264F27">
     <meta name="color-scheme" content="only light">
@@ -52,20 +52,24 @@
     <!-- Site Navigation -->
     <header class="site-nav">
         <div class="site-nav-inner">
-            <a href="index.html" class="site-nav-brand" aria-label="Omar Faruque Mosque — Home">
-                <img src="OMF-Primary-Myrtle.png" alt="Omar Faruque Mosque" class="site-nav-logo-img" width="151" height="68">
+            <!-- Home page only: Donate button instead of the logo (the big logo is already on the page) -->
+            <a href="https://square.link/u/hJsC8N0N" target="_blank" rel="noopener noreferrer" class="site-nav-donate" aria-label="Donate to Omar Faruque Mosque (opens in a new tab)">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <path d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3c1.74 0 3.26.83 4.312 2.11 1.052-1.28 2.573-2.11 4.312-2.11 2.974 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z"/>
+                </svg>
+                <span>Donate</span>
             </a>
             <nav class="site-nav-links" aria-label="Primary">
                 <a href="index.html" class="site-nav-link active">Home</a>
-                <a href="announcements.html" class="site-nav-link">Announcements</a>
-                <a href="location.html" class="site-nav-link">Location</a>
-                <a href="about.html" class="site-nav-link">About Us</a>
-                <a href="etiquette.html" class="site-nav-link">Etiquette</a>
-                <a href="jumuah.html" class="site-nav-link">Jumu'ah</a>
-            <a href="timetable.html" class="site-nav-link">Timetable</a>
-                <a href="help-us.html" class="site-nav-link site-nav-cta">Help Us</a>
-                <a href="links.html" class="site-nav-link">Links</a>
-                <a href="contact.html" class="site-nav-link">Contact</a>
+                <a href="announcements/index.html" class="site-nav-link">Announcements</a>
+                <a href="location/index.html" class="site-nav-link">Location</a>
+                <a href="about/index.html" class="site-nav-link">About Us</a>
+                <a href="etiquette/index.html" class="site-nav-link">Etiquette</a>
+                <a href="jumuah/index.html" class="site-nav-link">Jumu'ah</a>
+            <a href="timetable/index.html" class="site-nav-link">Timetable</a>
+                <a href="help-us/index.html" class="site-nav-link">Support Us</a>
+                <a href="links/index.html" class="site-nav-link">Links</a>
+                <a href="contact/index.html" class="site-nav-link">Contact</a>
             </nav>
             <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="navDrawer">
                 <span class="nav-toggle-bar"></span><span class="nav-toggle-bar"></span><span class="nav-toggle-bar"></span>
@@ -80,15 +84,15 @@
             <button class="nav-drawer-close" id="navClose" aria-label="Close menu">&times;</button>
         </div>
         <a href="index.html" class="nav-drawer-link active">Home</a>
-        <a href="announcements.html" class="nav-drawer-link">Announcements</a>
-        <a href="location.html" class="nav-drawer-link">Location</a>
-        <a href="about.html" class="nav-drawer-link">About Us</a>
-        <a href="etiquette.html" class="nav-drawer-link">Etiquette</a>
-        <a href="jumuah.html" class="nav-drawer-link">Jumu'ah</a>
-        <a href="timetable.html" class="nav-drawer-link">Timetable</a>
-        <a href="help-us.html" class="nav-drawer-link">Help Us</a>
-        <a href="links.html" class="nav-drawer-link">Links</a>
-        <a href="contact.html" class="nav-drawer-link">Contact</a>
+        <a href="announcements/index.html" class="nav-drawer-link">Announcements</a>
+        <a href="location/index.html" class="nav-drawer-link">Location</a>
+        <a href="about/index.html" class="nav-drawer-link">About Us</a>
+        <a href="etiquette/index.html" class="nav-drawer-link">Etiquette</a>
+        <a href="jumuah/index.html" class="nav-drawer-link">Jumu'ah</a>
+        <a href="timetable/index.html" class="nav-drawer-link">Timetable</a>
+        <a href="help-us/index.html" class="nav-drawer-link">Support Us</a>
+        <a href="links/index.html" class="nav-drawer-link">Links</a>
+        <a href="contact/index.html" class="nav-drawer-link">Contact</a>
     </aside>
 
     <!-- Facebook SDK disabled while the Facebook feed is hidden. Restore with the feed.
@@ -104,21 +108,21 @@
         <!-- ===== LEFT COLUMN: header, Salah timetable, Jumu'ah, Connect With Us ===== -->
         <div class="home-col home-col-left">
 
-        <!-- Header: Secondary logo + Next Jama'at + date (left column, top) -->
+        <!-- Header: Primary logo, then date + Next Jama'at (left column, top) -->
         <div class="home-hero">
             <header class="app-header">
-                <img src="OMF-Secondary-Myrtle.png" alt="Omar Faruque Mosque" class="app-logo-secondary" width="744" height="956">
+                <img src="assets/images/logo/OMF-Primary-Myrtle.png" alt="Omar Faruque Mosque" class="app-logo-primary" width="1911" height="861">
                 <h1 class="sr-only">Omar Faruque Mosque</h1>
             </header>
 
+            <!-- Date + Next Jama'at on one line, same width as the Salah table below -->
             <section class="datetime-section">
-                <div class="next-jamaat" aria-live="polite">
-                    <span class="next-jamaat-label">Next Jama&rsquo;at</span>
-                    <span class="next-jamaat-value" id="nextJamaatValue">&ndash;</span>
-                </div>
-                <div class="date-stack">
-                    <div class="gregorian-date" id="date">--</div>
-                    <div class="hijri-year" id="hijriYear"></div>
+                <div class="date-bar">
+                    <span class="gregorian-date" id="date">--</span>
+                    <span class="next-jamaat" aria-live="polite">
+                        <span class="next-jamaat-label">Next Jama&rsquo;at:</span>
+                        <span class="next-jamaat-value" id="nextJamaatValue">&ndash;</span>
+                    </span>
                 </div>
             </section>
         </div>
@@ -208,12 +212,9 @@
                     </div>
                     <div class="khutbah-time-card">
                         <span class="khutbah-label"><span class="ord">2nd</span> Khutbah</span>
-                        <span class="khutbah-time" id="jumuahSecond">13:25</span>
+                        <span class="khutbah-time" id="jumuahSecond">13:15</span>
                         <span class="khutbah-lang-labels"><span lang="ar">الخطبة الثانية</span></span>
                     </div>
-                </div>
-                <div class="jumuah-note">
-                    Assalamu Alaykum • Please arrive early to listen to the Khutbah.
                 </div>
             </div>
         </section>
@@ -335,7 +336,7 @@
                 <!-- Mosque Page Profile Header -->
                 <div class="fb-page-profile-card">
                     <div class="fb-page-profile-left">
-                        <img src="Logo - Large.jpeg" alt="Omar Faruque Mosque" class="fb-profile-avatar">
+                        <img src="home/logo-avatar.jpeg" alt="Omar Faruque Mosque" class="fb-profile-avatar">
                         <div class="fb-profile-info">
                             <div class="fb-profile-title-row">
                                 <h4 class="fb-profile-title">Omar Faruque Mosque</h4>
@@ -362,7 +363,7 @@
                     <!-- Post 1: Latest Jumu'ah & Prayer Announcement -->
                     <article class="fb-post-item">
                         <div class="fb-post-top">
-                            <img src="Logo - Large.jpeg" alt="Omar Faruque Mosque" class="fb-post-author-avatar">
+                            <img src="home/logo-avatar.jpeg" alt="Omar Faruque Mosque" class="fb-post-author-avatar">
                             <div class="fb-post-author-details">
                                 <div class="fb-post-author-name-row">
                                     <a href="https://www.facebook.com/omarfaruquemosque" target="_blank" rel="noopener noreferrer" class="fb-post-author-name">Omar Faruque Mosque</a>
@@ -385,7 +386,7 @@
                                 </div>
                                 <div class="fb-schedule-row">
                                     <span class="fb-sched-num">2nd Khutbah</span>
-                                    <span class="fb-sched-time">13:25</span>
+                                    <span class="fb-sched-time">13:15</span>
                                     <span class="fb-sched-sub">الخطبة الثانية</span>
                                 </div>
                             </div>
@@ -439,7 +440,7 @@
                     <!-- Post 2: Community Education & Youth Circle -->
                     <article class="fb-post-item">
                         <div class="fb-post-top">
-                            <img src="Logo - Large.jpeg" alt="Omar Faruque Mosque" class="fb-post-author-avatar">
+                            <img src="home/logo-avatar.jpeg" alt="Omar Faruque Mosque" class="fb-post-author-avatar">
                             <div class="fb-post-author-details">
                                 <div class="fb-post-author-name-row">
                                     <a href="https://www.facebook.com/omarfaruquemosque" target="_blank" rel="noopener noreferrer" class="fb-post-author-name">Omar Faruque Mosque</a>
@@ -562,7 +563,7 @@
                 <!-- Post Header -->
                 <div class="ig-post-header">
                     <div class="ig-avatar-ring">
-                        <img src="Logo - Large.jpeg" alt="Omar Faruque Mosque" class="ig-avatar-img">
+                        <img src="home/logo-avatar.jpeg" alt="Omar Faruque Mosque" class="ig-avatar-img">
                     </div>
                     <div class="ig-post-meta">
                         <div class="ig-author-line">
@@ -586,7 +587,7 @@
 
                 <!-- Post Media Image with Double-Tap Heart -->
                 <div class="ig-media-wrapper" id="igMediaWrapper" title="Double tap to like">
-                    <img src="mosque-prayer-hall.jpg" alt="Peaceful prayer hall at Omar Faruque Mosque, Cambridge" class="ig-post-img" id="igPostImg" loading="lazy">
+                    <img src="home/mosque-prayer-hall.jpg" alt="Peaceful prayer hall at Omar Faruque Mosque, Cambridge" class="ig-post-img" id="igPostImg" loading="lazy">
                     <div class="ig-heart-overlay" id="igHeartOverlay" aria-hidden="true">
                         <svg viewBox="0 0 24 24" fill="#FFFFFF">
                             <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
@@ -669,34 +670,25 @@
         <!-- ===== RIGHT COLUMN: mosque photo, Donate, Announcements, Visit Us ===== -->
         <div class="home-col home-col-right">
 
-        <!-- Photo with the Donate button over its bottom-centre.
-             To put Donate back underneath the photo, delete the class "donate-on-photo". -->
-        <div class="home-photo-wrap donate-on-photo">
+        <!-- Photo with a welcome message over its top (Donate is now in the top bar) -->
+        <div class="home-photo-wrap">
             <figure class="mosque-photo-card">
-                <img src="mosque-prayer-hall.jpg" alt="The prayer hall at Omar Faruque Mosque, Cambridge, with its green prayer carpet" width="1050" height="1400">
+                <img src="home/mosque-prayer-hall.jpg" alt="The prayer hall at Omar Faruque Mosque, Cambridge, with its green prayer carpet" width="1050" height="1400">
+                <figcaption class="photo-welcome">
+                    <span class="photo-welcome-salaam">Assalamu Alaikum</span>
+                    <span class="photo-welcome-line">Welcome to Omar Faruque Mosque.</span>
+                </figcaption>
             </figure>
-
-            <!-- Donation / Support Card -->
-            <section class="donation-section">
-                <a href="https://square.link/u/hJsC8N0N" target="_blank" rel="noopener noreferrer" class="donate-button-card" aria-label="Donate to Omar Faruque Mosque">
-                    <span class="heart-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3c1.74 0 3.26.83 4.312 2.11 1.052-1.28 2.573-2.11 4.312-2.11 2.974 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z"/>
-                        </svg>
-                    </span>
-                    <span class="donate-text">Donate & Support Our Mosque</span>
-                </a>
-            </section>
         </div>
 
         <!-- Announcements -->
         <section class="announcements-section" id="announcementsSection" aria-labelledby="annHeading">
             <div class="ann-header">
                 <h2 class="ann-heading" id="annHeading">Announcements</h2>
-                <a href="announcements.html" class="ann-viewall">View all &rarr;</a>
+                <a href="announcements/index.html" class="ann-viewall">View all &rarr;</a>
             </div>
             <div class="ann-list" id="homeAnnouncements">
-                <noscript><div class="ann-empty">Please enable JavaScript or <a href="announcements.html">view all announcements</a>.</div></noscript>
+                <noscript><div class="ann-empty">Please enable JavaScript or <a href="announcements/index.html">view all announcements</a>.</div></noscript>
             </div>
         </section>
 
@@ -754,11 +746,11 @@
         <p class="footer-line">
             <span>Registered charity in England and Wales no. <a href="https://register-of-charities.charitycommission.gov.uk/charity-search/-/charity-details/1117040" target="_blank" rel="noopener noreferrer">1117040</a></span>
             <span class="footer-sep" aria-hidden="true">&middot;</span>
-            <span><a href="location.html">Kirkwood Road, Cambridge, CB4 2PF</a></span>
+            <span><a href="location/index.html">Kirkwood Road, Cambridge, CB4 2PF</a></span>
             <span class="footer-sep" aria-hidden="true">&middot;</span>
-            <span><a href="contact.html">Contact us</a></span>
+            <span><a href="contact/index.html">Contact us</a></span>
             <span class="footer-sep" aria-hidden="true">&middot;</span>
-            <span><a href="privacy.html">Privacy &amp; cookies</a></span>
+            <span><a href="privacy/index.html">Privacy &amp; cookies</a></span>
             <span class="footer-sep" aria-hidden="true">&middot;</span>
             <span>&copy; <span id="footerYear">2026</span> Omar Faruque Mosque and Cultural Centre</span>
         </p>
@@ -770,11 +762,11 @@
     <div id="appToast" class="app-toast" role="status" aria-live="polite"></div>
 
     <!-- Scripts -->
-    <script src="site-tweaks.js"></script>
-    <script src="announcements-data.js"></script>
-    <script src="announcements.js"></script>
-    <script src="jumuah-times.js"></script>
-    <script src="prayer_data.js"></script>
-    <script src="app.js"></script>
-    <script src="nav.js"></script></body>
+    <script src="assets/js/site-tweaks.js"></script>
+    <script src="assets/data/announcements-data.js"></script>
+    <script src="assets/js/announcements.js"></script>
+    <script src="assets/js/jumuah-times.js"></script>
+    <script src="assets/data/prayer_data.js"></script>
+    <script src="home/app.js"></script>
+    <script src="assets/js/nav.js"></script></body>
 </html>
