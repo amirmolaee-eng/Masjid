@@ -443,3 +443,32 @@ input, textarea, select { font-size: 16px !important; }
 @media (max-width: 767px) {
     .page-hero.center-on-mobile { text-align: center; }
 }
+
+/* ---------- Home Jumu'ah card header on phones: centred and stacked ----------
+   "Jumu'ah Prayer" on one line, the Friday badge under it, the Arabic underneath. */
+@media (max-width: 767px) {
+    .jumuah-card-header { flex-direction: column; align-items: center; text-align: center; gap: 8px; }
+    .jumuah-title-wrap { display: contents; }      /* lets the badge sit between title and Arabic */
+    .jumuah-title     { order: 1; white-space: nowrap; }
+    .jumuah-day-badge { order: 2; }
+    .jumuah-title-sub { order: 3; margin-top: 0; }
+}
+@media (max-width: 360px) { .jumuah-title { font-size: 1.5rem; } }
+
+/* ---------- Home logo on phones: on the left, lined up with the timetable ----------
+   Starts at the timetable's left edge and never goes past its right edge. */
+@media (max-width: 767px) {
+    .home-hero .app-header { display: flex; flex-direction: column; align-items: flex-start; justify-content: flex-start; }
+    .home-hero .app-logo-primary { max-width: 100%; margin-left: 0; margin-right: auto; }
+}
+
+/* ---------- Google / Apple Maps buttons: full-colour icons ----------
+   (home "Visit Us" and Location page). White tile so the colours show; no colour swap on hover. */
+.nav-icon.nav-icon-brand,
+.nav-card.google-maps:hover .nav-icon.nav-icon-brand,
+.nav-card.apple-maps:hover .nav-icon.nav-icon-brand {
+    width: 46px; height: 46px; padding: 6px; flex-shrink: 0;
+    border-radius: 12px; background: #fff;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+}

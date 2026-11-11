@@ -93,3 +93,8 @@ Tested on iPhone SE / 15 Pro / 15 Pro Max (landscape), Pixel 7, Galaxy S24, A55,
 - Bottom ticker on phones: the whole message now shows, wrapping onto two lines instead of being cut off with "...". The bar keeps a fixed height, so it doesn't jump as messages change.
 - Location page on phones: the "Location" title and address are centred. Desktop is unchanged.
 - Home Jumu'ah card: the line "Assalamu Alaykum • Please arrive early to listen to the Khutbah." is removed.
+- Home Jumu'ah card on phones: header centred — "Jumu'ah Prayer", then the Friday badge, then the Arabic.
+- Donate link is now **SumUp**: `https://pay.sumup.com/b2c/QT2WWCE8` (home top bar and Support Us page; Privacy page wording updated from Square to SumUp).
+- Apple Maps button (home Visit Us and Location page) now opens `https://maps.apple/p/2mAwir68LELW80`.
+- Google Maps / Apple Maps buttons use full-colour icons on a white tile.
+- Home logo on phones sits on the left, starting at the timetable's left edge and never wider than it.
